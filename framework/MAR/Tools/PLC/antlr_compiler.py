@@ -3,10 +3,14 @@ import os
 from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 
+# ---  1:  ---
+# ： Grammar  __init__.py 
 try:
     from .Grammar.sclLexer import sclLexer
     from .Grammar.sclParser import sclParser
 except ImportError:
+    # ： (python antlr_compiler.py)
+    #  Grammar
     try:
         from Grammar.sclLexer import sclLexer
         from Grammar.sclParser import sclParser
@@ -21,6 +25,7 @@ class SyntaxErrorListener(ErrorListener):
         self.errors = []
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        # ，
         error_msg = f"Line {line}:{column} - {msg}"
         self.errors.append(error_msg)
 
@@ -30,7 +35,7 @@ class STCompiler:
 
     def check_syntax(self, code_string: str):
         """
-        Perform static syntax check using ANTLR.
+         ANTLR 
         """
         if not code_string or not code_string.strip():
             return {"passed": False, "errors": ["Empty code input"]}
@@ -39,17 +44,23 @@ class STCompiler:
             input_stream = InputStream(code_string)
             lexer = sclLexer(input_stream)
             
+            # 
             error_listener = SyntaxErrorListener()
 
+            #  Lexer  ()
             lexer.removeErrorListeners()
             lexer.addErrorListener(error_listener)
             
             stream = CommonTokenStream(lexer)
             parser = sclParser(stream)
             
+            #  Parser 
             parser.removeErrorListeners()
             parser.addErrorListener(error_listener)
 
+            # ---  2:  (，) ---
+            #  block*
+            #  .g4  'r'
             tree = parser.r() 
             
         except Exception as e:
@@ -67,9 +78,12 @@ class STCompiler:
             }
 
 if __name__ == "__main__":
+    # 
     compiler = STCompiler()
+    # 
     code_ok = "FUNCTION_BLOCK Test VAR x:INT; END_VAR x:=1; END_FUNCTION_BLOCK"
     print(f"Test OK: {compiler.check_syntax(code_ok)['passed']}")
     
-    code_err = "FUNCTION_BLOCK Test VAR x:INT END_VAR"  # Missing semicolon
+    # 
+    code_err = "FUNCTION_BLOCK Test VAR x:INT END_VAR" # 
     print(f"Test Err: {compiler.check_syntax(code_err)['passed']}")

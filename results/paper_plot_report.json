@@ -1,0 +1,480 @@
+{
+  "ablations": {
+    "balanced_three_seed": [
+      {
+        "calls": 33,
+        "compile_pass_count": 12,
+        "completion_tokens": 18323,
+        "monetary_cost": null,
+        "pass_count": 7,
+        "peak_gpu_memory_mib": 20109.0,
+        "peak_rss_bytes": 1578332160,
+        "prompt_tokens": 41809,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 5,
+          "PASS": 7
+        },
+        "wall_seconds_sum": 147.29350374297064
+      },
+      {
+        "calls": 36,
+        "compile_pass_count": 12,
+        "completion_tokens": 18509,
+        "monetary_cost": null,
+        "pass_count": 5,
+        "peak_gpu_memory_mib": 20107.0,
+        "peak_rss_bytes": 1554272256,
+        "prompt_tokens": 42454,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 7,
+          "PASS": 5
+        },
+        "wall_seconds_sum": 151.5629586730356
+      },
+      {
+        "calls": 35,
+        "compile_pass_count": 11,
+        "completion_tokens": 19429,
+        "monetary_cost": null,
+        "pass_count": 6,
+        "peak_gpu_memory_mib": 20107.0,
+        "peak_rss_bytes": 1577750528,
+        "prompt_tokens": 45030,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 5,
+          "COMPILE_FAIL": 1,
+          "PASS": 6
+        },
+        "wall_seconds_sum": 146.8114857730252
+      }
+    ],
+    "no_repair": {
+      "calls": 28,
+      "compile_pass_count": 11,
+      "completion_tokens": 16090,
+      "monetary_cost": null,
+      "pass_count": 5,
+      "peak_gpu_memory_mib": 20107.0,
+      "peak_rss_bytes": 1577836544,
+      "prompt_tokens": 35910,
+      "rows": 12,
+      "statuses": {
+        "ASSERTION_FAIL": 6,
+        "COMPILE_FAIL": 1,
+        "PASS": 5
+      },
+      "wall_seconds_sum": 122.66818226997566
+    },
+    "quality_three_seed": [
+      {
+        "calls": 43,
+        "compile_pass_count": 12,
+        "completion_tokens": 26917,
+        "monetary_cost": null,
+        "pass_count": 5,
+        "peak_gpu_memory_mib": 20107.0,
+        "peak_rss_bytes": 1554038784,
+        "prompt_tokens": 51156,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 7,
+          "PASS": 5
+        },
+        "wall_seconds_sum": 232.60609325399855
+      },
+      {
+        "calls": 43,
+        "compile_pass_count": 12,
+        "completion_tokens": 25852,
+        "monetary_cost": null,
+        "pass_count": 6,
+        "peak_gpu_memory_mib": 20107.0,
+        "peak_rss_bytes": 1555013632,
+        "prompt_tokens": 52123,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 6,
+          "PASS": 6
+        },
+        "wall_seconds_sum": 213.65246733100503
+      },
+      {
+        "calls": 44,
+        "compile_pass_count": 12,
+        "completion_tokens": 25432,
+        "monetary_cost": null,
+        "pass_count": 4,
+        "peak_gpu_memory_mib": 20107.0,
+        "peak_rss_bytes": 1553932288,
+        "prompt_tokens": 51116,
+        "rows": 12,
+        "statuses": {
+          "ASSERTION_FAIL": 8,
+          "PASS": 4
+        },
+        "wall_seconds_sum": 215.02158014901215
+      }
+    ],
+    "repair_budget_one_reference": {
+      "calls": 33,
+      "compile_pass_count": 12,
+      "completion_tokens": 18323,
+      "monetary_cost": null,
+      "pass_count": 7,
+      "peak_gpu_memory_mib": 20109.0,
+      "peak_rss_bytes": 1578332160,
+      "prompt_tokens": 41809,
+      "rows": 12,
+      "statuses": {
+        "ASSERTION_FAIL": 5,
+        "PASS": 7
+      },
+      "wall_seconds_sum": 147.29350374297064
+    }
+  },
+  "agents4plc23": {
+    "GPT-4o": {
+      "agents4plc_reported": {
+        "compile_passes": 23,
+        "tasks": 23,
+        "verification_passes": 14
+      },
+      "rl_mar": {
+        "calls": 31,
+        "compile_passes": 16,
+        "compile_rate": 0.6956521739130435,
+        "completed": 23,
+        "conditional_verification_rate": 1.0,
+        "end_to_end_verification_rate": 0.6956521739130435,
+        "expected": 23,
+        "model": "gpt-4o",
+        "run_id": "agents4plc23_gpt4o_corrected",
+        "tokens": 27875,
+        "verification_passes": 16,
+        "wall_seconds_sum": 170.82080167796812
+      }
+    },
+    "GPT-4o-mini": {
+      "agents4plc_reported": {
+        "compile_passes": 23,
+        "tasks": 23,
+        "verification_passes": 9
+      },
+      "rl_mar": {
+        "calls": 35,
+        "compile_passes": 15,
+        "compile_rate": 0.6521739130434783,
+        "completed": 23,
+        "conditional_verification_rate": 1.0,
+        "end_to_end_verification_rate": 0.6521739130434783,
+        "expected": 23,
+        "model": "gpt-4o-mini",
+        "run_id": "agents4plc23_gpt4o_mini",
+        "tokens": 36383,
+        "verification_passes": 15,
+        "wall_seconds_sum": 329.92825332102075
+      }
+    },
+    "failed_toolchain_attempt": {
+      "cause": "stale RuSTy container mount pointed to the pre-relocation workspace",
+      "disposition": "retained as terminal evidence and excluded from method comparison",
+      "iteration": 41,
+      "observed": {
+        "calls": 47,
+        "compile_pass_count": 0,
+        "completion_tokens": 11909,
+        "monetary_cost": null,
+        "pass_count": 0,
+        "peak_gpu_memory_mib": 0.0,
+        "peak_rss_bytes": 1483644928,
+        "prompt_tokens": 26149,
+        "rows": 23,
+        "statuses": {
+          "COMPILE_FAIL": 23
+        },
+        "wall_seconds_sum": 159.1275435409916
+      },
+      "status": "PASS"
+    }
+  },
+  "functional94": {
+    "DeepSeek-V3.2": {
+      "confirmation": {
+        "calls": 239,
+        "compile_pass_count": 77,
+        "pass_count": 31,
+        "pass_rate": 0.32978723404255317,
+        "seconds_per_pass": 198.45541714380482,
+        "status_counts": {
+          "COMPILE_FAIL": 14,
+          "FUNCTION_FAIL": 46,
+          "MISSING_OUTPUT": 3,
+          "PASS": 31
+        },
+        "tasks": 94,
+        "tokens": 384771,
+        "tokens_per_pass": 12411.967741935483,
+        "wall_seconds_sum": 6152.117931457949
+      },
+      "paired_confirmation": {
+        "mcnemar": {
+          "discordant": 3,
+          "first_only": 1,
+          "holm_adjusted_p": 1.0,
+          "p_value": 1.0,
+          "second_only": 2
+        },
+        "model": "DeepSeek-V3.2",
+        "paired_bootstrap_pass_rate_difference": {
+          "ci95": [
+            -0.0425531914893617,
+            0.02127659574468085
+          ],
+          "estimate": -0.010638297872340425,
+          "samples": 10000,
+          "seed": 20260905
+        }
+      },
+      "primary": {
+        "calls": 239,
+        "compile_pass_count": 75,
+        "pass_count": 30,
+        "pass_rate": 0.3191489361702128,
+        "seconds_per_pass": 203.6927090309313,
+        "status_counts": {
+          "COMPILE_FAIL": 15,
+          "FUNCTION_FAIL": 45,
+          "MISSING_OUTPUT": 4,
+          "PASS": 30
+        },
+        "tasks": 94,
+        "tokens": 394265,
+        "tokens_per_pass": 13142.166666666666,
+        "wall_seconds_sum": 6110.781270927939
+      }
+    },
+    "DeepSeek-v4-flash": {
+      "confirmation": {
+        "calls": 185,
+        "compile_pass_count": 87,
+        "pass_count": 29,
+        "pass_rate": 0.30851063829787234,
+        "seconds_per_pass": 42.15662908131269,
+        "status_counts": {
+          "COMPILE_FAIL": 7,
+          "FUNCTION_FAIL": 56,
+          "PASS": 29,
+          "TIMEOUT": 2
+        },
+        "tasks": 94,
+        "tokens": 346179,
+        "tokens_per_pass": 11937.206896551725,
+        "wall_seconds_sum": 1222.542243358068
+      },
+      "paired_confirmation": {
+        "mcnemar": {
+          "discordant": 3,
+          "first_only": 2,
+          "holm_adjusted_p": 1.0,
+          "p_value": 1.0,
+          "second_only": 1
+        },
+        "model": "DeepSeek-v4-flash",
+        "paired_bootstrap_pass_rate_difference": {
+          "ci95": [
+            -0.02127659574468085,
+            0.05319148936170213
+          ],
+          "estimate": 0.010638297872340425,
+          "samples": 10000,
+          "seed": 20260909
+        }
+      },
+      "primary": {
+        "calls": 186,
+        "compile_pass_count": 87,
+        "pass_count": 30,
+        "pass_rate": 0.3191489361702128,
+        "seconds_per_pass": 35.47250510349986,
+        "status_counts": {
+          "COMPILE_FAIL": 7,
+          "FUNCTION_FAIL": 56,
+          "PASS": 30,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 358124,
+        "tokens_per_pass": 11937.466666666667,
+        "wall_seconds_sum": 1064.1751531049958
+      }
+    },
+    "GPT-4o": {
+      "confirmation": {
+        "calls": 183,
+        "compile_pass_count": 78,
+        "pass_count": 33,
+        "pass_rate": 0.35106382978723405,
+        "seconds_per_pass": 30.664866258668496,
+        "status_counts": {
+          "COMPILE_FAIL": 16,
+          "FUNCTION_FAIL": 44,
+          "PASS": 33,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 275856,
+        "tokens_per_pass": 8359.272727272728,
+        "wall_seconds_sum": 1011.9405865360604
+      },
+      "paired_confirmation": {
+        "mcnemar": {
+          "discordant": 3,
+          "first_only": 0,
+          "holm_adjusted_p": 1.0,
+          "p_value": 0.25,
+          "second_only": 3
+        },
+        "model": "GPT-4o",
+        "paired_bootstrap_pass_rate_difference": {
+          "ci95": [
+            -0.07446808510638298,
+            0.0
+          ],
+          "estimate": -0.031914893617021274,
+          "samples": 10000,
+          "seed": 20260907
+        }
+      },
+      "primary": {
+        "calls": 185,
+        "compile_pass_count": 77,
+        "pass_count": 30,
+        "pass_rate": 0.3191489361702128,
+        "seconds_per_pass": 35.516209822166516,
+        "status_counts": {
+          "COMPILE_FAIL": 17,
+          "FUNCTION_FAIL": 46,
+          "PASS": 30,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 280194,
+        "tokens_per_pass": 9339.8,
+        "wall_seconds_sum": 1065.4862946649955
+      }
+    },
+    "GPT-4o-mini": {
+      "confirmation": {
+        "calls": 183,
+        "compile_pass_count": 71,
+        "pass_count": 30,
+        "pass_rate": 0.3191489361702128,
+        "seconds_per_pass": 60.13422009643109,
+        "status_counts": {
+          "COMPILE_FAIL": 23,
+          "FUNCTION_FAIL": 40,
+          "PASS": 30,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 303256,
+        "tokens_per_pass": 10108.533333333333,
+        "wall_seconds_sum": 1804.0266028929327
+      },
+      "paired_confirmation": {
+        "mcnemar": {
+          "discordant": 4,
+          "first_only": 1,
+          "holm_adjusted_p": 1.0,
+          "p_value": 0.625,
+          "second_only": 3
+        },
+        "model": "GPT-4o-mini",
+        "paired_bootstrap_pass_rate_difference": {
+          "ci95": [
+            -0.06382978723404255,
+            0.02127659574468085
+          ],
+          "estimate": -0.02127659574468085,
+          "samples": 10000,
+          "seed": 20260906
+        }
+      },
+      "primary": {
+        "calls": 185,
+        "compile_pass_count": 67,
+        "pass_count": 28,
+        "pass_rate": 0.2978723404255319,
+        "seconds_per_pass": 62.76326229742959,
+        "status_counts": {
+          "COMPILE_FAIL": 27,
+          "FUNCTION_FAIL": 38,
+          "PASS": 28,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 310106,
+        "tokens_per_pass": 11075.214285714286,
+        "wall_seconds_sum": 1757.3713443280285
+      }
+    },
+    "Qwen3.5-9B": {
+      "confirmation": {
+        "calls": 188,
+        "compile_pass_count": 65,
+        "pass_count": 25,
+        "pass_rate": 0.26595744680851063,
+        "seconds_per_pass": 129.23707277479582,
+        "status_counts": {
+          "COMPILE_FAIL": 29,
+          "FUNCTION_FAIL": 39,
+          "PASS": 25,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 356043,
+        "tokens_per_pass": 14241.72,
+        "wall_seconds_sum": 3230.9268193698954
+      },
+      "paired_confirmation": {
+        "mcnemar": {
+          "discordant": 1,
+          "first_only": 1,
+          "holm_adjusted_p": 1.0,
+          "p_value": 1.0,
+          "second_only": 0
+        },
+        "model": "Qwen3.5-9B",
+        "paired_bootstrap_pass_rate_difference": {
+          "ci95": [
+            0.0,
+            0.031914893617021274
+          ],
+          "estimate": 0.010638297872340425,
+          "samples": 10000,
+          "seed": 20260908
+        }
+      },
+      "primary": {
+        "calls": 188,
+        "compile_pass_count": 65,
+        "pass_count": 26,
+        "pass_rate": 0.2765957446808511,
+        "seconds_per_pass": 125.1606329526957,
+        "status_counts": {
+          "COMPILE_FAIL": 29,
+          "FUNCTION_FAIL": 38,
+          "PASS": 26,
+          "TIMEOUT": 1
+        },
+        "tasks": 94,
+        "tokens": 357329,
+        "tokens_per_pass": 13743.423076923076,
+        "wall_seconds_sum": 3254.1764567700884
+      }
+    }
+  }
+}

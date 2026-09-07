@@ -1,0 +1,20 @@
+{
+  "schema_version": "rlmar-route-profile-1.0",
+  "name": "balanced_domain_no_repair",
+  "base": "two_role_chain",
+  "intervention": "disable_repair",
+  "role_profile": "balanced_domain",
+  "generator_only_domains": [
+    "SequentialLogicControl",
+    "ProcessControl",
+    "DataHandlingAndCommunication"
+  ],
+  "two_role_domains": [
+    "MotionAndSortingControl",
+    "SafetyAndMonitoring"
+  ],
+  "topology": "Chain",
+  "rounds": 1,
+  "repair_budget": 0,
+  "token_budget": 16384
+}

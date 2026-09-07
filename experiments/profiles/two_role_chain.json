@@ -1,0 +1,30 @@
+{
+  "schema_version": "rlmar-stage4-route-profile-1.0",
+  "name": "two_role_chain",
+  "topology_index": 2,
+  "rounds": 1,
+  "repair_budget": 1,
+  "token_budget": 16384,
+  "roles_by_domain": {
+    "DataHandlingAndCommunication": [
+      {"index": 4, "name": "RequirementsAnalyzer"},
+      {"index": 5, "name": "STCodeGenerator"}
+    ],
+    "MotionAndSortingControl": [
+      {"index": 4, "name": "RequirementsAnalyzer"},
+      {"index": 5, "name": "STCodeGenerator"}
+    ],
+    "ProcessControl": [
+      {"index": 4, "name": "RequirementsAnalyzer"},
+      {"index": 5, "name": "STCodeGenerator"}
+    ],
+    "SafetyAndMonitoring": [
+      {"index": 4, "name": "SafetyLogicDesigner"},
+      {"index": 3, "name": "STSafetyCodeImplementer"}
+    ],
+    "SequentialLogicControl": [
+      {"index": 2, "name": "RequirementsAnalyzer"},
+      {"index": 3, "name": "STCodeGenerator"}
+    ]
+  }
+}

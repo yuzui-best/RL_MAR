@@ -1,0 +1,11 @@
+{
+  "schema_version": "rlmar-route-profile-1.0",
+  "name": "domain_specialist_chain",
+  "base": "two_role_chain",
+  "intervention": "add_one_domain_specialist",
+  "role_profile": "domain_specialist",
+  "topology": "Chain",
+  "rounds": 1,
+  "repair_budget": 1,
+  "token_budget": 16384
+}

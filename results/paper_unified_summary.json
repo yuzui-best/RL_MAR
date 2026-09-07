@@ -1,0 +1,372 @@
+[
+  {
+    "compiled": 75,
+    "method": "Direct Generation",
+    "model": "gpt-4o",
+    "passed": 30,
+    "run": "primary",
+    "seconds": 305.882675409317,
+    "statuses": {
+      "COMPILE_FAIL": 19,
+      "FUNCTION_FAIL": 45,
+      "PASS": 30
+    },
+    "tokens": 93201
+  },
+  {
+    "compiled": 84,
+    "method": "AutoPLC",
+    "model": "gpt-4o",
+    "passed": 31,
+    "run": "primary",
+    "seconds": 1362.1600000000003,
+    "statuses": {
+      "COMPILE_FAIL": 10,
+      "FUNCTION_FAIL": 52,
+      "PASS": 31,
+      "TIMEOUT": 1
+    },
+    "tokens": 447129
+  },
+  {
+    "compiled": 80,
+    "method": "LLM4PLC",
+    "model": "gpt-4o",
+    "passed": 11,
+    "run": "primary",
+    "seconds": 2330.27045750618,
+    "statuses": {
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 69,
+      "PASS": 11
+    },
+    "tokens": 494146
+  },
+  {
+    "compiled": 55,
+    "method": "Direct Generation",
+    "model": "gpt-4o-mini",
+    "passed": 24,
+    "run": "primary",
+    "seconds": 608.1238088607788,
+    "statuses": {
+      "COMPILE_FAIL": 38,
+      "FUNCTION_FAIL": 31,
+      "MISSING_OUTPUT": 1,
+      "PASS": 24
+    },
+    "tokens": 93064
+  },
+  {
+    "compiled": 75,
+    "method": "AutoPLC",
+    "model": "gpt-4o-mini",
+    "passed": 26,
+    "run": "primary",
+    "seconds": 2593.88,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 48,
+      "MISSING_OUTPUT": 1,
+      "PASS": 26,
+      "TIMEOUT": 1
+    },
+    "tokens": 557017
+  },
+  {
+    "compiled": 46,
+    "method": "LLM4PLC",
+    "model": "gpt-4o-mini",
+    "passed": 6,
+    "run": "primary",
+    "seconds": 2186.2083673477173,
+    "statuses": {
+      "COMPILE_FAIL": 48,
+      "FUNCTION_FAIL": 38,
+      "PASS": 6,
+      "TIMEOUT": 2
+    },
+    "tokens": 539017
+  },
+  {
+    "compiled": 68,
+    "method": "Direct Generation",
+    "model": "deepseek-v3.2",
+    "passed": 25,
+    "run": "primary",
+    "seconds": 2021.1907505989075,
+    "statuses": {
+      "COMPILE_FAIL": 26,
+      "FUNCTION_FAIL": 43,
+      "PASS": 25
+    },
+    "tokens": 111614
+  },
+  {
+    "compiled": 79,
+    "method": "AutoPLC",
+    "model": "deepseek-v3.2",
+    "passed": 26,
+    "run": "primary",
+    "seconds": 6750.169999999998,
+    "statuses": {
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 53,
+      "PASS": 26
+    },
+    "tokens": 472255
+  },
+  {
+    "compiled": 77,
+    "method": "LLM4PLC",
+    "model": "deepseek-v3.2",
+    "passed": 12,
+    "run": "primary",
+    "seconds": 8674.067459583282,
+    "statuses": {
+      "COMPILE_FAIL": 17,
+      "FUNCTION_FAIL": 65,
+      "PASS": 12
+    },
+    "tokens": 529673
+  },
+  {
+    "compiled": 68,
+    "method": "Direct Generation",
+    "model": "qwen3.5-9b",
+    "passed": 16,
+    "run": "primary",
+    "seconds": 933.7158284187317,
+    "statuses": {
+      "COMPILE_FAIL": 25,
+      "FUNCTION_FAIL": 52,
+      "MISSING_OUTPUT": 1,
+      "PASS": 16
+    },
+    "tokens": 101788
+  },
+  {
+    "compiled": 74,
+    "method": "AutoPLC",
+    "model": "qwen3.5-9b",
+    "passed": 20,
+    "run": "primary",
+    "seconds": 9183.019999999999,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 53,
+      "MISSING_OUTPUT": 2,
+      "PASS": 20,
+      "TIMEOUT": 1
+    },
+    "tokens": 667005
+  },
+  {
+    "compiled": 53,
+    "method": "LLM4PLC",
+    "model": "qwen3.5-9b",
+    "passed": 11,
+    "run": "primary",
+    "seconds": 11065.667201757431,
+    "statuses": {
+      "COMPILE_FAIL": 38,
+      "FUNCTION_FAIL": 42,
+      "MISSING_OUTPUT": 3,
+      "PASS": 11
+    },
+    "tokens": 819009
+  },
+  {
+    "compiled": 72,
+    "method": "Direct Generation",
+    "model": "deepseek-v4-flash",
+    "passed": 25,
+    "run": "primary",
+    "seconds": 402.9793014526367,
+    "statuses": {
+      "COMPILE_FAIL": 22,
+      "FUNCTION_FAIL": 47,
+      "PASS": 25
+    },
+    "tokens": 122518
+  },
+  {
+    "compiled": 78,
+    "method": "AutoPLC",
+    "model": "deepseek-v4-flash",
+    "passed": 27,
+    "run": "primary",
+    "seconds": 1357.1400000000008,
+    "statuses": {
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 50,
+      "PASS": 27,
+      "TIMEOUT": 1
+    },
+    "tokens": 487918
+  },
+  {
+    "compiled": 75,
+    "method": "LLM4PLC",
+    "model": "deepseek-v4-flash",
+    "passed": 15,
+    "run": "primary",
+    "seconds": 2711.8294093608856,
+    "statuses": {
+      "COMPILE_FAIL": 19,
+      "FUNCTION_FAIL": 60,
+      "PASS": 15
+    },
+    "tokens": 1047255
+  },
+  {
+    "compiled": 77,
+    "method": "RL-MAR",
+    "model": "gpt-4o",
+    "passed": 30,
+    "run": "primary",
+    "seconds": 1065.4862946649955,
+    "statuses": {
+      "COMPILE_FAIL": 17,
+      "FUNCTION_FAIL": 46,
+      "PASS": 30,
+      "TIMEOUT": 1
+    },
+    "tokens": 280194
+  },
+  {
+    "compiled": 67,
+    "method": "RL-MAR",
+    "model": "gpt-4o-mini",
+    "passed": 28,
+    "run": "primary",
+    "seconds": 1757.3713443280285,
+    "statuses": {
+      "COMPILE_FAIL": 27,
+      "FUNCTION_FAIL": 38,
+      "PASS": 28,
+      "TIMEOUT": 1
+    },
+    "tokens": 310106
+  },
+  {
+    "compiled": 75,
+    "method": "RL-MAR",
+    "model": "deepseek-v3.2",
+    "passed": 30,
+    "run": "primary",
+    "seconds": 6110.781270927939,
+    "statuses": {
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 45,
+      "MISSING_OUTPUT": 4,
+      "PASS": 30
+    },
+    "tokens": 394265
+  },
+  {
+    "compiled": 65,
+    "method": "RL-MAR",
+    "model": "qwen3.5-9b",
+    "passed": 26,
+    "run": "primary",
+    "seconds": 3254.1764567700884,
+    "statuses": {
+      "COMPILE_FAIL": 29,
+      "FUNCTION_FAIL": 38,
+      "PASS": 26,
+      "TIMEOUT": 1
+    },
+    "tokens": 357329
+  },
+  {
+    "compiled": 87,
+    "method": "RL-MAR",
+    "model": "deepseek-v4-flash",
+    "passed": 30,
+    "run": "primary",
+    "seconds": 1064.1751531049958,
+    "statuses": {
+      "COMPILE_FAIL": 7,
+      "FUNCTION_FAIL": 56,
+      "PASS": 30,
+      "TIMEOUT": 1
+    },
+    "tokens": 358124
+  },
+  {
+    "compiled": 78,
+    "method": "RL-MAR",
+    "model": "gpt-4o",
+    "passed": 33,
+    "run": "confirmation",
+    "seconds": 1011.9405865360604,
+    "statuses": {
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 44,
+      "PASS": 33,
+      "TIMEOUT": 1
+    },
+    "tokens": 275856
+  },
+  {
+    "compiled": 71,
+    "method": "RL-MAR",
+    "model": "gpt-4o-mini",
+    "passed": 30,
+    "run": "confirmation",
+    "seconds": 1804.0266028929327,
+    "statuses": {
+      "COMPILE_FAIL": 23,
+      "FUNCTION_FAIL": 40,
+      "PASS": 30,
+      "TIMEOUT": 1
+    },
+    "tokens": 303256
+  },
+  {
+    "compiled": 77,
+    "method": "RL-MAR",
+    "model": "deepseek-v3.2",
+    "passed": 31,
+    "run": "confirmation",
+    "seconds": 6152.117931457949,
+    "statuses": {
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 46,
+      "MISSING_OUTPUT": 3,
+      "PASS": 31
+    },
+    "tokens": 384771
+  },
+  {
+    "compiled": 65,
+    "method": "RL-MAR",
+    "model": "qwen3.5-9b",
+    "passed": 25,
+    "run": "confirmation",
+    "seconds": 3230.9268193698954,
+    "statuses": {
+      "COMPILE_FAIL": 29,
+      "FUNCTION_FAIL": 39,
+      "PASS": 25,
+      "TIMEOUT": 1
+    },
+    "tokens": 356043
+  },
+  {
+    "compiled": 87,
+    "method": "RL-MAR",
+    "model": "deepseek-v4-flash",
+    "passed": 29,
+    "run": "confirmation",
+    "seconds": 1222.542243358068,
+    "statuses": {
+      "COMPILE_FAIL": 7,
+      "FUNCTION_FAIL": 56,
+      "PASS": 29,
+      "TIMEOUT": 2
+    },
+    "tokens": 346179
+  }
+]

@@ -7,10 +7,10 @@ import sys
 # else:
 #     from typing.io import TextIO
 try:
-    # Python 3.8+ 推荐从 typing 导入类型别名
+    # Python 3.8+  typing 
     from typing import TextIO
 except Exception:
-    # 作为回退，使用标准库 io 中的类型作为别名（运行时不会影响行为）
+    # ， io （）
     import io as _io
     TextIO = _io.TextIOBase
 

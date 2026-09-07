@@ -1522,7 +1522,6 @@ try:
             
             if not pou:
                 print("POU not found using robust path finder: " + full_path)
-                # with open(r"E:\\Openness\\codesys-api\\my.log", "w") as ff:
                 #     ff.write(debug_info.encode("utf-8"))
                 result = {{"success": False, "error": "POU not found: " + full_path}}
             else:
@@ -2107,7 +2106,7 @@ def compile_pou(application, pou_objs, pou_mapping):
     compile_msgs = []
 
     def extract_line_number(text):
-        match = re.search(r'(?:Line|行)[\\s:]*(\\d+)', text)
+        match = re.search(r'(?:Line|)[\\s:]*(\\d+)', text)
         if match:
             return int(match.group(1))
         else:
@@ -2116,20 +2115,20 @@ def compile_pou(application, pou_objs, pou_mapping):
     try:
         print("Cleaning and Compiling application...")
         
-        # 1. 尝试清理 (防御性执行)
+        # 1.  ()
         try:
             if hasattr(application, 'clean'):
                 application.clean()
         except:
-            pass # 清理失败不影响后续编译
+            pass # 
         
-        # 2. 执行编译
+        # 2. 
         application.build()
         print("Compiling operation completed")
         compilation_time = time.time() - start_time
         print("Build duration: " + str(compilation_time) + " seconds")
 
-        # 3. 获取报错信息 (全面防御模式)
+        # 3.  ()
         try:
             cates = system.get_message_categories(bActive=False)
             print("DEBUG: Found total " + str(len(cates)) + " message categories.")
@@ -2140,24 +2139,24 @@ def compile_pou(application, pou_objs, pou_mapping):
         levels = set([scriptengine.Severity.FatalError, scriptengine.Severity.Error])
         
         for cate in cates:
-            # --- 核心修改：单次循环的堡垒 ---
+            # --- ： ---
             try:
                 if cate is None:
                     continue
 
-                # 获取类别描述 (容错)
+                #  ()
                 try:
                     desc = system.get_message_category_description(cate)
                 except:
                     desc = "Unknown"
 
-                # 获取消息对象 (这是最容易报错的地方)
+                #  ()
                 msg_objs = system.get_message_objects(category=cate)
 
                 if len(msg_objs) > 0:
                     print("DEBUG: Checking Category: '" + str(desc) + "' with " + str(len(msg_objs)) + " messages.")
 
-                # 提取错误 (双重括号转义)
+                #  ()
                 category_msgs = [
                     {{
                         "Path": extract_line_number(obj.position_text),
@@ -2175,15 +2174,15 @@ def compile_pou(application, pou_objs, pou_mapping):
                     compile_msgs.extend(category_msgs)
             
             except Exception:
-                # 这里的 Exception 会捕获所有 Python 异常
-                # 如果遇到 .NET 底层严重错误导致无法捕获，循环会自动跳过
+                #  Exception  Python 
+                #  .NET ，
                 print("WARNING: Skipping a bad category/message.")
                 continue
             except:
-                # 捕获所有非标准异常 (如 .NET 类型异常)
+                #  ( .NET )
                 print("WARNING: Skipping a bad category (Unknown Error).")
                 continue
-            # --- 核心修改结束 ---
+            # ---  ---
 
         result = {{
             "success": True,

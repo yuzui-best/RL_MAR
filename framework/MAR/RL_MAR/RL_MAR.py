@@ -6,6 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.special import gammaln
 import math
+import time
 
 from MAR.LLM.llm_embedding import SentenceEncoder
 from MAR.Graph.graph import DynamicEngineeringTopology as Graph
@@ -125,37 +126,38 @@ class IntelligentPLCRouter(nn.Module):
                 prompt_file:str='MAR/Roles/FinalNode/plc.json',
                 use_async_graph: bool = False,
                 max_concurrent_agents: int = 3,
-                ablation: Optional[str] = None):
+                ablation: Optional[str] = None,
+                task_metadata: Optional[List[Dict[str, str]]] = None):
         if not self.training_mode:
             return self._forward_inference(
                 design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation
+                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata
             )
         else:
             return self._forward_training(
                 design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation
+                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata
             )
 
     def _forward_inference(self, design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                          fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation):
+                          fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata):
         """Inference mode forward pass (uses no_grad)."""
         with torch.no_grad():
             return self._forward_impl(
                 design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation
+                fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata
             )
 
     def _forward_training(self, design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                         fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation):
+                         fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata):
         """Training mode forward pass (preserves gradients)."""
         return self._forward_impl(
             design_specs, domain_definitions, engine_profiles, workflow_topologies,
-            fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation
+            fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata
         )
 
     def _forward_impl(self, design_specs, domain_definitions, engine_profiles, workflow_topologies,
-                     fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation):
+                     fixed_domain_idx, prompt_file, use_async_graph, max_concurrent_agents, ablation, task_metadata):
         """Actual forward pass implementation."""
         if self.use_cache and not getattr(self, '_cache_initialized', False):
             self._initialize_caches(domain_definitions, engine_profiles, workflow_topologies)
@@ -259,8 +261,10 @@ class IntelligentPLCRouter(nn.Module):
         completion_tokens_list = []
         retry_counts = []
         first_pass_codes = []
+        execution_records = []
         # Execution Loop
-        for spec, domain, engines, topology, roles in zip(design_specs, selected_domains, selected_engines, selected_topologies, selected_roles):
+        metadata_items = task_metadata or [{} for _ in design_specs]
+        for spec, domain, engines, topology, roles, metadata in zip(design_specs, selected_domains, selected_engines, selected_topologies, selected_roles, metadata_items):
             previous_cost = Cost.instance().value
             previous_prompt = PromptTokens.instance().value
             previous_completion = CompletionTokens.instance().value
@@ -282,17 +286,24 @@ class IntelligentPLCRouter(nn.Module):
                       decision_method = "FinalRefer", prompt_file = prompt_file, reasoning_name=topology["Name"], **kwargs)
             self.g = g
             # Use 'query' key for compatibility with Agent logic
-            final_result.append(g.run(inputs={"query":spec}, num_rounds=kwargs["num_rounds"],
+            execution_started = time.monotonic()
+            final_result.append(g.run(inputs={"query": spec, **metadata}, num_rounds=kwargs["num_rounds"],
                                      use_async=use_async_graph, max_concurrent=max_concurrent_agents)[0][0])
+            execution_seconds = time.monotonic() - execution_started
             costs.append(Cost.instance().value - previous_cost)
             prompt_tokens_list.append(PromptTokens.instance().value - previous_prompt)
             completion_tokens_list.append(CompletionTokens.instance().value - previous_completion)
 
             retry_counts.append(getattr(g.decision_node, 'retry_count', 0))
             first_pass_codes.append(getattr(g.decision_node, 'first_pass_code', None))
+            execution_records.append({
+                'attempt_records': getattr(g.decision_node, 'attempt_records', []),
+                'agent_calls': len(role_names) * kwargs["num_rounds"] + 1 + getattr(g.decision_node, 'retry_count', 0),
+                'execution_seconds': execution_seconds,
+            })
 
         topology_names = [t['Name'] for t in selected_topologies]
-        return final_result, costs, policy_log_probs, domain_probs, total_compliance_loss, engineer_count_float, prompt_tokens_list, completion_tokens_list, topology_names, retry_counts, first_pass_codes
+        return final_result, costs, policy_log_probs, domain_probs, total_compliance_loss, engineer_count_float, prompt_tokens_list, completion_tokens_list, topology_names, retry_counts, first_pass_codes, execution_records
     
     def _preprocess_data(self, raw_data:List[Dict[str, str]]):
         get_name_description = lambda x: x['Name'] + ' : ' + x['Description']
@@ -367,7 +378,8 @@ class ControlDomainClassifier(nn.Module):
         self.weights_path = "MAR/RL_MAR/trained_classifier.pth"
         self.load_weights()
 
-        self.register_buffer('_label_to_profile', torch.tensor([2, 1, 0, 3, 4]))
+        self.register_buffer('_label_to_profile', torch.arange(5))
+        self.context_proj = nn.Linear(input_dim, hidden_dim).to(self.device)
 
         try:
             local_model_path = os.environ.get('LOCAL_MODEL_PATH', '')
@@ -437,8 +449,6 @@ class ControlDomainClassifier(nn.Module):
 
         selected_id = torch.argmax(scores, dim=1)
 
-        if not hasattr(self, 'context_proj'):
-            self.context_proj = nn.Linear(384, 64).to(self.device)
         spec_context = F.normalize(self.context_proj(spec_embedding), p=2, dim=1)
 
         return selected_id, scores, spec_context

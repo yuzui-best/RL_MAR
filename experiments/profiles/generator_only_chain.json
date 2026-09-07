@@ -1,0 +1,11 @@
+{
+  "schema_version": "rlmar-route-profile-1.0",
+  "name": "generator_only_chain",
+  "base": "two_role_chain",
+  "intervention": "remove_requirements_analyzer",
+  "role_profile": "generator_only",
+  "topology": "Chain",
+  "rounds": 1,
+  "repair_budget": 1,
+  "token_budget": 16384
+}

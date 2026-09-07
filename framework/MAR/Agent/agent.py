@@ -1,5 +1,8 @@
 from typing import Dict
+import hashlib
+import time
 import json
+import os
 from loguru import logger
 
 from MAR.Agent.agent_registry import AgentRegistry
@@ -7,7 +10,22 @@ from MAR.LLM.llm_registry import LLMRegistry
 from MAR.Roles.role_registry import RoleRegistry
 from MAR.Graph.node import Node
 from MAR.Prompts.message_aggregation_plc import message_aggregation #,inner_test
-from MAR.Prompts.post_process_plc import post_process, _extract_st_code, _format_codesys_errors, _build_rename_hint
+from MAR.Prompts.post_process_plc import (
+    post_process,
+    _extract_st_code,
+    _format_codesys_errors,
+    _build_rename_hint,
+    canonicalize_st,
+    replace_st_code,
+    functional_context,
+    functional_available,
+    functional_repair_instructions,
+    run_functional_check,
+    sanitize_compiler_diagnostic,
+    public_functional_summary,
+    functional_feedback,
+    functional_score,
+)
 from MAR.Prompts.output_format_plc import output_format_prompt
 from MAR.Prompts.reasoning import reasoning_prompt
 from MAR.Utils.ablation_config import get_ablation_mode
@@ -191,7 +209,8 @@ class FinalRefer(Node):
         spatial_str = ""
         for id, info in spatial_info.items():
             spatial_str += id + ": " + info['output'] + "\n\n"
-        user_prompt = f"The task is:\n\n {raw_inputs['query']}.\n At the same time, the output of other agents is as follows:\n\n{spatial_str} {self.prompt_file['user']}"
+        acceptance = functional_context(raw_inputs.get("task_id", ""))
+        user_prompt = f"The task is:\n\n {raw_inputs['query']}.{acceptance}\n At the same time, the output of other agents is as follows:\n\n{spatial_str} {self.prompt_file['user']}"
         return [{'role':'system','content':system_prompt},{'role':'user','content':user_prompt}]
     
     def _execute(self, input, spatial_info, temporal_info, **kwargs):
@@ -210,14 +229,85 @@ class FinalRefer(Node):
             logger.info(f"FinalNode: [Ablation:{get_ablation_mode()}] CODESYS feedback disabled, skipping internal compilation check")
             return response
 
-        max_retries = 1
+        return self.repair_existing(input, response)
+
+    def repair_existing(self, input, response):
+        """Continue FinalNode validation from an already generated ST candidate."""
+        self.first_pass_code = _extract_st_code(response)
+        self.retry_count = 0
+        self.attempt_records = []
+
+        configured_retries = os.getenv("RL_MAR_MAX_REPAIRS")
+        max_retries = int(configured_retries) if configured_retries is not None else (4 if functional_available(input.get("task_id", "")) else 1)
+        max_retries = min(max(max_retries, 0), 4)
+        repair_mode = os.getenv("RL_MAR_REPAIR_MODE", "all_stages")
+        if repair_mode not in {"compile_only", "all_stages"}:
+            raise ValueError(f"unknown repair mode: {repair_mode}")
+        max_stagnant = int(os.getenv("RL_MAR_MAX_STAGNANT_REPAIRS", "2"))
+        if max_stagnant not in {1, 2}:
+            raise ValueError(f"unsupported stagnant repair limit: {max_stagnant}")
+        best_response = response
+        best_score = (-1, -1, -1, -1, -1)
+        non_improving_retries = 0
         for attempt in range(1, max_retries + 2):  # attempt 1 = first, 2+ = retries
+            code = canonicalize_st(_extract_st_code(response))
+            response = replace_st_code(response, code)
+            validation_started = time.monotonic()
+            executable_result = run_functional_check(input.get("task_id", ""), code)
+            validation_seconds = time.monotonic() - validation_started
+            score = functional_score(executable_result)
+            feedback = functional_feedback(executable_result, input.get("task_id", "")) if executable_result else ""
+            record = {
+                "attempt": attempt,
+                "code_sha256": hashlib.sha256(code.encode("utf-8")).hexdigest(),
+                "code": code,
+                "status": executable_result.get("status") if executable_result else "UNAVAILABLE",
+                "score": list(score),
+                "feedback_sha256": hashlib.sha256(feedback.encode("utf-8")).hexdigest(),
+                "feedback": feedback,
+                "validation_seconds": validation_seconds,
+                "validation_summary": public_functional_summary(executable_result) if executable_result else None,
+                "selected": False,
+                "selection_reason": "candidate did not improve the best score",
+            }
+            self.attempt_records.append(record)
+            if executable_result is not None and executable_result.get("status") == "DATASET_ERROR":
+                logger.warning(f"FinalNode: dataset definition error for {input.get('task_id', '')}; skipping retries.")
+                return response
+            if executable_result is not None:
+                if score > best_score:
+                    best_score = score
+                    best_response = response
+                    non_improving_retries = 0
+                    for previous in self.attempt_records:
+                        if previous.get("selected"):
+                            previous["selection_reason"] = f"superseded by attempt {attempt}"
+                        previous["selected"] = False
+                    record["selected"] = True
+                    record["selection_reason"] = "highest lexicographic functional score"
+                elif attempt > 1:
+                    non_improving_retries += 1
+                if executable_result.get("status") == "PASS":
+                    record["stop_reason"] = "validation_passed"
+                    logger.info(f"FinalNode: executable checks passed (attempt {attempt}).")
+                    return response
+                if repair_mode == "compile_only" and executable_result.get("status") not in {"COMPILE_FAIL", "COMPILE_ERROR"}:
+                    record["stop_reason"] = "repair_mode_compile_only"
+                    return best_response
+                validation_label = "Executable Validation"
+                error_text = functional_feedback(executable_result, input.get("task_id", ""))
+            else:
+                validation_label = "CODESYS Compilation"
+                error_text = ""
             try:
-                from MAR.Tools.PLC.codesys_client import get_codesys_client
-                client = get_codesys_client()
-                code = _extract_st_code(response)
-                codesys_result = client.compile_code(code)
-                codesys_passed = codesys_result.get("success", False)
+                if executable_result is not None and executable_result.get("status") != "DATASET_ERROR":
+                    codesys_passed = False
+                    codesys_result = {"errors": [{"ErrorDesc": error_text}]}
+                else:
+                    from MAR.Tools.PLC.codesys_client import get_codesys_client
+                    client = get_codesys_client()
+                    codesys_result = client.compile_code(code)
+                    codesys_passed = codesys_result.get("success", False)
             except Exception as e:
                 logger.warning(f"FinalNode: CODESYS client error (attempt {attempt}): {e}")
                 codesys_passed = False
@@ -228,25 +318,35 @@ class FinalRefer(Node):
                 return response
 
             error_count = len(codesys_result.get("errors", []))
-            logger.warning(f"FinalNode: CODESYS compilation failed (attempt {attempt}/{max_retries + 1}), {error_count} error(s).")
+            logger.warning(f"FinalNode: {validation_label} failed (attempt {attempt}/{max_retries + 1}), {error_count} error(s).")
 
             if attempt > max_retries:
+                record["stop_reason"] = "repair_budget_exhausted"
                 logger.warning(f"FinalNode: max retries ({max_retries + 1}) exhausted, returning last response.")
-                return response
+                return best_response if best_score > (-1, -1) else response
 
-            error_text = ""
-            for e in codesys_result.get("errors", []):
-                error_text += f"  - {e.get('ErrorDesc', str(e))}\n"
+            if non_improving_retries >= max_stagnant:
+                record["stop_reason"] = "non_improving_limit"
+                logger.warning(f"FinalNode: stopping after {max_stagnant} consecutive non-improving retries.")
+                return best_response
+
+            error_text = sanitize_compiler_diagnostic("\n".join(
+                f"  - {e.get('ErrorDesc', str(e))}"
+                for e in codesys_result.get("errors", [])
+            ))
 
             retry_system = (
                 f"{self.prompt_file.get('system', '')}\n\n"
-                f"Your previous ST code failed CODESYS compilation with the following errors.\n"
+                f"Your previous ST code failed {validation_label} with the following errors.\n"
+                f"{functional_repair_instructions()}\n"
                 f"Fix ALL of them and output the corrected ST code in ```st ... ``` blocks."
             )
             retry_user = (
                 f"## Task\n{input.get('query', '')}\n\n"
-                f"## CODESYS Compilation Errors to Fix\n{error_text}\n"
-                f"Please fix ALL compilation errors above and regenerate the correct ST code."
+                f"## Executable Contract\n{functional_context(input.get('task_id', ''))}\n\n"
+                f"## Previous ST Code\n```st\n{code}\n```\n\n"
+                f"## {validation_label} Errors to Fix\n{error_text}\n"
+                f"Please fix all reported problems and regenerate the complete correct ST code."
             )
             retry_prompt = [
                 {'role': 'system', 'content': retry_system},
@@ -256,13 +356,28 @@ class FinalRefer(Node):
             self.retry_count += 1
             logger.debug(f"FinalNode retry {self.retry_count} response:\n{response}")
             try:
+                generation_started = time.monotonic()
                 response = self.llm.gen(retry_prompt)
                 if not response:
                     logger.error("FinalNode retry returned empty response.")
-                    return response
+                    self.attempt_records.append({
+                        "attempt": attempt + 1,
+                        "status": "GENERATION_ERROR",
+                        "diagnostic": "empty LLM response",
+                        "generation_seconds": time.monotonic() - generation_started,
+                        "selected": False,
+                    })
+                    return best_response if best_score > (-1, -1) else response
             except Exception as e:
                 logger.error(f"FinalNode retry LLM call failed: {e}")
-                return response
+                self.attempt_records.append({
+                    "attempt": attempt + 1,
+                    "status": "GENERATION_ERROR",
+                    "diagnostic": str(e),
+                    "generation_seconds": time.monotonic() - generation_started,
+                    "selected": False,
+                })
+                return best_response if best_score > (-1, -1) else response
 
         return response
     

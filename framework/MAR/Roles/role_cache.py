@@ -8,9 +8,9 @@ from loguru import logger
 
 class RoleConfigCache:
     """
-    Role configuration cache (performance optimization)
+     ()
 
-    Avoids reading JSON files from disk each time the Router is initialized.
+     Router  JSON 
     """
 
     _instance = None
@@ -24,13 +24,13 @@ class RoleConfigCache:
 
     def load_once(self, path: str = 'MAR/Roles') -> Dict[str, List[Dict]]:
         """
-        Load role configurations only once
+        
 
         Args:
-            path: Path to role configuration directory
+            path: 
 
         Returns:
-            Dict[str, List[Dict]]: Role database {domain: [role_configs]}
+            Dict[str, List[Dict]]:  {domain: [role_configs]}
         """
         if self._initialized:
             return self._role_db
@@ -56,17 +56,17 @@ class RoleConfigCache:
         return self._role_db
 
     def get_role_db(self) -> Dict[str, List[Dict]]:
-        """Get role database (auto-load if not initialized)"""
+        """ ()"""
         if not self._initialized:
             return self.load_once()
         return self._role_db
 
     def clear(self):
-        """Clear cache (for testing)"""
+        """ ()"""
         self._role_db.clear()
         self._initialized = False
         logger.info("Role config cache cleared")
 
 
-# Global singleton
+# 
 role_cache = RoleConfigCache()

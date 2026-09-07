@@ -1,4 +1,5 @@
 import aiohttp
+import hashlib
 from typing import List, Union, Optional
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 from typing import Dict, Any
@@ -11,10 +12,29 @@ from openai import OpenAI, AsyncOpenAI
 from MAR.LLM.price import cost_count
 from MAR.LLM.llm import LLM
 from MAR.LLM.llm_registry import LLMRegistry
+from MAR.Core.request_budget import active_request_budget
 
 load_dotenv()
 MINE_BASE_URL = os.getenv('BASE_URL')
 MINE_API_KEYS = os.getenv('API_KEY')
+
+
+def _deepseek_base_url() -> Optional[str]:
+    url = os.environ.get("DS_URL")
+    if url:
+        return url.rstrip("/").removesuffix("/chat/completions")
+    return url
+
+
+def _api_model_name(logical_model_name: str) -> str:
+    """Resolve a provider alias without changing the audited logical model ID."""
+    return os.environ.get("RL_MAR_API_MODEL", logical_model_name)
+
+
+def _thinking_control_enabled() -> bool:
+    disabled = os.getenv("RL_MAR_DISABLE_THINKING", "").lower() in {"1", "true", "yes"}
+    supported = os.getenv("RL_MAR_SUPPORTS_THINKING_CONTROL", "").lower() in {"1", "true", "yes"}
+    return disabled and supported
 
 
 @LLMRegistry.register('ALLChat')
@@ -22,7 +42,7 @@ class ALLChat(LLM):
     def __init__(self, model_name: str):
         self.model_name = model_name
     
-    @retry(wait=wait_random_exponential(max=180), stop=stop_after_attempt(5))
+    @retry(wait=wait_random_exponential(max=5), stop=stop_after_attempt(2), reraise=True)
     def gen(
         self,
         messages: Union[List[Dict], str],
@@ -31,7 +51,7 @@ class ALLChat(LLM):
         num_comps: Optional[int] = None,
         ) -> Union[List[str], str]:
         if max_tokens is None:
-            max_tokens = self.DEFAULT_MAX_TOKENS
+            max_tokens = int(os.getenv("LLM_MAX_TOKENS", self.DEFAULT_MAX_TOKENS))
         if temperature is None:
             temperature = self.DEFAULT_TEMPERATURE
         if num_comps is None:
@@ -40,16 +60,24 @@ class ALLChat(LLM):
         if isinstance(messages, str):
             messages = [{'role':"user", 'content':messages}]
 
+        budget = active_request_budget()
+        reservation_acquired = False
         try:
+            remaining = budget.before_call(max_tokens) if budget else float(os.getenv("RL_MAR_API_TIMEOUT", "90"))
+            reservation_acquired = budget is not None
+            timeout = max(1.0, min(float(os.getenv("RL_MAR_API_TIMEOUT", "90")), remaining))
             client = OpenAI(base_url = os.environ.get("URL"),
                             api_key = os.environ.get("KEY"),
-                            timeout=180)
-            chat_completion = client.chat.completions.create(
-            messages = messages,
-            model = self.model_name,
-            max_tokens = max_tokens,
-            temperature = temperature,
-            )
+                            timeout=timeout)
+            create_kwargs = {
+                "messages": messages,
+                "model": _api_model_name(self.model_name),
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+            }
+            if _thinking_control_enabled():
+                create_kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
+            chat_completion = client.chat.completions.create(**create_kwargs)
 
             # Check if response is valid ChatCompletion object
             if hasattr(chat_completion, 'choices') and len(chat_completion.choices) > 0:
@@ -61,6 +89,13 @@ class ALLChat(LLM):
                 usage = getattr(chat_completion, 'usage', None)
                 prompt = "".join([item['content'] for item in messages])
                 cost_count(prompt, response, self.model_name, usage=usage)
+                if budget:
+                    reservation_acquired = False
+                    budget.after_call(
+                        int(getattr(usage, "prompt_tokens", 0) or 0),
+                        int(getattr(usage, "completion_tokens", 0) or 0),
+                        max_tokens,
+                    )
                 return response
             else:
                 # Debug: print what we actually received
@@ -69,8 +104,11 @@ class ALLChat(LLM):
                 raise ValueError(f"Unexpected response format: {type(chat_completion)}")
 
         except Exception as e:
-            print(f"OpenAI API Error: {e}")
-            print(f"Base URL: {os.environ.get('URL')}")
+            if budget and reservation_acquired:
+                budget.cancel_call(max_tokens)
+            print(f"OpenAI API Error: {type(e).__name__}")
+            url = os.environ.get("URL", "")
+            print("Base URL configured")
             print(f"Model: {self.model_name}")
             print(f"Messages length: {sum(len(m.get('content', '')) for m in messages)}")
             raise e
@@ -84,7 +122,7 @@ class ALLChat(LLM):
         ) -> Union[List[str], str]:
 
         if max_tokens is None:
-            max_tokens = self.DEFAULT_MAX_TOKENS
+            max_tokens = int(os.getenv("LLM_MAX_TOKENS", self.DEFAULT_MAX_TOKENS))
         if temperature is None:
             temperature = self.DEFAULT_TEMPERATURE
         if num_comps is None:
@@ -93,18 +131,29 @@ class ALLChat(LLM):
         if isinstance(messages, str):
             messages = [{'role':"user", 'content':messages}]
         
+        budget = active_request_budget()
+        reservation_acquired = False
+        remaining = budget.before_call(max_tokens) if budget else float(os.getenv("RL_MAR_API_TIMEOUT", "90"))
+        reservation_acquired = budget is not None
         client = AsyncOpenAI(base_url = os.environ.get("URL"),
                              api_key = os.environ.get("KEY"),
-                             timeout = 600)
-        chat_completion = await client.chat.completions.create(
-        messages = messages,
-        model = self.model_name,
-        max_tokens = max_tokens,
-        temperature = temperature,
-        )
-        response = chat_completion.choices[0].message.content
-
-        return response
+                             timeout=max(1.0, min(float(os.getenv("RL_MAR_API_TIMEOUT", "90")), remaining)))
+        create_kwargs = {"messages": messages, "model": _api_model_name(self.model_name), "max_tokens": max_tokens, "temperature": temperature}
+        if _thinking_control_enabled():
+            create_kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
+        try:
+            chat_completion = await client.chat.completions.create(**create_kwargs)
+            response = chat_completion.choices[0].message.content
+            usage = getattr(chat_completion, "usage", None)
+            cost_count("".join(item["content"] for item in messages), response, self.model_name, usage=usage)
+            if budget:
+                reservation_acquired = False
+                budget.after_call(int(getattr(usage, "prompt_tokens", 0) or 0), int(getattr(usage, "completion_tokens", 0) or 0), max_tokens)
+            return response
+        except Exception:
+            if budget and reservation_acquired:
+                budget.cancel_call(max_tokens)
+            raise
     
 
 @LLMRegistry.register('Deepseek')
@@ -133,8 +182,8 @@ class DSChat(LLM):
             messages = [{'role':"user", 'content':messages}]
         from MAR.Utils.ablation_config import get_ablation_frequency_penalty
         freq_penalty = get_ablation_frequency_penalty()
-        client = OpenAI(base_url = os.environ.get("DS_URL"),
-                        api_key = os.environ.get("DS_KEY"),
+        client = OpenAI(base_url = _deepseek_base_url(),
+                        api_key = os.environ.get("DS_KEY") or os.environ.get("DS_API_KEY"),
                         timeout=180)
         create_kwargs = dict(
             messages = messages,
@@ -173,8 +222,8 @@ class DSChat(LLM):
 
         from MAR.Utils.ablation_config import get_ablation_frequency_penalty
         freq_penalty = get_ablation_frequency_penalty()
-        client = AsyncOpenAI(base_url = os.environ.get("DS_URL"),
-                             api_key = os.environ.get("DS_KEY"),)
+        client = AsyncOpenAI(base_url = _deepseek_base_url(),
+                             api_key = os.environ.get("DS_KEY") or os.environ.get("DS_API_KEY"),)
         create_kwargs = dict(
             messages = messages,
             model = self.model_name,

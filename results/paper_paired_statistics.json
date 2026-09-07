@@ -1,0 +1,201 @@
+{
+  "protocol": "50000 paired task bootstrap draws, seed 20260907; exact McNemar; Holm over five backbones per endpoint; pooled resampling of 94 task clusters",
+  "statistics": {
+    "compilation": {
+      "backbones": [
+        {
+          "autoplc": 84,
+          "both": 74,
+          "ci95_pp": [
+            -14.893617021276595,
+            0.0
+          ],
+          "difference_pp": -7.446808510638298,
+          "holm_p": 0.369140625,
+          "losses": 10,
+          "mcnemar_exact_p": 0.09228515625,
+          "model": "gpt-4o",
+          "n": 94,
+          "neither": 7,
+          "rlmar": 77,
+          "wins": 3
+        },
+        {
+          "autoplc": 75,
+          "both": 62,
+          "ci95_pp": [
+            -17.02127659574468,
+            0.0
+          ],
+          "difference_pp": -8.51063829787234,
+          "holm_p": 0.369140625,
+          "losses": 13,
+          "mcnemar_exact_p": 0.09625244140625,
+          "model": "gpt-4o-mini",
+          "n": 94,
+          "neither": 14,
+          "rlmar": 67,
+          "wins": 5
+        },
+        {
+          "autoplc": 79,
+          "both": 70,
+          "ci95_pp": [
+            -11.702127659574469,
+            3.1914893617021276
+          ],
+          "difference_pp": -4.25531914893617,
+          "holm_p": 0.4239501953125,
+          "losses": 9,
+          "mcnemar_exact_p": 0.4239501953125,
+          "model": "deepseek-v3.2",
+          "n": 94,
+          "neither": 10,
+          "rlmar": 75,
+          "wins": 5
+        },
+        {
+          "autoplc": 74,
+          "both": 57,
+          "ci95_pp": [
+            -20.212765957446805,
+            1.0638297872340425
+          ],
+          "difference_pp": -9.574468085106384,
+          "holm_p": 0.369140625,
+          "losses": 17,
+          "mcnemar_exact_p": 0.10775214433670044,
+          "model": "qwen3.5-9b",
+          "n": 94,
+          "neither": 12,
+          "rlmar": 65,
+          "wins": 8
+        },
+        {
+          "autoplc": 78,
+          "both": 77,
+          "ci95_pp": [
+            3.1914893617021276,
+            15.957446808510639
+          ],
+          "difference_pp": 9.574468085106384,
+          "holm_p": 0.05859375,
+          "losses": 1,
+          "mcnemar_exact_p": 0.01171875,
+          "model": "deepseek-v4-flash",
+          "n": 94,
+          "neither": 6,
+          "rlmar": 87,
+          "wins": 10
+        }
+      ],
+      "pooled": {
+        "ci95_pp": [
+          -8.085106382978726,
+          1.1810883240693154e-16
+        ],
+        "difference_pp": -4.042553191489363,
+        "pairs": 470,
+        "tasks": 94
+      }
+    },
+    "functional": {
+      "backbones": [
+        {
+          "autoplc": 31,
+          "both": 25,
+          "ci95_pp": [
+            -8.51063829787234,
+            5.319148936170213
+          ],
+          "difference_pp": -1.0638297872340425,
+          "holm_p": 1.0,
+          "losses": 6,
+          "mcnemar_exact_p": 1.0,
+          "model": "gpt-4o",
+          "n": 94,
+          "neither": 58,
+          "rlmar": 30,
+          "wins": 5
+        },
+        {
+          "autoplc": 26,
+          "both": 20,
+          "ci95_pp": [
+            -5.319148936170213,
+            9.574468085106384
+          ],
+          "difference_pp": 2.127659574468085,
+          "holm_p": 1.0,
+          "losses": 6,
+          "mcnemar_exact_p": 0.79052734375,
+          "model": "gpt-4o-mini",
+          "n": 94,
+          "neither": 60,
+          "rlmar": 28,
+          "wins": 8
+        },
+        {
+          "autoplc": 26,
+          "both": 23,
+          "ci95_pp": [
+            -2.127659574468085,
+            10.638297872340425
+          ],
+          "difference_pp": 4.25531914893617,
+          "holm_p": 1.0,
+          "losses": 3,
+          "mcnemar_exact_p": 0.34375,
+          "model": "deepseek-v3.2",
+          "n": 94,
+          "neither": 61,
+          "rlmar": 30,
+          "wins": 7
+        },
+        {
+          "autoplc": 20,
+          "both": 16,
+          "ci95_pp": [
+            -1.0638297872340425,
+            13.829787234042554
+          ],
+          "difference_pp": 6.382978723404255,
+          "holm_p": 0.8978271484375,
+          "losses": 4,
+          "mcnemar_exact_p": 0.1795654296875,
+          "model": "qwen3.5-9b",
+          "n": 94,
+          "neither": 64,
+          "rlmar": 26,
+          "wins": 10
+        },
+        {
+          "autoplc": 27,
+          "both": 24,
+          "ci95_pp": [
+            -3.1914893617021276,
+            9.574468085106384
+          ],
+          "difference_pp": 3.1914893617021276,
+          "holm_p": 1.0,
+          "losses": 3,
+          "mcnemar_exact_p": 0.5078125,
+          "model": "deepseek-v4-flash",
+          "n": 94,
+          "neither": 61,
+          "rlmar": 30,
+          "wins": 6
+        }
+      ],
+      "pooled": {
+        "ci95_pp": [
+          -0.851063829787234,
+          7.021276595744681
+        ],
+        "difference_pp": 2.9787234042553195,
+        "pairs": 470,
+        "tasks": 94
+      }
+    }
+  }
+}

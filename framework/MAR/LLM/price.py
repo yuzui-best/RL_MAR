@@ -1,12 +1,18 @@
 from MAR.Utils.globals import Cost, PromptTokens, CompletionTokens
 
+
+def pricing_model_name(model_name: str) -> str:
+    """Map API routing prefixes to the underlying billable model."""
+    return model_name.removeprefix("Pro/")
+
 def cal_token(text: str) -> int:
-    """Estimate token count (fallback when API usage data is unavailable)."""
+    """ token （ API usage ）"""
     try:
         import tiktoken
         encoder = tiktoken.encoding_for_model('gpt-4o')
         return len(encoder.encode(text))
     except Exception:
+        # :  ~0.6 token/,  ~0.3
         return int(len(text) * 0.6)
 
 
@@ -16,9 +22,11 @@ def cost_count(prompt, response, model_name, usage=None):
     price: float
 
     if usage is not None:
+        #  API  token 
         prompt_len = getattr(usage, 'prompt_tokens', 0) or 0
         completion_len = getattr(usage, 'completion_tokens', 0) or 0
 
+        #  token  (DeepSeek )
         cached_tokens = 0
         prompt_details = getattr(usage, 'prompt_tokens_details', None)
         if prompt_details is not None:
@@ -27,14 +35,20 @@ def cost_count(prompt, response, model_name, usage=None):
             elif isinstance(prompt_details, dict):
                 cached_tokens = prompt_details.get('cached_tokens', 0)
     else:
+        # : tiktoken 
         prompt_len = cal_token(prompt or "")
         completion_len = cal_token(response or "")
         cached_tokens = 0
 
-    if model_name not in MODEL_PRICE:
-        return 0, 0, 0
+    PromptTokens.instance().add(prompt_len)
+    CompletionTokens.instance().add(completion_len)
 
-    prices = MODEL_PRICE[model_name]
+    pricing_model = pricing_model_name(model_name)
+    if pricing_model not in MODEL_PRICE:
+        return 0, prompt_len, completion_len
+
+    prices = MODEL_PRICE[pricing_model]
+    # /
     uncached_input = max(0, prompt_len - cached_tokens)
     input_cost = uncached_input * prices['input'] / 1_000_000
     if cached_tokens > 0 and 'input_cached' in prices:
@@ -46,8 +60,6 @@ def cost_count(prompt, response, model_name, usage=None):
     price = input_cost + output_cost
 
     Cost.instance().add(price)
-    PromptTokens.instance().add(prompt_len)
-    CompletionTokens.instance().add(completion_len)
 
     return price, prompt_len, completion_len
 
@@ -79,7 +91,8 @@ MODEL_PRICE = {
 
 
 def get_currency(model_name: str) -> str:
-    """Return the billing currency for the model, defaulting to 'USD'."""
-    if model_name in MODEL_PRICE:
-        return MODEL_PRICE[model_name].get('currency', 'USD')
+    """， 'USD'"""
+    pricing_model = pricing_model_name(model_name)
+    if pricing_model in MODEL_PRICE:
+        return MODEL_PRICE[pricing_model].get('currency', 'USD')
     return 'USD'

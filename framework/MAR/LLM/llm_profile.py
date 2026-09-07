@@ -7,8 +7,8 @@ llm_profile = [
                     The model costs $0.15 per million input tokens and $0.6 per million output tokens'},
                 {'Name': 'qwen3.5-9b',
                  'Description': 'Qwen3.5-9B is a 9B-parameter open-source LLM by Alibaba, supporting multilingual tasks with strong reasoning and coding capabilities.\n\
-                   The model costs ¥0.5 per million input tokens and ¥4.0 per million output tokens'},
+                   The model costs 0.5 per million input tokens and 4.0 per million output tokens'},
                {'Name': 'deepseek-ai/DeepSeek-V3.2',
                 'Description': 'DeepSeek-V3.2 is the latest experimental model from DeepSeek, featuring improved reasoning and coding capabilities.\n\
-                   The model costs ¥2.0 per million input tokens and ¥3.0 per million output tokens'},
+                   The model costs 2.0 per million input tokens and 3.0 per million output tokens'},
                 ]
