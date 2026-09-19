@@ -1,0 +1,111 @@
+[
+  {
+    "model": "gpt-4o",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 80,
+    "compilation_rate": 85.1,
+    "functional_pass": 11,
+    "functional_pass_rate": 11.7,
+    "average_task_seconds": 24.79,
+    "total_tokens": 494146,
+    "statuses": {
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 68,
+      "PASS": 11,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 46,
+    "compilation_rate": 48.9,
+    "functional_pass": 6,
+    "functional_pass_rate": 6.4,
+    "average_task_seconds": 23.258,
+    "total_tokens": 539017,
+    "statuses": {
+      "COMPILE_FAIL": 48,
+      "FUNCTION_FAIL": 36,
+      "PASS": 6,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 2
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 77,
+    "compilation_rate": 81.9,
+    "functional_pass": 12,
+    "functional_pass_rate": 12.8,
+    "average_task_seconds": 92.277,
+    "total_tokens": 529673,
+    "statuses": {
+      "COMPILE_FAIL": 17,
+      "FUNCTION_FAIL": 64,
+      "PASS": 12,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 53,
+    "compilation_rate": 56.4,
+    "functional_pass": 11,
+    "functional_pass_rate": 11.7,
+    "average_task_seconds": 117.72,
+    "total_tokens": 819009,
+    "statuses": {
+      "COMPILE_FAIL": 38,
+      "FUNCTION_FAIL": 42,
+      "MISSING_OUTPUT": 3,
+      "PASS": 11
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 15,
+    "functional_pass_rate": 16.0,
+    "average_task_seconds": 28.849,
+    "total_tokens": 1047255,
+    "statuses": {
+      "COMPILE_FAIL": 19,
+      "FUNCTION_FAIL": 59,
+      "PASS": 15,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 86,
+    "compilation_rate": 91.5,
+    "functional_pass": 15,
+    "functional_pass_rate": 16.0,
+    "average_task_seconds": 77.404,
+    "total_tokens": 617301,
+    "statuses": {
+      "COMPILE_FAIL": 8,
+      "FUNCTION_FAIL": 70,
+      "PASS": 15,
+      "TIMEOUT": 1
+    }
+  }
+]

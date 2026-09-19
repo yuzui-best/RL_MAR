@@ -1,5 +1,5 @@
-from MAR.LLM.llm_registry import LLMRegistry
-from MAR.LLM.gpt_chat import GPTChat
+"""Embedding support used by the public RL-MAR route policy."""
 
-__all__ = ["LLMRegistry",
-           "GPTChat",]
+from .llm_embedding import SentenceEncoder, get_sentence_embedding
+
+__all__ = ["SentenceEncoder", "get_sentence_embedding"]

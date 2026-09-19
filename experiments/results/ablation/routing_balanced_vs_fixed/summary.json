@@ -1,0 +1,100 @@
+{
+  "schema_version": "rlmar-routing-ablation-overall-1.0",
+  "model": "deepseek-v4-flash",
+  "seeds": [
+    1818,
+    2411,
+    3203
+  ],
+  "per_seed": [
+    {
+      "seed": 1818,
+      "balanced": {
+        "calls": 181,
+        "compile_pass": 86,
+        "functional_pass": 32,
+        "tasks": 94,
+        "time_seconds": 502.7655276686419,
+        "tokens": 276550
+      },
+      "fixed_role": {
+        "calls": 250,
+        "compile_pass": 85,
+        "functional_pass": 32,
+        "tasks": 94,
+        "time_seconds": 637.1928999915253,
+        "tokens": 397982
+      }
+    },
+    {
+      "seed": 2411,
+      "balanced": {
+        "calls": 181,
+        "compile_pass": 84,
+        "functional_pass": 33,
+        "tasks": 94,
+        "time_seconds": 507.44143712334335,
+        "tokens": 279628
+      },
+      "fixed_role": {
+        "calls": 253,
+        "compile_pass": 85,
+        "functional_pass": 33,
+        "tasks": 94,
+        "time_seconds": 651.4584420016035,
+        "tokens": 399723
+      }
+    },
+    {
+      "seed": 3203,
+      "balanced": {
+        "calls": 184,
+        "compile_pass": 86,
+        "functional_pass": 31,
+        "tasks": 94,
+        "time_seconds": 520.3438126905821,
+        "tokens": 283961
+      },
+      "fixed_role": {
+        "calls": 254,
+        "compile_pass": 84,
+        "functional_pass": 33,
+        "tasks": 94,
+        "time_seconds": 685.9613737156615,
+        "tokens": 398166
+      }
+    }
+  ],
+  "overall": {
+    "balanced": {
+      "tasks": 282,
+      "functional_pass": 96,
+      "compile_pass": 256,
+      "calls": 546,
+      "tokens": 840139,
+      "time_seconds": 1530.5507774825674
+    },
+    "fixed_role": {
+      "tasks": 282,
+      "functional_pass": 98,
+      "compile_pass": 254,
+      "calls": 757,
+      "tokens": 1195871,
+      "time_seconds": 1974.6127157087903
+    }
+  },
+  "route_allocation": {
+    "balanced_agents_per_task": 1.27,
+    "fixed_role_agents_per_task": 2.0,
+    "balanced_single_role_runs": 207,
+    "balanced_two_role_runs": 75,
+    "fixed_role_single_role_runs": 0,
+    "fixed_role_two_role_runs": 282
+  },
+  "verifier_correction": {
+    "balanced_without_correction": 93,
+    "balanced_triggered": 189,
+    "fixed_role_without_correction": 89,
+    "fixed_role_triggered": 193
+  }
+}

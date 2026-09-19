@@ -1,0 +1,20 @@
+{
+  "benchmark": "RewardPLC development set",
+  "tasks": 12,
+  "seeds": [
+    1818,
+    2411,
+    3203
+  ],
+  "model": "deepseek-v4-flash",
+  "quality_profile": {
+    "roles_per_task": 2,
+    "topology": "Chain",
+    "correction_budget": 1
+  },
+  "balanced_profile": {
+    "roles": "domain conditional, one or two",
+    "topology": "Chain",
+    "correction_budget": 1
+  }
+}

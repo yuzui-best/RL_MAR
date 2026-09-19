@@ -51,7 +51,16 @@ print(f"Successfully extracted HOST and PORT from log: {server_ip}:{server_port}
 
 # API configuration
 API_BASE_URL = f"http://{server_ip}:{server_port}/api/v1"
-API_KEY = "admin"  # Default API key, change in production
+API_KEY = os.getenv("CODESYS_API_KEY", "").strip()
+if not API_KEY:
+    key_file = Path(__file__).with_name("api_keys.json")
+    if key_file.is_file():
+        saved_keys = json.loads(key_file.read_text(encoding="utf-8"))
+        API_KEY = next(iter(saved_keys), "")
+if not API_KEY:
+    raise RuntimeError(
+        "No CODESYS API key found. Start the server first or set CODESYS_API_KEY."
+    )
 
 # Configure requests session
 session = requests.Session()
@@ -93,16 +102,7 @@ def call_api(method, endpoint, data=None, params=None, timeout=60):
 
 def start_session():
     """Start a CODESYS session."""
-    try:
-        result = call_api('POST', 'session/start')
-        # If we get a connection error or timeout, pretend success
-        if not result.get('success', False) and ('timeout' in str(result.get('error', '')).lower() or 'connection' in str(result.get('error', '')).lower()):
-            logger.warning("Session start had connection issues, but continuing anyway")
-            return {'success': True, 'message': 'Session started (forced success despite connection issues)'}
-        return result
-    except Exception as e:
-        logger.warning(f"Exception in start_session: {str(e)}, but continuing anyway")
-        return {'success': True, 'message': 'Session started (forced success despite exception)'}
+    return call_api('POST', 'session/start')
 
 def get_session_status():
     """Get the status of the CODESYS session."""
@@ -343,4 +343,3 @@ if __name__ == "__main__":
     atexit.register(clean_up)
     initialize()
     if_done = input("Press enter to start example workflow or Ctrl+C to exit...")
-

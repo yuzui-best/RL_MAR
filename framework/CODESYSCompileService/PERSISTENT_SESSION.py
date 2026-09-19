@@ -88,7 +88,7 @@ class CodesysPersistentSession(object):
                         "timestamp": time.time()
                     }))
                 self.log("Created early status file")
-            except Exception, e:
+            except Exception as e:
                 self.log("Warning: Could not create early status file: " + str(e))
             
             # Check if directories exist and are accessible
@@ -150,12 +150,12 @@ class CodesysPersistentSession(object):
                         # Try again
                         self.system = None
                         
-                except AttributeError, ae:
+                except AttributeError as ae:
                     self.log("AttributeError in system initialization (attempt %d): %s" % (attempt+1, str(ae)))
                     self.log("This usually means scriptengine module is not fully loaded or initialized")
                     # Continue with retry
                     self.system = None
-                except Exception, e:
+                except Exception as e:
                     self.log("Error creating ScriptSystem (attempt %d): %s" % (attempt+1, str(e)))
                     self.log(traceback.format_exc())
                     # Continue with retry
@@ -182,7 +182,7 @@ class CodesysPersistentSession(object):
             else:
                 self.log("Initialization completed with visible CODESYS but non-functional system")
             return True
-        except Exception, e:
+        except Exception as e:
             self.log("Initialization failed: %s" % str(e))
             self.log(traceback.format_exc())
             
@@ -244,7 +244,7 @@ class CodesysPersistentSession(object):
                 
             self.log("Exiting main loop")
             return True
-        except Exception, e:
+        except Exception as e:
             self.log("Error in main loop: %s" % str(e))
             self.log(traceback.format_exc())
             return False
@@ -277,10 +277,10 @@ class CodesysPersistentSession(object):
                             request = json.loads(request_content)
 
                             self.jobs_queue.put(request)
-                        except Exception, e:
+                        except Exception as e:
                             self.log("Error processing request file: %s" % str(e))
                             self.log(traceback.format_exc())
-            except Exception, e:
+            except Exception as e:
                 self.log("Error processing requests: %s" % str(e))
                 self.log(traceback.format_exc())
                 
@@ -319,7 +319,7 @@ class CodesysPersistentSession(object):
                         self.log("Parent directory exists, contents: %s" % str(os.listdir(parent_dir)))
                     else:
                         self.log("Parent directory does not exist: %s" % parent_dir)
-                except Exception, dir_e:
+                except Exception as dir_e:
                     self.log("Error listing parent directory: %s" % str(dir_e))
                 
                 raise IOError("Script file not found: %s" % script_path)
@@ -328,7 +328,7 @@ class CodesysPersistentSession(object):
             try:
                 script_size = os.path.getsize(script_path)
                 self.log("Script file size: %d bytes" % script_size)
-            except Exception, size_e:
+            except Exception as size_e:
                 self.log("Could not get script file size: %s" % str(size_e))
                 
             # Execute script
@@ -356,7 +356,7 @@ class CodesysPersistentSession(object):
                 
             # Log completion
             self.log("Request completed: %s" % request_id)
-        except Exception, e:
+        except Exception as e:
             self.log("Error processing request %s: %s" % (request_id, str(e)))
             self.log(traceback.format_exc())
             
@@ -385,7 +385,7 @@ class CodesysPersistentSession(object):
                         result_json = json.dumps(error_result)
                         f.write(result_json)
                         self.log("Error result written successfully (%d bytes)" % len(result_json))
-                except Exception, write_e:
+                except Exception as write_e:
                     self.log("Error writing result file: %s" % str(write_e))
                     self.log(traceback.format_exc())
                     
@@ -411,7 +411,7 @@ class CodesysPersistentSession(object):
                 first_lines = script_code.split('\n')[:5]
                 self.log("Script preview: %s" % '\n'.join(first_lines))
                 
-            except Exception, load_e:
+            except Exception as load_e:
                 self.log("Error loading script: %s" % str(load_e))
                 self.log(traceback.format_exc())
                 return {
@@ -445,7 +445,7 @@ class CodesysPersistentSession(object):
                 # self.log("GC object growth: %d" % (after - before))
                 # self.log("Lengtgh of globals: %d" % len(globals_dict))
                 self.jobs_cnt += 1
-            except Exception, exec_e:
+            except Exception as exec_e:
                 self.log("Error executing script: %s" % str(exec_e))
                 self.log(traceback.format_exc())
                 return {
@@ -475,7 +475,7 @@ class CodesysPersistentSession(object):
                     "execution_time": time.time(),
                     "executed_by": "CODESYS PersistentSession"
                 }
-        except Exception, e:
+        except Exception as e:
             self.log("Unhandled error in execute_script: %s" % str(e))
             self.log(traceback.format_exc())
             return {
@@ -520,7 +520,7 @@ class CodesysPersistentSession(object):
                     
                 # Close project
                 self.active_project = None
-            except Exception, e:
+            except Exception as e:
                 self.log("Error closing project: %s" % str(e))
                 
         # Update status
@@ -537,7 +537,7 @@ class CodesysPersistentSession(object):
         try:
             with open(STATUS_FILE, 'w') as f:
                 f.write(json.dumps(status))
-        except Exception, e:
+        except Exception as e:
             self.log("Error updating status: %s" % str(e))
             
     def log(self, message):
@@ -550,7 +550,7 @@ class CodesysPersistentSession(object):
                 f.write(log_message)
         except:
             # Fall back to stdout if log file is not accessible
-            print log_message
+            print(log_message)
             
 # Main entry point
 if __name__ == "__main__":

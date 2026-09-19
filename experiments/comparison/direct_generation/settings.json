@@ -1,0 +1,14 @@
+{
+  "method": "Direct Generation",
+  "benchmark": "Functional94 v1.3",
+  "models": [
+    "gpt-4o",
+    "gpt-4o-mini",
+    "gpt-5.5",
+    "deepseek-v3.2",
+    "deepseek-v4-flash",
+    "qwen3.5-9b"
+  ],
+  "workflow": "Single model call from the public requirement and interface to IEC 61131-3 ST",
+  "evaluator": "../../evaluation/functional94"
+}

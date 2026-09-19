@@ -1,0 +1,560 @@
+[
+  {
+    "model": "gpt-4o",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 30,
+    "functional_pass_rate": 31.9,
+    "average_task_seconds": 3.254,
+    "total_tokens": 93201,
+    "statuses": {
+      "COMPILE_FAIL": 19,
+      "FUNCTION_FAIL": 42,
+      "PASS": 30,
+      "RUNTIME_FAIL": 3
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 84,
+    "compilation_rate": 89.4,
+    "functional_pass": 31,
+    "functional_pass_rate": 33.0,
+    "average_task_seconds": 14.491,
+    "total_tokens": 447129,
+    "statuses": {
+      "COMPILE_FAIL": 10,
+      "FUNCTION_FAIL": 49,
+      "PASS": 31,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 80,
+    "compilation_rate": 85.1,
+    "functional_pass": 11,
+    "functional_pass_rate": 11.7,
+    "average_task_seconds": 24.79,
+    "total_tokens": 494146,
+    "statuses": {
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 68,
+      "PASS": 11,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 55,
+    "compilation_rate": 58.5,
+    "functional_pass": 24,
+    "functional_pass_rate": 25.5,
+    "average_task_seconds": 6.469,
+    "total_tokens": 93064,
+    "statuses": {
+      "COMPILE_FAIL": 38,
+      "FUNCTION_FAIL": 28,
+      "MISSING_OUTPUT": 1,
+      "PASS": 24,
+      "RUNTIME_FAIL": 3
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 26,
+    "functional_pass_rate": 27.7,
+    "average_task_seconds": 27.594,
+    "total_tokens": 557017,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 45,
+      "MISSING_OUTPUT": 1,
+      "PASS": 26,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 46,
+    "compilation_rate": 48.9,
+    "functional_pass": 6,
+    "functional_pass_rate": 6.4,
+    "average_task_seconds": 23.258,
+    "total_tokens": 539017,
+    "statuses": {
+      "COMPILE_FAIL": 48,
+      "FUNCTION_FAIL": 36,
+      "PASS": 6,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 2
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 68,
+    "compilation_rate": 72.3,
+    "functional_pass": 25,
+    "functional_pass_rate": 26.6,
+    "average_task_seconds": 21.502,
+    "total_tokens": 111614,
+    "statuses": {
+      "COMPILE_FAIL": 26,
+      "FUNCTION_FAIL": 40,
+      "PASS": 25,
+      "RUNTIME_FAIL": 3
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 79,
+    "compilation_rate": 84.0,
+    "functional_pass": 26,
+    "functional_pass_rate": 27.7,
+    "average_task_seconds": 71.81,
+    "total_tokens": 472255,
+    "statuses": {
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 51,
+      "PASS": 26,
+      "RUNTIME_FAIL": 2
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 77,
+    "compilation_rate": 81.9,
+    "functional_pass": 12,
+    "functional_pass_rate": 12.8,
+    "average_task_seconds": 92.277,
+    "total_tokens": 529673,
+    "statuses": {
+      "COMPILE_FAIL": 17,
+      "FUNCTION_FAIL": 64,
+      "PASS": 12,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 68,
+    "compilation_rate": 72.3,
+    "functional_pass": 16,
+    "functional_pass_rate": 17.0,
+    "average_task_seconds": 9.933,
+    "total_tokens": 101788,
+    "statuses": {
+      "COMPILE_FAIL": 25,
+      "FUNCTION_FAIL": 50,
+      "MISSING_OUTPUT": 1,
+      "PASS": 16,
+      "RUNTIME_FAIL": 2
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 74,
+    "compilation_rate": 78.7,
+    "functional_pass": 20,
+    "functional_pass_rate": 21.3,
+    "average_task_seconds": 97.692,
+    "total_tokens": 667005,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 52,
+      "MISSING_OUTPUT": 2,
+      "PASS": 20,
+      "RUNTIME_FAIL": 1,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 53,
+    "compilation_rate": 56.4,
+    "functional_pass": 11,
+    "functional_pass_rate": 11.7,
+    "average_task_seconds": 117.72,
+    "total_tokens": 819009,
+    "statuses": {
+      "COMPILE_FAIL": 38,
+      "FUNCTION_FAIL": 42,
+      "MISSING_OUTPUT": 3,
+      "PASS": 11
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 72,
+    "compilation_rate": 76.6,
+    "functional_pass": 25,
+    "functional_pass_rate": 26.6,
+    "average_task_seconds": 4.287,
+    "total_tokens": 122518,
+    "statuses": {
+      "COMPILE_FAIL": 22,
+      "FUNCTION_FAIL": 45,
+      "PASS": 25,
+      "RUNTIME_FAIL": 2
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 78,
+    "compilation_rate": 83.0,
+    "functional_pass": 27,
+    "functional_pass_rate": 28.7,
+    "average_task_seconds": 14.438,
+    "total_tokens": 487918,
+    "statuses": {
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 48,
+      "PASS": 27,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 15,
+    "functional_pass_rate": 16.0,
+    "average_task_seconds": 28.849,
+    "total_tokens": 1047255,
+    "statuses": {
+      "COMPILE_FAIL": 19,
+      "FUNCTION_FAIL": 59,
+      "PASS": 15,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 77,
+    "compilation_rate": 81.9,
+    "functional_pass": 30,
+    "functional_pass_rate": 31.9,
+    "average_task_seconds": 11.335,
+    "total_tokens": 280194,
+    "statuses": {
+      "COMPILE_FAIL": 17,
+      "FUNCTION_FAIL": 43,
+      "PASS": 30,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 67,
+    "compilation_rate": 71.3,
+    "functional_pass": 28,
+    "functional_pass_rate": 29.8,
+    "average_task_seconds": 18.695,
+    "total_tokens": 310106,
+    "statuses": {
+      "COMPILE_FAIL": 27,
+      "FUNCTION_FAIL": 36,
+      "PASS": 28,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 30,
+    "functional_pass_rate": 31.9,
+    "average_task_seconds": 65.008,
+    "total_tokens": 394265,
+    "statuses": {
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 44,
+      "MISSING_OUTPUT": 4,
+      "PASS": 30,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 65,
+    "compilation_rate": 69.1,
+    "functional_pass": 26,
+    "functional_pass_rate": 27.7,
+    "average_task_seconds": 34.619,
+    "total_tokens": 357329,
+    "statuses": {
+      "COMPILE_FAIL": 29,
+      "FUNCTION_FAIL": 36,
+      "PASS": 26,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 87,
+    "compilation_rate": 92.6,
+    "functional_pass": 30,
+    "functional_pass_rate": 31.9,
+    "average_task_seconds": 11.321,
+    "total_tokens": 358124,
+    "statuses": {
+      "COMPILE_FAIL": 7,
+      "FUNCTION_FAIL": 54,
+      "PASS": 30,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 78,
+    "compilation_rate": 83.0,
+    "functional_pass": 33,
+    "functional_pass_rate": 35.1,
+    "average_task_seconds": 10.765,
+    "total_tokens": 275856,
+    "statuses": {
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 41,
+      "PASS": 33,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 71,
+    "compilation_rate": 75.5,
+    "functional_pass": 30,
+    "functional_pass_rate": 31.9,
+    "average_task_seconds": 19.192,
+    "total_tokens": 303256,
+    "statuses": {
+      "COMPILE_FAIL": 23,
+      "FUNCTION_FAIL": 38,
+      "PASS": 30,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 77,
+    "compilation_rate": 81.9,
+    "functional_pass": 31,
+    "functional_pass_rate": 33.0,
+    "average_task_seconds": 65.448,
+    "total_tokens": 384771,
+    "statuses": {
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 45,
+      "MISSING_OUTPUT": 3,
+      "PASS": 31,
+      "RUNTIME_FAIL": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 65,
+    "compilation_rate": 69.1,
+    "functional_pass": 25,
+    "functional_pass_rate": 26.6,
+    "average_task_seconds": 34.372,
+    "total_tokens": 356043,
+    "statuses": {
+      "COMPILE_FAIL": 29,
+      "FUNCTION_FAIL": 37,
+      "PASS": 25,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 87,
+    "compilation_rate": 92.6,
+    "functional_pass": 29,
+    "functional_pass_rate": 30.9,
+    "average_task_seconds": 13.006,
+    "total_tokens": 346179,
+    "statuses": {
+      "COMPILE_FAIL": 7,
+      "FUNCTION_FAIL": 54,
+      "PASS": 29,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 2
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 83,
+    "compilation_rate": 88.3,
+    "functional_pass": 28,
+    "functional_pass_rate": 29.8,
+    "average_task_seconds": 10.299,
+    "total_tokens": 134055,
+    "statuses": {
+      "COMPILE_FAIL": 11,
+      "FUNCTION_FAIL": 55,
+      "PASS": 28
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 86,
+    "compilation_rate": 91.5,
+    "functional_pass": 31,
+    "functional_pass_rate": 33.0,
+    "average_task_seconds": 50.841,
+    "total_tokens": 567924,
+    "statuses": {
+      "COMPILE_FAIL": 8,
+      "FUNCTION_FAIL": 55,
+      "PASS": 31
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "LLM4PLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 86,
+    "compilation_rate": 91.5,
+    "functional_pass": 15,
+    "functional_pass_rate": 16.0,
+    "average_task_seconds": 77.404,
+    "total_tokens": 617301,
+    "statuses": {
+      "COMPILE_FAIL": 8,
+      "FUNCTION_FAIL": 70,
+      "PASS": 15,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 92,
+    "compilation_rate": 97.9,
+    "functional_pass": 37,
+    "functional_pass_rate": 39.4,
+    "average_task_seconds": 23.13,
+    "total_tokens": 323849,
+    "statuses": {
+      "COMPILE_FAIL": 1,
+      "FUNCTION_FAIL": 53,
+      "PASS": 37,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "RL-MAR",
+    "run": "confirmation",
+    "tasks": 94,
+    "compiled": 88,
+    "compilation_rate": 93.6,
+    "functional_pass": 32,
+    "functional_pass_rate": 34.0,
+    "average_task_seconds": 41.812,
+    "total_tokens": 315016,
+    "statuses": {
+      "COMPILE_FAIL": 4,
+      "FUNCTION_FAIL": 56,
+      "PASS": 32,
+      "RUNTIME_FAIL": 2
+    }
+  }
+]

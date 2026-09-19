@@ -1,0 +1,38 @@
+{
+  "benchmark": "Functional94 v1.3",
+  "tasks": 94,
+  "models": [
+    "gpt-4o",
+    "gpt-4o-mini",
+    "gpt-5.5",
+    "deepseek-v3.2",
+    "deepseek-v4-flash",
+    "qwen3.5-9b"
+  ],
+  "methods": [
+    "Direct Generation",
+    "AutoPLC",
+    "LLM4PLC",
+    "RL-MAR"
+  ],
+  "metrics": [
+    "compilation_rate",
+    "functional_pass_rate",
+    "average_task_seconds",
+    "total_tokens"
+  ],
+  "evaluation": {
+    "deterministic_revalidation": true,
+    "hidden_exact_trace_tasks": 21,
+    "deterministic_test_cases": 122,
+    "property_directed_tasks": 73,
+    "executable_oracles": 388,
+    "infrastructure_failures_in_denominator": true
+  },
+  "shared_generation": {
+    "seed": 1234,
+    "max_call_tokens": 2048,
+    "max_model_calls_per_task": 8,
+    "max_route_seconds": 180
+  }
+}

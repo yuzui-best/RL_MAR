@@ -1,0 +1,9 @@
+{
+  "benchmark": "RewardPLC development set",
+  "model": "deepseek-v4-flash",
+  "seed": 1818,
+  "fixed_profile": "balanced_domain_chain",
+  "intervention": "repair_budget",
+  "with_correction": 1,
+  "without_correction": 0
+}

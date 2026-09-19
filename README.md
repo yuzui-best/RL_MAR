@@ -1,80 +1,100 @@
-# RL-MAR: Reinforcement Learning-based Multi-Agent Routing for Verifiable PLC Code Generation
+# RL-MAR: Verifier-Guided Multi-Agent Routing for PLC Program Generation
 
-[👉 中文版本](README_zh.md)
+[中文说明](README_zh.md)
 
-This repository contains the source code and experiment results for RL-MAR, a neural-symbolic multi-agent framework that generates IEC 61131-3 Structured Text (ST) code from natural-language specifications.
+This repository contains the public implementation and experiment artifacts for
+**"Harnessing Large Language Models for PLC Program Generation via
+Verifier-Guided Multi-Agent Routing."** RL-MAR generates IEC 61131-3 Structured
+Text (ST) programs from natural-language specifications using domain-conditioned
+agent routing, resource-aware execution, and bounded verifier-guided correction.
 
-![](PLC_paper_picture/PLC%20Agent%20Framework.png)
+![RL-MAR framework](PLC_paper_picture/PLC%20Agent%20Framework.png)
 
-RL-MAR uses a learned router to classify control domains, plan execution topologies, and dispatch specialized agent teams. The generated code is validated through ANTLR syntax checking and CODESYS compilation. Our experiments use mainstream LLMs accessible via OpenAI-compatible APIs (GPT-4o, DeepSeek-V3.2, Qwen3.5-9B, etc.); the framework works with any compatible provider.
+The evaluation covers six LLM backbones on **Functional94**, formal-property
+verification on **Agents4PLC-23**, routing and verifier-feedback ablations, and a
+Siemens S7-1200 stereoscopic warehouse case study.
 
-**Pipeline**: Domain Classification → Topology Planning → Agent Role Dispatch → Multi-Agent DAG Execution → CODESYS Compile & Retry → Verified ST Code. Agents run in parallel within DAG layers, with cross-round temporal memory. The router is trained via policy gradient to balance validation success and inference cost.
+## Repository Structure
 
-The benchmark dataset contains 94 PLC programming tasks across 5 control domains: Sequential Logic, Process Control, Motion & Sorting, Data Handling, and Safety & Monitoring.
-
-## Directory Structure
-
-```
-├── framework/                     # Core framework
-│   ├── MAR/                       # Agent, Graph, Router, LLM, Roles, Tools
-│   ├── Datasets/                  # Benchmark dataset
-│   └── CODESYSCompileService/     # CODESYS HTTP compilation service
-├── experiments/                   # Experiments and results
-│   ├── run_plc.py                 # Main experiment entry point
-│   ├── comparison/                # Baseline comparison results
-│   └── results/ablation/          # Ablation study results
-└── PLC_paper_picture/             # Paper figures
+```text
+RL_MAR/
+|-- framework/
+|   |-- MAR/                         # RL-MAR runtime, domain roles, and PLC tools
+|   `-- CODESYSCompileService/       # Optional CODESYS compilation service
+|-- evaluation/
+|   |-- functional94/                # Frozen 94-task functional evaluator
+|   `-- agents4plc/                  # 23-task formal-property evaluator
+|-- experiments/
+|   |-- comparison/                  # Baseline/RL-MAR runners and reported results
+|   |-- results/                     # Ablations and failure analysis
+|   `-- case_study/                  # Generated ST, measurements, and TIA project
+`-- PLC_paper_picture/               # Framework figure
 ```
 
 ## Installation
 
-We recommend running RL-MAR on Windows with Python 3.8+.
-
-1. Install dependencies:
+Python 3.10+ is recommended. Install the core dependencies and create a private
+environment file:
 
 ```bash
 pip install -r framework/requirements.txt
-pip install antlr4-python3-runtime==4.13.1
-```
-
-2. Environment setup. Copy the template and fill in your API key:
-
-```bash
 cp framework/template.env framework/.env
-# Edit .env with your LLM provider URL and key
 ```
 
-3. CODESYS Compilation Service (optional, for compilation validation):
+Fill `framework/.env` with the endpoints, model names, and API keys for the
+providers you intend to use. Do not commit this file.
 
-RL-MAR uses a CODESYS-based HTTP compilation service to validate generated ST code. This requires CODESYS V3.5 SP20 with ScriptEngine on Windows. See [CODESYSCompileService](https://github.com/cangkui/CODESYSCompileService) for setup.
+Functional94 execution additionally requires Docker, a C compiler, and RuSTy.
+Agents4PLC-23 formal verification requires RuSTy, PLCverif, and nuXmv. The
+CODESYS service is optional and requires CODESYS V3.5 SP20 with ScriptEngine on
+Windows:
 
 ```bash
 pip install -r framework/CODESYSCompileService/requirements.txt
 cd framework/CODESYSCompileService
-python HTTP_SERVER.py    # Listens on 0.0.0.0:9000
+python debug_server.py
 ```
 
-Set `CODESYS_HOST` and `CODESYS_PORT` in `.env` accordingly. ANTLR-based syntax checking works without CODESYS.
+## Running the Experiments
 
-## Running RL-MAR
-
-Main experiment on the 94-task benchmark:
+Validate the frozen Functional94 manifest:
 
 ```bash
-cd framework
-python ../experiments/run_plc.py \
-  --data_path Datasets/plcdataset.json \
-  --use_async --max_concurrent_agents 3 \
-  --model deepseek-ai/DeepSeek-V3.2
+python evaluation/functional94/scripts/validate_manifest.py \
+  evaluation/functional94/data/plc94.functional.v1.3.jsonl
 ```
 
-Single-task debugging:
+Inspect an RL-MAR comparison command before execution:
 
 ```bash
-python ../experiments/run_plc.py --task_id hf_1 --use_async --log_level DEBUG
+python experiments/comparison/run_comparison.py \
+  --method rlmar \
+  --model gpt-4o \
+  --dataset evaluation/functional94/data/plc94.functional.v1.3.jsonl \
+  --output-root runs \
+  --env-file framework/.env \
+  --dry-run
 ```
 
+Remove `--dry-run` after the required compiler/evaluator tools are configured.
+The same launcher supports `direct_generation`, `autoplc`, `llm4plc`, and
+`agents4plc23`. Saved paper results and task-level records are provided under
+`experiments/comparison/` and `experiments/results/`.
+
+## Reported Results
+
+On Functional94, RL-MAR matches or exceeds AutoPLC on most of the six evaluated
+backbones while using 16.5-46.4% fewer recorded generation tokens under the
+original workflow settings. The matched routing ablation reduces recorded
+tokens by 29.7% and execution time by 22.5% with comparable functional results.
+On Agents4PLC-23, RL-MAR verifies 69.6% of tasks with GPT-4o and 65.2% with
+GPT-4o-mini.
 
 ## Acknowledgments
 
-We thank the authors of [LLM4PLC](https://github.com/fakih-/LLM4PLC) and [AutoPLC](https://github.com/cangkui/AutoPLC) for their open-source implementations. The CODESYS compilation service is based on [CODESYSCompileService](https://github.com/cangkui/CODESYSCompileService). Formal verification uses the benchmark and toolchain from [Agents4PLC](https://github.com/Luoji-zju/Agents4PLC_release).
+The comparison and verification workflows build on
+[AutoPLC](https://github.com/cangkui/AutoPLC),
+[LLM4PLC](https://github.com/AICPS/LLM_4_PLC),
+[Agents4PLC](https://github.com/Luoji-zju/Agents4PLC_release), and
+[CODESYSCompileService](https://github.com/cangkui/CODESYSCompileService).
+See the repository and subdirectory license notices for applicable terms.

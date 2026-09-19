@@ -1,0 +1,27 @@
+{
+  "method": "RL-MAR",
+  "benchmark": "Functional94 v1.3",
+  "models": [
+    "gpt-4o",
+    "gpt-4o-mini",
+    "gpt-5.5",
+    "deepseek-v3.2",
+    "deepseek-v4-flash",
+    "qwen3.5-9b"
+  ],
+  "profile": "balanced_domain_chain",
+  "checkpoint": "route_policy.pt",
+  "checkpoint_sha256": "e4006a0245bd5947d8a45fc7404db41969cfd368bd57ca8bf208b88323cb546d",
+  "primary_seed": 1234,
+  "seed": 1234,
+  "deterministic_revalidation": true,
+  "evaluation_only": true,
+  "disable_thinking": {
+    "deepseek-v4-flash": true
+  },
+  "max_call_tokens": 2048,
+  "max_model_calls": 8,
+  "max_route_seconds": 180,
+  "confirmation_reuses_primary_routes": true,
+  "correction_budget": 1
+}

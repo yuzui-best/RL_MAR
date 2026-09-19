@@ -1,0 +1,202 @@
+{
+  "gpt-4o": {
+    "Parsing / delimiters": [
+      "hf_9",
+      "hf_15",
+      "med_53",
+      "med_60",
+      "med_65",
+      "med_73",
+      "med_79",
+      "med_86"
+    ],
+    "Unresolved references": [
+      "hf_5",
+      "hf_8",
+      "hf_14",
+      "med_32",
+      "med_37",
+      "med_54"
+    ],
+    "Unknown types": [
+      "hf_5",
+      "hf_14",
+      "med_32"
+    ],
+    "Type / argument mismatch": [
+      "hf_5",
+      "hf_14"
+    ],
+    "Duplicate / nonconstant symbols": [],
+    "Other diagnostics": [
+      "hf_10",
+      "med_28",
+      "med_75"
+    ]
+  },
+  "gpt-4o-mini": {
+    "Parsing / delimiters": [
+      "hf_7",
+      "hf_9",
+      "hf_12",
+      "hf_15",
+      "med_30",
+      "med_34",
+      "med_49",
+      "med_51",
+      "med_53",
+      "med_56",
+      "med_60",
+      "med_65",
+      "med_68",
+      "med_73",
+      "med_79",
+      "med_81",
+      "med_85",
+      "med_86",
+      "hard_94"
+    ],
+    "Unresolved references": [
+      "hf_5",
+      "hf_8",
+      "hf_10",
+      "hf_14",
+      "med_32"
+    ],
+    "Unknown types": [
+      "hf_5",
+      "hf_14",
+      "med_32"
+    ],
+    "Type / argument mismatch": [
+      "hf_5",
+      "hf_10",
+      "hf_14",
+      "med_32",
+      "med_63"
+    ],
+    "Duplicate / nonconstant symbols": [],
+    "Other diagnostics": [
+      "hf_5",
+      "med_28",
+      "med_75"
+    ]
+  },
+  "deepseek-v3.2": {
+    "Parsing / delimiters": [
+      "hf_5",
+      "med_34",
+      "med_47",
+      "med_51",
+      "med_60",
+      "med_79"
+    ],
+    "Unresolved references": [
+      "hf_14",
+      "med_32",
+      "med_33",
+      "med_37",
+      "med_61",
+      "med_64",
+      "med_75",
+      "med_87"
+    ],
+    "Unknown types": [
+      "hf_14",
+      "med_32",
+      "med_33",
+      "med_64",
+      "med_75",
+      "med_87"
+    ],
+    "Type / argument mismatch": [
+      "hf_14",
+      "med_32",
+      "med_33",
+      "med_64",
+      "med_87"
+    ],
+    "Duplicate / nonconstant symbols": [],
+    "Other diagnostics": [
+      "med_28"
+    ]
+  },
+  "qwen3.5-9b": {
+    "Parsing / delimiters": [
+      "hf_5",
+      "hf_7",
+      "hf_8",
+      "hf_9",
+      "hf_14",
+      "hf_15",
+      "hf_16",
+      "hf_19",
+      "hf_21",
+      "med_40",
+      "med_44",
+      "med_57",
+      "med_60",
+      "med_62",
+      "med_77",
+      "hard_94"
+    ],
+    "Unresolved references": [
+      "med_32",
+      "med_51",
+      "med_53",
+      "med_79"
+    ],
+    "Unknown types": [
+      "med_32",
+      "med_51"
+    ],
+    "Type / argument mismatch": [
+      "med_32",
+      "med_53",
+      "med_79"
+    ],
+    "Duplicate / nonconstant symbols": [
+      "hf_20",
+      "med_47",
+      "med_51",
+      "med_79"
+    ],
+    "Other diagnostics": [
+      "hf_1",
+      "med_37",
+      "med_50",
+      "med_61",
+      "med_63",
+      "med_64",
+      "med_76"
+    ]
+  },
+  "deepseek-v4-flash": {
+    "Parsing / delimiters": [
+      "med_53",
+      "med_60",
+      "med_75",
+      "med_79"
+    ],
+    "Unresolved references": [
+      "hf_10",
+      "med_37"
+    ],
+    "Unknown types": [
+      "hf_5"
+    ],
+    "Type / argument mismatch": [],
+    "Duplicate / nonconstant symbols": [],
+    "Other diagnostics": []
+  },
+  "gpt-5.5": {
+    "Parsing / delimiters": [],
+    "Unresolved references": [
+      "med_37"
+    ],
+    "Unknown types": [],
+    "Type / argument mismatch": [],
+    "Duplicate / nonconstant symbols": [],
+    "Other diagnostics": []
+  }
+}

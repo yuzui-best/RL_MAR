@@ -1,0 +1,115 @@
+[
+  {
+    "model": "gpt-4o",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 84,
+    "compilation_rate": 89.4,
+    "functional_pass": 31,
+    "functional_pass_rate": 33.0,
+    "average_task_seconds": 14.491,
+    "total_tokens": 447129,
+    "statuses": {
+      "COMPILE_FAIL": 10,
+      "FUNCTION_FAIL": 49,
+      "PASS": 31,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 75,
+    "compilation_rate": 79.8,
+    "functional_pass": 26,
+    "functional_pass_rate": 27.7,
+    "average_task_seconds": 27.594,
+    "total_tokens": 557017,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 45,
+      "MISSING_OUTPUT": 1,
+      "PASS": 26,
+      "RUNTIME_FAIL": 3,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 79,
+    "compilation_rate": 84.0,
+    "functional_pass": 26,
+    "functional_pass_rate": 27.7,
+    "average_task_seconds": 71.81,
+    "total_tokens": 472255,
+    "statuses": {
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 51,
+      "PASS": 26,
+      "RUNTIME_FAIL": 2
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 74,
+    "compilation_rate": 78.7,
+    "functional_pass": 20,
+    "functional_pass_rate": 21.3,
+    "average_task_seconds": 97.692,
+    "total_tokens": 667005,
+    "statuses": {
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 52,
+      "MISSING_OUTPUT": 2,
+      "PASS": 20,
+      "RUNTIME_FAIL": 1,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 78,
+    "compilation_rate": 83.0,
+    "functional_pass": 27,
+    "functional_pass_rate": 28.7,
+    "average_task_seconds": 14.438,
+    "total_tokens": 487918,
+    "statuses": {
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 48,
+      "PASS": 27,
+      "RUNTIME_FAIL": 2,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "AutoPLC",
+    "run": "primary",
+    "tasks": 94,
+    "compiled": 86,
+    "compilation_rate": 91.5,
+    "functional_pass": 31,
+    "functional_pass_rate": 33.0,
+    "average_task_seconds": 50.841,
+    "total_tokens": 567924,
+    "statuses": {
+      "COMPILE_FAIL": 8,
+      "FUNCTION_FAIL": 55,
+      "PASS": 31
+    }
+  }
+]

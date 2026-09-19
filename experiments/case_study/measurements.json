@@ -1,0 +1,34 @@
+{
+  "experiment": "Stereoscopic warehouse hardware verification",
+  "backbone": "deepseek-v3.2",
+  "scenarios": 10,
+  "first_deployment_passes": 9,
+  "refinement": {
+    "issue": "Continuous-cycle X-axis positioning deviation caused by encoder noise",
+    "observed_deviation_mm": 8,
+    "remedy": "Software deadband filter",
+    "rounds": 1
+  },
+  "measurements": [
+    {
+      "metric": "Single pick cycle time",
+      "target": "< 15 s",
+      "measured": "14.2 +/- 0.8 s"
+    },
+    {
+      "metric": "E-stop halt latency",
+      "target": "< 100 ms",
+      "measured": "92 +/- 6 ms"
+    },
+    {
+      "metric": "Positioning repeatability",
+      "target": "< +/-5 mm",
+      "measured": "+/-2.3 mm"
+    },
+    {
+      "metric": "Fork extend/retract time",
+      "target": "< 3 s",
+      "measured": "2.1 +/- 0.3 s"
+    }
+  ]
+}

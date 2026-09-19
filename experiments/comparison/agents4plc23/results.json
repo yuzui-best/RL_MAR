@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "method": "Agents4PLC'23",
+  "benchmark": "Agents4PLC-23",
+  "summary": [
+    {
+      "model": "gpt-4o",
+      "tasks": 23,
+      "compiled": 16,
+      "verified": 16,
+      "verification_rate": 69.6,
+      "conditional_verification_rate": 100.0,
+      "published_agents4plc_verified": 14,
+      "published_agents4plc_compile_fail": 9
+    },
+    {
+      "model": "gpt-4o-mini",
+      "tasks": 23,
+      "compiled": 15,
+      "verified": 15,
+      "verification_rate": 65.2,
+      "conditional_verification_rate": 100.0,
+      "published_agents4plc_verified": 9,
+      "published_agents4plc_compile_fail": 14
+    }
+  ],
+  "tasks": [
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-1",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.115211405995069"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-10",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "5.913717140996596"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-11",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "6.275541588998749"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-12",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "2",
+      "wall_seconds": "5.22537402099988"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-13",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "5.743047387994011"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-14",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "5.5061102350009605"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-15",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "5.8648458199895686"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-16",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.01165753499663"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-2",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "5.466900313011138"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-3",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "7.66054769299808"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-4",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "7.083689450999373"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-5",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "8",
+      "wall_seconds": "12.129586890005157"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-6",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "5.942443646999891"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-7",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "5.882647090009414"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-8",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "9.20327792900207"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-E-9",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "7.933376346991281"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-1",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "8.735282927998924"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-2",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "10.293675184002495"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-3",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "7.022159374988405"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-4",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "7",
+      "wall_seconds": "14.238300113996956"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-5",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "5.299957583003561"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-6",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "6",
+      "wall_seconds": "9.370010403989"
+    },
+    {
+      "model": "gpt-4o",
+      "task_id": "v1-M-7",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "7.903441595000913"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-1",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.810145852010464"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-10",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "8.089603884989629"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-11",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "7.148218119007652"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-12",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "6.0828343690081965"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-13",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.40536288000294"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-14",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.625653330003843"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-15",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.423117853992153"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-16",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.2042649849900045"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-2",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "6",
+      "wall_seconds": "15.0652685110108"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-3",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "33.170271027003764"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-4",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "34.10384201198758"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-5",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "10.648148223990574"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-6",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "16.873512147009023"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-7",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "3",
+      "wall_seconds": "6.287390277997474"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-8",
+      "difficulty": "Easy",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "10.088672729005339"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-E-9",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "7.982339894006145"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-1",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "20.49757339899952"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-2",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "37.68017811299069"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-3",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "15.423045802002889"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-4",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "7",
+      "wall_seconds": "22.502560747001553"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-5",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "4",
+      "wall_seconds": "13.30783022500691"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-6",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "compiled": "True",
+      "verification_pass": "True",
+      "checks_passed": "6",
+      "wall_seconds": "18.04314777800755"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "task_id": "v1-M-7",
+      "difficulty": "Medium",
+      "status": "COMPILE_FAIL",
+      "compiled": "False",
+      "verification_pass": "False",
+      "checks_passed": "0",
+      "wall_seconds": "14.465271160996053"
+    }
+  ]
+}

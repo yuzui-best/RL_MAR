@@ -1,0 +1,15 @@
+{
+  "method": "AutoPLC",
+  "benchmark": "Functional94 v1.3",
+  "models": [
+    "gpt-4o",
+    "gpt-4o-mini",
+    "gpt-5.5",
+    "deepseek-v3.2",
+    "deepseek-v4-flash",
+    "qwen3.5-9b"
+  ],
+  "workflow": "AutoPLC multi-stage baseline under the common Functional94 evaluator",
+  "upstream": "https://github.com/AutoPLC/AutoPLC",
+  "gpt55_config": "functional94_gpt55_consistent.yaml"
+}

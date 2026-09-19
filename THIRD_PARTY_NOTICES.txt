@@ -1,0 +1,25 @@
+Third-party notices
+===================
+
+AutoPLC
+  Source: https://github.com/cangkui/AutoPLC
+  License: MIT. The retained upstream license is located at
+  experiments/comparison/autoplc/LICENSE.upstream.
+
+CODESYSCompileService
+  Source: https://github.com/cangkui/CODESYSCompileService
+  License: MIT. This repository contains an adapted subset. The retained
+  upstream license is located at
+  framework/CODESYSCompileService/LICENSE.upstream.
+
+Agents4PLC
+  Source: https://github.com/Luoji-zju/Agents4PLC_release
+  License: Apache License 2.0. The retained upstream license is located at
+  evaluation/agents4plc/LICENSE.upstream.
+
+LLM4PLC
+  Source: https://github.com/AICPS/LLM_4_PLC
+  This repository contains a compatibility launcher, adapted prompts, and
+  evaluation results. No upstream license was displayed at the time this
+  notice was prepared; the upstream project and authors are credited here
+  and in the root README.

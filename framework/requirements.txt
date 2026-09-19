@@ -1,20 +1,11 @@
-# Core ML & LLM
+# RL-MAR public framework
 torch>=2.0.0
-sentence-transformers
+sentence-transformers>=3.0.0
+
+# OpenAI-compatible experiment backends
 openai>=1.0.0
-tiktoken
 
-# Utilities
-loguru
-python-dotenv
-class-registry
-tenacity
-shortuuid
-pyyaml
-
-# Data
-numpy
-pandas
-
-# Network
-requests
+# PLC validation backends
+antlr4-python3-runtime==4.13.1
+requests>=2.31.0
+loguru>=0.7.0

@@ -1,0 +1,17 @@
+{
+  "benchmark": "Agents4PLC-23",
+  "tasks": 23,
+  "composition": {
+    "easy": 16,
+    "medium": 7
+  },
+  "models": [
+    "gpt-4o",
+    "gpt-4o-mini"
+  ],
+  "verifier": [
+    "PLCverif",
+    "nuXmv"
+  ],
+  "published_baseline_source": "Agents4PLC published evaluation"
+}
