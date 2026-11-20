@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-8",
+  "selected_source": "FUNCTION_BLOCK dw\nVAR_INPUT\n    i: INT;\nEND_VAR_INPUT\n\nVAR_OUTPUT\n    o: INT;\nEND_VAR_OUTPUT\n\nVAR\n    ss: INT := 0; // Initialize ss to 0\nEND_VAR\n\n// Increment ss each time the function block is executed\nss := ss + 1;\n\n// Determine output based on input value\nCASE i OF\n    1: \n        o := 1; // If input is 1, set output to 1\n    ELSE\n        o := ss; // Otherwise, set output to the current value of ss\nEND_CASE;\n\nEND_FUNCTION_BLOCK\n\nPROGRAM MAIN\nVAR\n    fb_dw: dw; // Instance of the function block\n    input_value: INT := 3; // Input value to be passed to the function block\n    output_value: INT; // Variable to hold the output from the function block\nEND_VAR\n\n// Call the function block with the input value\nfb_dw(i := input_value);\n\n// Retrieve the output from the function block\noutput_value := fb_dw.o;\n\nEND_PROGRAM",
+  "known_tokens": 4998,
+  "calls": [
+    {
+      "seconds": 5.692494474351406,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.319241234101355,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.968024080619216,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.6836002906784415,
+      "finish_reason": "stop"
+    }
+  ]
+}

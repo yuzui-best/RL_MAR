@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-4",
+  "selected_source": "FUNCTION_BLOCK FB_LoopCounter\nVAR_INPUT\n    i : BOOL;  // Trigger input for the counter\nEND_VAR\nVAR\n    macro : INT := 1;  // Current count\n    micro : INT := 1;  // Control variable for counting down\nEND_VAR\nVAR_OUTPUT\n    o : INT;  // Current value of the counter\nEND_VAR\n\nVAR\n    tempMacro : INT;  // Temporary variable to hold macro value\n    tempMicro : INT;  // Temporary variable to hold micro value\nEND_VAR\n\n// Main logic\nIF i THEN\n    // Decrement micro\n    micro := micro - 1;\n\n    // Check if micro has reached zero\n    IF micro <= 0 THEN\n        // Increment macro\n        macro := macro + 1;\n        // Reset micro to the new value of macro\n        micro := macro;\n    END_IF\nEND_IF\n\n// Ensure macro and micro do not go negative\nIF macro < 1 THEN\n    macro := 1;\nEND_IF\n\nIF micro < 1 THEN\n    micro := 1;\nEND_IF\n\n// Set the output value\no := macro;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 8511,
+  "calls": [
+    {
+      "seconds": 3.0683224676176906,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.3402599496766925,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.062909683212638,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.4811213864013553,
+      "finish_reason": "stop"
+    }
+  ]
+}

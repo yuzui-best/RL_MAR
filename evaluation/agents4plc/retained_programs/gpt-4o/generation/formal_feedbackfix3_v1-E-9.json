@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-9",
+  "selected_source": "FUNCTION_BLOCK LED_Control\nVAR_INPUT\n    PB1 : BOOL;\n    PB2 : BOOL;\nEND_VAR\nVAR_OUTPUT\n    LED : BOOL;\nEND_VAR\n\nVAR\n    PB2_Not : BOOL;\nEND_VAR\n\n// Calculate the negation of PB2\nPB2_Not := NOT PB2;\n\n// Perform the logical AND operation between PB1 and the negation of PB2\nLED := PB1 AND PB2_Not;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 380,
+  "calls": [
+    {
+      "seconds": 2.205974600277841,
+      "finish_reason": "stop"
+    }
+  ]
+}

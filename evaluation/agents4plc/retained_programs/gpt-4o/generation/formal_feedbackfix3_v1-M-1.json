@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-1",
+  "selected_source": "PROGRAM MAIN\nVAR\n    pressure_sensor : UINT := 10;\n    temp_sensor : INT := 2;\n    relay : BOOL := TRUE;\n    counter : UINT := 0;\n    error_code : INT := 0;\n    error : BOOL := FALSE;\n    GT1_OUT : BOOL := FALSE;\n    operation_complete : BOOL := FALSE;\nEND_VAR\n\nFUNCTION_BLOCK FB_ScaleAnalogSignal\nVAR_INPUT\n    raw_value : UINT;\n    scale_factor : REAL;\nEND_VAR_INPUT\n\nVAR_OUTPUT\n    scaled_value : REAL;\nEND_VAR_OUTPUT\n\nscaled_value := REAL(raw_value) * scale_factor;\n\nEND_FUNCTION_BLOCK\n\nFUNCTION_BLOCK FB_PIDControl\nVAR_INPUT\n    setpoint : REAL;\n    process_variable : REAL;\n    kp : REAL;\n    ki : REAL;\n    kd : REAL;\nEND_VAR_INPUT\n\nVAR_OUTPUT\n    control_output : REAL;\nEND_VAR_OUTPUT\n\nVAR\n    error : REAL;\n    integral : REAL := 0.0;\n    derivative : REAL;\n    previous_error : REAL := 0.0;\nEND_VAR\n\nerror := setpoint - process_variable;\nintegral := integral + error;\nderivative := error - previous_error;\ncontrol_output := (kp * error) + (ki * integral) + (kd * derivative);\nprevious_error := error;\n\nEND_FUNCTION_BLOCK\n\nVAR\n    scaled_pressure : REAL;\n    scaled_temperature : REAL;\n    pid_output : REAL;\nEND_VAR\n\n// Scale the pressure sensor value\nFB_ScaleAnalogSignal(raw_value := pressure_sensor, scale_factor := 0.1, scaled_value => scaled_pressure);\n\n// Scale the temperature sensor value\nFB_ScaleAnalogSignal(raw_value := UINT(temp_sensor), scale_factor := 0.05, scaled_value => scaled_temperature);\n\n// Implement PID control logic\nFB_PIDControl(setpoint := 50.0, process_variable := scaled_temperature, kp := 1.0, ki := 0.1, kd := 0.01, control_output => pid_output);\n\n// Adjust temperature sensor based on PID output\nIF pid_output > 0 THEN\n    temp_sensor := temp_sensor + INT(pid_output);\nELSE\n    temp_sensor := temp_sensor - INT(ABS(pid_output));\nEND_IF\n\n// Update relay status based on GT1_OUT\nIF GT1_OUT THEN\n    relay := TRUE;\nELSE\n    relay := FALSE;\nEND_IF\n\n// Check for overflow conditions\nIF pressure_sensor > 1000 THEN\n    error := TRUE;\n    error_code := 1; // Error code for pressure overflow\nELSIF temp_sensor > 100 THEN\n    error := TRUE;\n    error_code := 2; // Error code for temperature overflow\nELSE\n    error := FALSE;\n    error_code := 0;\nEND_IF\n\n// Update counter\ncounter := counter + 1;\n\n// Determine operation completion\nIF counter >= 100 THEN\n    operation_complete := TRUE;\nELSE\n    operation_complete := FALSE;\nEND_IF\n\nEND_PROGRAM",
+  "known_tokens": 8620,
+  "calls": [
+    {
+      "seconds": 3.9620441868901253,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 4.64739244710654,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 4.8602731404826045,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.584292968735099,
+      "finish_reason": "stop"
+    }
+  ]
+}

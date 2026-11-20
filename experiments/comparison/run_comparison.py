@@ -30,6 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--plcverif-bin", type=Path)
     parser.add_argument("--nuxmv-bin", type=Path)
     parser.add_argument("--tool-log-dir", type=Path)
+    parser.add_argument("--cbmc-bin", type=Path)
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -60,27 +61,21 @@ def main() -> None:
                 command = [sys.executable, str(HERE / method / "run.py")]
                 if args.rlmar_runner:
                     command += ["--runner", str(args.rlmar_runner)]
-                command += ["--", "--dataset", str(args.dataset), "--model", model, "--output", str(args.output_root / method), "--run-id", f"comparison_{model}", "--candidate-profile", "balanced_domain", "--policy", str(HERE / method / "route_policy.pt"), "--env-file", str(args.env_file)]
+                command += ["--", "--dataset", str(args.dataset), "--model", model, "--output", str(args.output_root / method), "--run-id", f"comparison_{model}", "--policy", str(HERE / method / "route_policy.pt"), "--env-file", str(args.env_file)]
                 commands.append(command)
         else:
-            required = {
-                "--env-file": args.env_file,
-                "--agents-evaluator": args.agents_evaluator,
-                "--rusty-bin": args.rusty_bin,
-                "--plcverif-bin": args.plcverif_bin,
-                "--nuxmv-bin": args.nuxmv_bin,
-                "--tool-log-dir": args.tool_log_dir,
-            }
+            required = {"--rusty-bin": args.rusty_bin, "--plcverif-bin": args.plcverif_bin,
+                        "--nuxmv-bin": args.nuxmv_bin, "--cbmc-bin": args.cbmc_bin}
             missing = [name for name, value in required.items() if value is None]
             if missing:
-                raise SystemExit("Agents4PLC'23 requires " + ", ".join(missing))
-            prefixes = {"gpt-4o": "GPT4O", "gpt-4o-mini": "GPT4O_MINI", "deepseek-v3.2": "DEEPSEEK_V32", "qwen3.5-9b": "QWEN35", "deepseek-v4-flash": "DEEPSEEK_V4_FLASH", "gpt-5.5": "GPT55"}
-            for model in models:
-                command = [sys.executable, str(HERE / method / "run.py")]
-                if args.agents4plc23_runner:
-                    command += ["--runner", str(args.agents4plc23_runner)]
-                command += ["--", "--manifest", str(args.dataset), "--model", model, "--provider-prefix", prefixes[model], "--output", str(args.output_root / method), "--run-id", f"comparison_{model}", "--policy", str(HERE / "rlmar" / "route_policy.pt"), "--env-file", str(args.env_file), "--evaluator", str(args.agents_evaluator), "--rusty-bin", str(args.rusty_bin), "--plcverif-bin", str(args.plcverif_bin), "--nuxmv-bin", str(args.nuxmv_bin), "--tool-log-dir", str(args.tool_log_dir)]
-                commands.append(command)
+                raise SystemExit("Agents4PLC rechecking requires " + ", ".join(missing))
+            command = [sys.executable, str(HERE / method / "run.py")]
+            if args.agents4plc23_runner:
+                command += ["--runner", str(args.agents4plc23_runner)]
+            command += ["--", "--out", str(args.output_root / method),
+                "--rusty-bin", str(args.rusty_bin), "--plcverif-bin", str(args.plcverif_bin),
+                "--nuxmv-bin", str(args.nuxmv_bin), "--cbmc-bin", str(args.cbmc_bin)]
+            commands.append(command)
 
     for command in commands:
         print(subprocess.list2cmdline(command), flush=True)

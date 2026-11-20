@@ -1,0 +1,19 @@
+{
+  "task_id": "v1-M-7",
+  "selected_source": "FUNCTION_BLOCK LED_Motor_Controller\nVAR_INPUT\n    PI_Button_Left : BOOL;    // Button for motor left control\n    PI_Button_Right : BOOL;   // Button for motor right control\n    E_Left : BOOL;            // Signal to turn on red LED (left indicator)\n    E_Right : BOOL;           // Signal to turn on green LED (right indicator)\nEND_VAR\n\nVAR_OUTPUT\n    PI_LED_Red : BOOL;        // Red LED control output\n    PI_LED_Green : BOOL;      // Green LED control output\n    A_Motor_Left : BOOL;      // Motor control to turn left\n    A_Motor_Right : BOOL;     // Motor control to turn right\nEND_VAR\n\n// Logic to control the LEDs\nPI_LED_Red := E_Left;\nPI_LED_Green := E_Right;\n\n// Logic to control the motor direction\nA_Motor_Left := NOT PI_Button_Left;\nA_Motor_Right := NOT PI_Button_Right;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5043,
+  "calls": [
+    {
+      "seconds": 3.250786516815424,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.086753095500171,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.064507114700973,
+      "finish_reason": "stop"
+    }
+  ]
+}

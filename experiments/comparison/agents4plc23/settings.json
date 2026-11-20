@@ -11,7 +11,21 @@
   ],
   "verifier": [
     "PLCverif",
-    "nuXmv"
+    "nuXmv",
+    "CBMC"
   ],
-  "published_baseline_source": "Agents4PLC published evaluation"
+  "published_baseline_source": "Agents4PLC published evaluation",
+  "generation": {
+    "seed": 1818,
+    "round": 1,
+    "max_corrections": 3,
+    "max_call_tokens": 2048,
+    "total_budget": 16384
+  },
+  "recheck_conditions": [
+    "original_source",
+    "semicolon_compatibility"
+  ],
+  "official_denominator": "compiled_programs",
+  "full_task_denominator": 23
 }

@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-2",
+  "selected_source": "FUNCTION_BLOCK FB_CalculateOutput\nVAR_INPUT\n    i: INT;\nEND_VAR\nVAR_OUTPUT\n    o: INT;\nEND_VAR\n\nVAR\n    // Temporary variable for state management (if needed)\nEND_VAR\n\n// Main logic to determine output based on input value\nCASE i OF\n    0:\n        o := 0; // When input is 0, output is 0\n    1, 2, 3, 4, 5:\n        o := i * i; // When input is between 1 and 5, output is the square of i\n    6, 7, 8, 9, 10:\n        o := i + 2 * i; // When input is between 6 and 10, output is i plus two times i\n    ELSE\n        o := -1; // For any other value of i, output is -1\nEND_CASE;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5972,
+  "calls": [
+    {
+      "seconds": 3.3647398250177503,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.6249757669866085,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.338716489262879,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.6226344499737024,
+      "finish_reason": "stop"
+    }
+  ]
+}

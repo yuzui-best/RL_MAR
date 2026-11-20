@@ -1,229 +1,133 @@
 [
   {
-    "model": "gpt-4o",
-    "method": "RL-MAR",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 77,
-    "compilation_rate": 81.9,
-    "functional_pass": 30,
-    "functional_pass_rate": 31.9,
-    "average_task_seconds": 11.335,
-    "total_tokens": 280194,
-    "statuses": {
-      "COMPILE_FAIL": 17,
-      "FUNCTION_FAIL": 43,
-      "PASS": 30,
-      "RUNTIME_FAIL": 3,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "gpt-4o-mini",
-    "method": "RL-MAR",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 67,
-    "compilation_rate": 71.3,
-    "functional_pass": 28,
-    "functional_pass_rate": 29.8,
-    "average_task_seconds": 18.695,
-    "total_tokens": 310106,
-    "statuses": {
-      "COMPILE_FAIL": 27,
-      "FUNCTION_FAIL": 36,
-      "PASS": 28,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "deepseek-v3.2",
-    "method": "RL-MAR",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 75,
-    "compilation_rate": 79.8,
-    "functional_pass": 30,
-    "functional_pass_rate": 31.9,
-    "average_task_seconds": 65.008,
-    "total_tokens": 394265,
-    "statuses": {
-      "COMPILE_FAIL": 15,
-      "FUNCTION_FAIL": 44,
-      "MISSING_OUTPUT": 4,
-      "PASS": 30,
-      "RUNTIME_FAIL": 1
-    }
-  },
-  {
-    "model": "qwen3.5-9b",
-    "method": "RL-MAR",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 65,
-    "compilation_rate": 69.1,
-    "functional_pass": 26,
-    "functional_pass_rate": 27.7,
-    "average_task_seconds": 34.619,
-    "total_tokens": 357329,
-    "statuses": {
-      "COMPILE_FAIL": 29,
-      "FUNCTION_FAIL": 36,
-      "PASS": 26,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
     "model": "deepseek-v4-flash",
     "method": "RL-MAR",
     "run": "primary",
     "tasks": 94,
-    "compiled": 87,
-    "compilation_rate": 92.6,
-    "functional_pass": 30,
-    "functional_pass_rate": 31.9,
-    "average_task_seconds": 11.321,
-    "total_tokens": 358124,
-    "statuses": {
-      "COMPILE_FAIL": 7,
-      "FUNCTION_FAIL": 54,
-      "PASS": 30,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "gpt-4o",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 78,
-    "compilation_rate": 83.0,
-    "functional_pass": 33,
-    "functional_pass_rate": 35.1,
-    "average_task_seconds": 10.765,
-    "total_tokens": 275856,
-    "statuses": {
-      "COMPILE_FAIL": 16,
-      "FUNCTION_FAIL": 41,
-      "PASS": 33,
-      "RUNTIME_FAIL": 3,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "gpt-4o-mini",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 71,
-    "compilation_rate": 75.5,
-    "functional_pass": 30,
-    "functional_pass_rate": 31.9,
-    "average_task_seconds": 19.192,
-    "total_tokens": 303256,
-    "statuses": {
-      "COMPILE_FAIL": 23,
-      "FUNCTION_FAIL": 38,
-      "PASS": 30,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "deepseek-v3.2",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 77,
-    "compilation_rate": 81.9,
-    "functional_pass": 31,
-    "functional_pass_rate": 33.0,
-    "average_task_seconds": 65.448,
-    "total_tokens": 384771,
-    "statuses": {
-      "COMPILE_FAIL": 14,
-      "FUNCTION_FAIL": 45,
-      "MISSING_OUTPUT": 3,
-      "PASS": 31,
-      "RUNTIME_FAIL": 1
-    }
-  },
-  {
-    "model": "qwen3.5-9b",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 65,
-    "compilation_rate": 69.1,
-    "functional_pass": 25,
-    "functional_pass_rate": 26.6,
-    "average_task_seconds": 34.372,
-    "total_tokens": 356043,
-    "statuses": {
-      "COMPILE_FAIL": 29,
-      "FUNCTION_FAIL": 37,
-      "PASS": 25,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "deepseek-v4-flash",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 87,
-    "compilation_rate": 92.6,
-    "functional_pass": 29,
-    "functional_pass_rate": 30.9,
-    "average_task_seconds": 13.006,
-    "total_tokens": 346179,
-    "statuses": {
-      "COMPILE_FAIL": 7,
-      "FUNCTION_FAIL": 54,
-      "PASS": 29,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 2
-    }
-  },
-  {
-    "model": "gpt-5.5",
-    "method": "RL-MAR",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 92,
-    "compilation_rate": 97.9,
-    "functional_pass": 37,
-    "functional_pass_rate": 39.4,
-    "average_task_seconds": 23.13,
-    "total_tokens": 323849,
-    "statuses": {
-      "COMPILE_FAIL": 1,
-      "FUNCTION_FAIL": 53,
-      "PASS": 37,
-      "RUNTIME_FAIL": 2,
-      "TIMEOUT": 1
-    }
-  },
-  {
-    "model": "gpt-5.5",
-    "method": "RL-MAR",
-    "run": "confirmation",
-    "tasks": 94,
-    "compiled": 88,
-    "compilation_rate": 93.6,
     "functional_pass": 32,
-    "functional_pass_rate": 34.0,
-    "average_task_seconds": 41.812,
-    "total_tokens": 315016,
+    "functional_pass_rate": 34.04255319148936,
+    "compilation_rate": 92.5531914893617,
+    "average_task_seconds": 20.077017093503333,
+    "total_tokens": 335465,
+    "quality_ci95_percent": "[24.46808510638298, 43.61702127659575]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 87,
     "statuses": {
-      "COMPILE_FAIL": 4,
-      "FUNCTION_FAIL": 56,
       "PASS": 32,
-      "RUNTIME_FAIL": 2
+      "COMPILE_FAIL": 7,
+      "FUNCTION_FAIL": 54,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "deepseek-v3.2",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 35,
+    "functional_pass_rate": 37.234042553191486,
+    "compilation_rate": 85.1063829787234,
+    "average_task_seconds": 47.42585705319149,
+    "total_tokens": 301274,
+    "quality_ci95_percent": "[27.659574468085108, 46.808510638297875]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 80,
+    "statuses": {
+      "PASS": 35,
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 45
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 29,
+    "functional_pass_rate": 30.851063829787233,
+    "compilation_rate": 85.1063829787234,
+    "average_task_seconds": 16.31090630851064,
+    "total_tokens": 321725,
+    "quality_ci95_percent": "[21.27659574468085, 40.42553191489361]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 80,
+    "statuses": {
+      "PASS": 29,
+      "COMPILE_FAIL": 14,
+      "FUNCTION_FAIL": 50,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 32,
+    "functional_pass_rate": 34.04255319148936,
+    "compilation_rate": 84.04255319148936,
+    "average_task_seconds": 8.129624063829787,
+    "total_tokens": 286915,
+    "quality_ci95_percent": "[24.46808510638298, 43.61702127659575]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 79,
+    "statuses": {
+      "PASS": 32,
+      "COMPILE_FAIL": 15,
+      "FUNCTION_FAIL": 46,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "qwen3.5-9b",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 22,
+    "functional_pass_rate": 23.404255319148938,
+    "compilation_rate": 70.2127659574468,
+    "average_task_seconds": 32.76512321276596,
+    "total_tokens": 388730,
+    "quality_ci95_percent": "[14.893617021276595, 31.914893617021278]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 66,
+    "statuses": {
+      "PASS": 22,
+      "COMPILE_FAIL": 28,
+      "FUNCTION_FAIL": 43,
+      "TIMEOUT": 1
+    }
+  },
+  {
+    "model": "gpt-5.5",
+    "method": "RL-MAR",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 39,
+    "functional_pass_rate": 41.48936170212766,
+    "compilation_rate": 96.80851063829788,
+    "average_task_seconds": 17.624158063829785,
+    "total_tokens": 312791,
+    "quality_ci95_percent": "[31.914893617021278, 51.06382978723404]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "rlmar",
+    "compiled": 91,
+    "statuses": {
+      "PASS": 39,
+      "COMPILE_FAIL": 2,
+      "FUNCTION_FAIL": 52,
+      "MISSING_CANDIDATE": 1
     }
   }
 ]

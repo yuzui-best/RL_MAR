@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-6",
+  "selected_source": "FUNCTION_BLOCK LatencyMonitor\nVAR_INPUT\n    latency_xx_ms : DINT;            // Input latency time in milliseconds\n    NODE_xx_STATUS : UDINT;          // Input node status\nEND_VAR\n\nVAR_IN_OUT\n    errors_xx : DINT;                // Error count for the specific node\n    errors_all : DINT;               // Total error count\n    min_latency_ms : DINT;           // Minimum latency observed\n    max_latency_ms : DINT;           // Maximum latency observed\nEND_VAR\n\nVAR\n    isError : BOOL;                  // Flag to indicate if there is an error\nEND_VAR\n\n// Check for error conditions\nisError := (latency_xx_ms = 0) OR (NODE_xx_STATUS <> 1);\n\nIF isError THEN\n    // Increment error counts\n    errors_xx := errors_xx + 1;\n    errors_all := errors_all + 1;\nEND_IF;\n\n// Update minimum latency\nIF (latency_xx_ms < min_latency_ms) OR (min_latency_ms < 0) THEN\n    min_latency_ms := latency_xx_ms;\nEND_IF;\n\n// Update maximum latency\nIF (latency_xx_ms > max_latency_ms) OR (max_latency_ms < 0) THEN\n    max_latency_ms := latency_xx_ms;\nEND_IF;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 8226,
+  "calls": [
+    {
+      "seconds": 2.3109057005494833,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.847103636711836,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.825957608409226,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.47060623858124,
+      "finish_reason": "stop"
+    }
+  ]
+}

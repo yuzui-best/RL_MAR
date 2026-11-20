@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-2",
+  "selected_source": "FUNCTION_BLOCK F_CollectInput\nVAR_IN_OUT\n    Data : ARRAY[1 .. 20] OF BOOL;\nEND_VAR\nVAR_INPUT\n    TICK  : BOOL := 0;\n    IN1   : BOOL := 0;\n    IN2   : BOOL := 0;\n    IN3   : BOOL := 0;\n    IN4   : BOOL := 0;\n    IN5   : BOOL := 0;\n    RESET : BOOL := FALSE;\nEND_VAR\nVAR_OUTPUT\n    Finished : BOOL := FALSE;\nEND_VAR\nVAR\n    j    : USINT := 1;\n    tock : BOOL  := FALSE;\n    i    : USINT;  (* Declare the loop variable i *)\nEND_VAR\n\nIF RESET THEN\n    j := 1;\n    Finished := FALSE;\n    FOR i := 1 TO 20 DO\n        Data[i] := FALSE;\n    END_FOR\nELSIF TICK AND NOT Finished THEN\n    Data[j] := IN1 OR IN2 OR IN3 OR IN4 OR IN5;\n    j := j + 1;\n    IF j > 20 THEN\n        Finished := TRUE;\n    END_IF\nEND_IF\n\nEND_FUNCTION_BLOCK\n\nPROGRAM MAIN\nVAR\n    Data  : ARRAY[1 .. 20] OF BOOL;\n    Ready : BOOL := FALSE;\n    CollectInput : F_CollectInput;\n    A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15 : BOOL;\nEND_VAR\nVAR\n    TICK     : BOOL;\n    IN1      : BOOL;\n    IN2      : BOOL;\n    IN3      : BOOL;\n    IN4      : BOOL;\n    IN5      : BOOL;\n    OutReady : BOOL := FALSE;\n    FeedNext : BOOL := FALSE;\n    Out      : BOOL := FALSE;\nEND_VAR\n\n(* Invoke the CollectInput function block *)\nCollectInput(TICK := TICK, IN1 := IN1, IN2 := IN2, IN3 := IN3, IN4 := IN4, IN5 := IN5, RESET := FeedNext, Data := Data);\n\n(* Check if data collection is finished *)\nIF CollectInput.Finished THEN\n    Ready := TRUE;\nEND_IF\n\n(* Calculate the output signal based on logical conditions *)\nIF Ready THEN\n    A1 := NOT Data[7] AND NOT Data[3] AND NOT Data[2] AND NOT Data[1] OR Data[5];\n    A2 := Data[7] AND NOT Data[3] AND NOT Data[2] AND NOT Data[1] OR Data[6];\n    A3 := NOT Data[7] AND Data[3] AND NOT Data[2] AND NOT Data[1] OR Data[12];\n    A4 := Data[7] AND Data[3] AND NOT Data[2] AND NOT Data[1] OR Data[8];\n    A5 := NOT Data[7] AND NOT Data[3] AND Data[2] AND NOT Data[1] OR Data[4];\n    A6 := Data[7] AND NOT Data[3] AND Data[2] AND NOT Data[1] OR Data[9];\n    A7 := NOT Data[7] AND Data[3] AND Data[2] AND NOT Data[1] OR Data[10];\n    A8 := Data[7] AND Data[3] AND Data[2] AND NOT Data[1] OR Data[16];\n    A9 := NOT Data[7] AND NOT Data[3] AND NOT Data[2] AND Data[1] OR Data[11];\n    A10 := Data[7] AND NOT Data[3] AND NOT Data[2] AND Data[1] OR Data[14];\n    A11 := NOT Data[7] AND Data[3] AND NOT Data[2] AND Data[1] OR Data[17];\n    A12 := Data[7] AND Data[3] AND NOT Data[2] AND Data[1] OR Data[18];\n    A13 := NOT Data[7] AND NOT Data[3] AND Data[2] AND Data[1] OR Data[13];\n    A14 := Data[7] AND NOT Data[3] AND Data[2] AND Data[1] OR Data[20];\n    A15 := NOT Data[7] AND Data[3] AND Data[2] AND Data[1] OR Data[15];\n\n    Out := NOT (A1 OR A2 OR A3 OR A4 OR A5 OR A6 OR A7 OR A8 OR A9 OR A10 OR A11 OR A12 OR A13 OR A14 OR A15);\n    OutReady := TRUE;\n    FeedNext := TRUE; (* Reset the CollectInput function block for the next cycle *)\nEND_IF\n\nEND_PROGRAM",
+  "known_tokens": 15359,
+  "calls": [
+    {
+      "seconds": 5.73236586432904,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 6.553933849558234,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.2764653833583,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.335559295490384,
+      "finish_reason": "stop"
+    }
+  ]
+}

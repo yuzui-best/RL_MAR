@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-1",
+  "selected_source": "FUNCTION_BLOCK FB_MotorControl\nVAR_INPUT\n    Pressure_LOW : REAL; // Input pressure value\nEND_VAR\n\nVAR_OUTPUT\n    Motor_Critical : BOOL; // Output motor state\nEND_VAR\n\nVAR\n    Threshold : REAL := 36464; // Pressure threshold value\nEND_VAR\n\n// Main logic to evaluate motor state\nIF Pressure_LOW < Threshold THEN\n    Motor_Critical := TRUE; // Trigger motor if pressure is below threshold\nELSE\n    Motor_Critical := FALSE; // Do not trigger motor if pressure is above or equal to threshold\nEND_IF;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 6858,
+  "calls": [
+    {
+      "seconds": 2.8427229216322303,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.324983669444919,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.863840942271054,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 4.0061444425955415,
+      "finish_reason": "stop"
+    }
+  ]
+}

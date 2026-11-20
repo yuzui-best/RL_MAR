@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-2",
+  "selected_source": "FUNCTION_BLOCK F_CollectInput\nVAR_IN_OUT\n    Data : ARRAY[1 .. 20] OF BOOL;\nEND_VAR\nVAR_INPUT\n    TICK  : BOOL := FALSE;\n    IN1   : BOOL := FALSE;\n    IN2   : BOOL := FALSE;\n    IN3   : BOOL := FALSE;\n    IN4   : BOOL := FALSE;\n    IN5   : BOOL := FALSE;\n    RESET : BOOL := FALSE;\nEND_VAR\nVAR_OUTPUT\n    Finished : BOOL := FALSE;\nEND_VAR\nVAR\n    j : USINT := 1;\nEND_VAR\n\n// Function Block Logic\nIF RESET THEN\n    j := 1; // Reset index\n    Finished := FALSE; // Reset finished flag\n    FOR i := 1 TO 20 DO\n        Data[i] := FALSE; // Clear previous data\n    END_FOR;\nELSE\n    IF TICK THEN\n        IF j <= 20 THEN\n            // Collect input data\n            CASE j OF\n                1: Data[j] := IN1;\n                2: Data[j] := IN2;\n                3: Data[j] := IN3;\n                4: Data[j] := IN4;\n                5: Data[j] := IN5;\n                // Continue collecting data for additional inputs if needed\n            END_CASE;\n            j := j + 1; // Increment index\n        END_IF;\n\n        // Check if data collection is finished\n        IF j > 20 THEN\n            Finished := TRUE; // Set finished flag\n        END_IF;\n    END_IF;\nEND_IF;\n\nEND_FUNCTION_BLOCK\n\nPROGRAM MAIN\nVAR\n    Data : ARRAY[1 .. 20] OF BOOL;\n    Ready : BOOL := FALSE;\n    CollectInput : F_CollectInput;\n    TICK : BOOL;\n    IN1 : BOOL;\n    IN2 : BOOL;\n    IN3 : BOOL;\n    IN4 : BOOL;\n    IN5 : BOOL;\n    OutReady : BOOL := FALSE;\n    Out : BOOL;\nEND_VAR\n\n// Main Program Logic\nCollectInput(IN1 := IN1, IN2 := IN2, IN3 := IN3, IN4 := IN4, IN5 := IN5, TICK := TICK, RESET := FALSE, Data := Data);\n\nIF CollectInput.Finished THEN\n    Ready := TRUE; // Set Ready flag\n\n    // Calculate output based on conditions\n    VAR\n        A : ARRAY[1 .. 15] OF BOOL;\n    END_VAR\n\n    A[1] := NOT (Data[7]) AND NOT (Data[3]) AND NOT (Data[2]) AND NOT (Data[1]) OR Data[5];\n    A[2] := Data[7] AND NOT (Data[3]) AND NOT (Data[2]) AND NOT (Data[1]) OR Data[6];\n    A[3] := NOT (Data[7]) AND Data[3] AND NOT (Data[2]) AND NOT (Data[1]) OR Data[12];\n    A[4] := Data[7] AND Data[3] AND NOT (Data[2]) AND NOT (Data[1]) OR Data[8];\n    A[5] := NOT (Data[7]) AND NOT (Data[3]) AND Data[2] AND NOT (Data[1]) OR Data[4];\n    A[6] := Data[7] AND NOT (Data[3]) AND Data[2] AND NOT (Data[1]) OR Data[9];\n    A[7] := NOT (Data[7]) AND Data[3] AND Data[2] AND NOT (Data[1]) OR Data[10];\n    A[8] := Data[7] AND Data[3] AND Data[2] AND NOT (Data[1]) OR Data[16];\n    A[9] := NOT (Data[7]) AND NOT (Data[3]) AND NOT (Data[2]) AND Data[1] OR Data[11];\n    A[10] := Data[7] AND NOT (Data[3]) AND NOT (Data[2]) AND Data[1] OR Data[14];\n    A[11] := NOT (Data[7]) AND Data[3] AND NOT (Data[2]) AND Data[1] OR Data[17];\n    A[12] := Data[7] AND Data[3] AND NOT (Data[2]) AND Data[1] OR Data[18];\n    A[13] := NOT (Data[7]) AND NOT (Data[3]) AND Data[2] AND Data[1] OR Data[13];\n    A[14] := Data[7] AND NOT (Data[3]) AND Data[2] AND Data[1] OR Data[20];\n    A[15] := NOT (Data[7]) AND Data[3] AND Data[2] AND Data[1] OR Data[15];\n\n    // Calculate final output\n    Out := NOT (A[1] OR A[2] OR A[3] OR A[4] OR A[5] OR A[6] OR A[7] OR A[8] OR A[9] OR A[10] OR A[11] OR A[12] OR A[13] OR A[14] OR A[15]);\n    OutReady := TRUE; // Set output ready flag\nEND_IF;\n\n// Reset the CollectInput function block for the next cycle\nIF OutReady THEN\n    CollectInput.RESET := TRUE; // Prepare for next data collection\n    OutReady := FALSE; // Reset output ready flag\nEND_IF;\n\nEND_PROGRAM",
+  "known_tokens": 15505,
+  "calls": [
+    {
+      "seconds": 14.697176780551672,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 14.266009751707315,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 20.37596316728741,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 14.506212355569005,
+      "finish_reason": "stop"
+    }
+  ]
+}

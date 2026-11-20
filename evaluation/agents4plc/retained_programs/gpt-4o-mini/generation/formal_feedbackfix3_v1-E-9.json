@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-9",
+  "selected_source": "FUNCTION_BLOCK LED_Control\nVAR_INPUT\n    PB1 : BOOL;\n    PB2 : BOOL;\nEND_VAR\nVAR_OUTPUT\n    LED : BOOL;\nEND_VAR\n\n// Main logic for LED control\nLED := PB1 AND NOT PB2;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 342,
+  "calls": [
+    {
+      "seconds": 1.6842223387211561,
+      "finish_reason": "stop"
+    }
+  ]
+}

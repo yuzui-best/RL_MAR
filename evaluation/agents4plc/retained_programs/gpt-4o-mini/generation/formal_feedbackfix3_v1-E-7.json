@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-7",
+  "selected_source": "FUNCTION_BLOCK constantprogram\nVAR_INPUT\n    i : INT;  // Input integer\nEND_VAR\nVAR_OUTPUT\n    o : INT;  // Output integer equal to input\n    c : INT;  // Constant output set to 43\nEND_VAR\n\n// Function block body\no := i;  // Assign input value to output o\nc := 43; // Set output c to constant value of 43\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5284,
+  "calls": [
+    {
+      "seconds": 2.1800653217360377,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.2399451388046145,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.3067846735939384,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.4658002043142915,
+      "finish_reason": "stop"
+    }
+  ]
+}

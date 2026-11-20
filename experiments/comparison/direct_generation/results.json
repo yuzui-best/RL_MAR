@@ -1,39 +1,23 @@
 [
   {
-    "model": "gpt-4o",
+    "model": "deepseek-v4-flash",
     "method": "Direct Generation",
     "run": "primary",
     "tasks": 94,
-    "compiled": 75,
-    "compilation_rate": 79.8,
-    "functional_pass": 30,
-    "functional_pass_rate": 31.9,
-    "average_task_seconds": 3.254,
-    "total_tokens": 93201,
+    "functional_pass": 28,
+    "functional_pass_rate": 29.78723404255319,
+    "compilation_rate": 80.85106382978722,
+    "average_task_seconds": 4.912639121643882,
+    "total_tokens": 113879,
+    "quality_ci95_percent": "[20.212765957446805, 39.361702127659576]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 76,
     "statuses": {
-      "COMPILE_FAIL": 19,
-      "FUNCTION_FAIL": 42,
-      "PASS": 30,
-      "RUNTIME_FAIL": 3
-    }
-  },
-  {
-    "model": "gpt-4o-mini",
-    "method": "Direct Generation",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 55,
-    "compilation_rate": 58.5,
-    "functional_pass": 24,
-    "functional_pass_rate": 25.5,
-    "average_task_seconds": 6.469,
-    "total_tokens": 93064,
-    "statuses": {
-      "COMPILE_FAIL": 38,
-      "FUNCTION_FAIL": 28,
-      "MISSING_OUTPUT": 1,
-      "PASS": 24,
-      "RUNTIME_FAIL": 3
+      "PASS": 28,
+      "COMPILE_FAIL": 18,
+      "FUNCTION_FAIL": 48
     }
   },
   {
@@ -41,17 +25,62 @@
     "method": "Direct Generation",
     "run": "primary",
     "tasks": 94,
-    "compiled": 68,
-    "compilation_rate": 72.3,
     "functional_pass": 25,
-    "functional_pass_rate": 26.6,
-    "average_task_seconds": 21.502,
-    "total_tokens": 111614,
+    "functional_pass_rate": 26.595744680851062,
+    "compilation_rate": 74.46808510638297,
+    "average_task_seconds": 29.251151553191487,
+    "total_tokens": 112707,
+    "quality_ci95_percent": "[18.085106382978726, 36.17021276595745]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 70,
     "statuses": {
-      "COMPILE_FAIL": 26,
-      "FUNCTION_FAIL": 40,
       "PASS": 25,
-      "RUNTIME_FAIL": 3
+      "COMPILE_FAIL": 24,
+      "FUNCTION_FAIL": 45
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 23,
+    "functional_pass_rate": 24.46808510638298,
+    "compilation_rate": 58.51063829787234,
+    "average_task_seconds": 5.770460329787234,
+    "total_tokens": 93858,
+    "quality_ci95_percent": "[15.957446808510639, 32.97872340425532]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 55,
+    "statuses": {
+      "PASS": 23,
+      "COMPILE_FAIL": 39,
+      "FUNCTION_FAIL": 32
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "method": "Direct Generation",
+    "run": "primary",
+    "tasks": 94,
+    "functional_pass": 27,
+    "functional_pass_rate": 28.723404255319153,
+    "compilation_rate": 82.97872340425532,
+    "average_task_seconds": 5.222946835996573,
+    "total_tokens": 97222,
+    "quality_ci95_percent": "[20.212765957446805, 38.297872340425535]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 78,
+    "statuses": {
+      "PASS": 27,
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 51
     }
   },
   {
@@ -59,36 +88,21 @@
     "method": "Direct Generation",
     "run": "primary",
     "tasks": 94,
-    "compiled": 68,
-    "compilation_rate": 72.3,
-    "functional_pass": 16,
-    "functional_pass_rate": 17.0,
-    "average_task_seconds": 9.933,
-    "total_tokens": 101788,
+    "functional_pass": 19,
+    "functional_pass_rate": 20.212765957446805,
+    "compilation_rate": 69.14893617021278,
+    "average_task_seconds": 10.499488021276596,
+    "total_tokens": 106524,
+    "quality_ci95_percent": "[12.76595744680851, 28.723404255319153]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 65,
     "statuses": {
-      "COMPILE_FAIL": 25,
-      "FUNCTION_FAIL": 50,
-      "MISSING_OUTPUT": 1,
-      "PASS": 16,
-      "RUNTIME_FAIL": 2
-    }
-  },
-  {
-    "model": "deepseek-v4-flash",
-    "method": "Direct Generation",
-    "run": "primary",
-    "tasks": 94,
-    "compiled": 72,
-    "compilation_rate": 76.6,
-    "functional_pass": 25,
-    "functional_pass_rate": 26.6,
-    "average_task_seconds": 4.287,
-    "total_tokens": 122518,
-    "statuses": {
-      "COMPILE_FAIL": 22,
+      "PASS": 19,
       "FUNCTION_FAIL": 45,
-      "PASS": 25,
-      "RUNTIME_FAIL": 2
+      "COMPILE_FAIL": 29,
+      "TIMEOUT": 1
     }
   },
   {
@@ -96,16 +110,20 @@
     "method": "Direct Generation",
     "run": "primary",
     "tasks": 94,
-    "compiled": 83,
-    "compilation_rate": 88.3,
-    "functional_pass": 28,
-    "functional_pass_rate": 29.8,
-    "average_task_seconds": 10.299,
-    "total_tokens": 134055,
+    "functional_pass": 25,
+    "functional_pass_rate": 26.595744680851062,
+    "compilation_rate": 82.97872340425532,
+    "average_task_seconds": 17.128181765957446,
+    "total_tokens": 125503,
+    "quality_ci95_percent": "[18.085106382978726, 35.1063829787234]",
+    "time_scope": "API call time only; excludes compiler/evaluator; cached original service durations retained",
+    "source": "experiments/results/main_comparison/TABLE_OLD_FORMAT.csv",
+    "method_slug": "direct",
+    "compiled": 78,
     "statuses": {
-      "COMPILE_FAIL": 11,
-      "FUNCTION_FAIL": 55,
-      "PASS": 28
+      "PASS": 25,
+      "COMPILE_FAIL": 16,
+      "FUNCTION_FAIL": 53
     }
   }
 ]

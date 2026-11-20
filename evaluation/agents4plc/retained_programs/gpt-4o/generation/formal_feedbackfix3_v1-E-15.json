@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-15",
+  "selected_source": "FUNCTION_BLOCK NOT_GATE\nVAR_INPUT\n    Input : BOOL;\nEND_VAR\nVAR_OUTPUT\n    NegatedOutput : BOOL;\nEND_VAR\n\nVAR\n    // Internal variables can be declared here if needed\nEND_VAR\n\n// The body of the function block\nNegatedOutput := NOT Input;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 369,
+  "calls": [
+    {
+      "seconds": 2.463969551026821,
+      "finish_reason": "stop"
+    }
+  ]
+}

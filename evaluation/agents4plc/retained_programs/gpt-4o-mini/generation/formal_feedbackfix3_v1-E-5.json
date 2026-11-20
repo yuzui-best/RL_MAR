@@ -1,0 +1,27 @@
+{
+  "task_id": "v1-E-5",
+  "selected_source": "FUNCTION_BLOCK FB_Estop_Processor\nVAR_INPUT\n    Field_Estop_IN : BOOL;\n    R1_Estop_IN : BOOL;\n    R2_Estop_IN : BOOL;\n    R3_Estop_IN : BOOL;\n    B1_Estop_IN : BOOL;\n    B2_Estop_IN : BOOL;\n    B3_Estop_IN : BOOL;\nEND_VAR\n\nVAR_OUTPUT\n    Field_Estop_OUT : BOOL;\n    R1_Estop_OUT : BOOL;\n    R2_Estop_OUT : BOOL;\n    R3_Estop_OUT : BOOL;\n    B1_Estop_OUT : BOOL;\n    B2_Estop_OUT : BOOL;\n    B3_Estop_OUT : BOOL;\nEND_VAR\n\nBEGIN\n    Field_Estop_OUT := NOT Field_Estop_IN;\n    R1_Estop_OUT := NOT R1_Estop_IN;\n    R2_Estop_OUT := NOT R2_Estop_IN;\n    R3_Estop_OUT := NOT R3_Estop_IN;\n    B1_Estop_OUT := NOT B1_Estop_IN;\n    B2_Estop_OUT := NOT B2_Estop_IN;\n    B3_Estop_OUT := NOT B3_Estop_IN;\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5257,
+  "calls": [
+    {
+      "seconds": 3.7906527230516076,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.8293127920478582,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.900851926766336,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.426155012100935,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.57277281396091,
+      "finish_reason": "stop"
+    }
+  ]
+}

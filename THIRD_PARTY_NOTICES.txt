@@ -23,3 +23,7 @@ LLM4PLC
   evaluation results. No upstream license was displayed at the time this
   notice was prepared; the upstream project and authors are credited here
   and in the root README.
+
+The Agents4PLC official verification modules are retained under
+evaluation/agents4plc/official_source/ with the upstream Apache-2.0 notice.
+The AutoPLC launcher requires a separate upstream checkout.

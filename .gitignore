@@ -31,3 +31,7 @@ framework/CODESYSCompileService/terminate.signal
 framework/CODESYSCompileService/projects/
 framework/CODESYSCompileService/results/
 framework/CODESYSCompileService/requests/
+
+# Fresh generation/training outputs stay outside recorded paper artifacts.
+runs/
+.DS_Store

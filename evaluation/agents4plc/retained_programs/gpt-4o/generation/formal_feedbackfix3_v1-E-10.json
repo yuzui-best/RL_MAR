@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-10",
+  "selected_source": "FUNCTION_BLOCK FB_SequentialAssignment\nVAR_INPUT\n    i : INT;              // Input value\nEND_VAR\n\nVAR\n    a, b, c, d0 : INT;    // Intermediate variables\nEND_VAR\n\nVAR_OUTPUT\n    o : INT;              // Output value\nEND_VAR\n\n// Subroutine to assign input value to variables in sequence\nMETHOD constantprogram : VOID\nVAR_INPUT\n    inputValue : INT;     // Input value for the subroutine\nEND_VAR\nBEGIN\n    a := inputValue;\n    b := a;\n    c := b;\n    d0 := c;\n    o := d0;\nEND_METHOD\n\n// Main program\nMETHOD MAIN : VOID\nBEGIN\n    // Call the subroutine with the integer value 3\n    constantprogram(3);\nEND_METHOD\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 4450,
+  "calls": [
+    {
+      "seconds": 3.2152478210628033,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.59917426481843,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.2298783902078867,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 4.717688107863069,
+      "finish_reason": "stop"
+    }
+  ]
+}

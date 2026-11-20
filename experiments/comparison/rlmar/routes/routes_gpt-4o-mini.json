@@ -1,0 +1,972 @@
+[
+  {
+    "task_id": "hf_1",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_2",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_3",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_4",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_5",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_6",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_7",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_8",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_9",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "hf_10",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_11",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_12",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_13",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_14",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_15",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_16",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_17",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "hf_18",
+    "domain": "SequentialLogicControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hf_19",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "hf_20",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "hf_21",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_22",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_23",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_24",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "med_25",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_26",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_27",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_28",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_29",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_30",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_31",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_32",
+    "domain": "ProcessControl",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_33",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_34",
+    "domain": "SequentialLogicControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_35",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_36",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_37",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_38",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_39",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_40",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_41",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_42",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_43",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_44",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_45",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_46",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_47",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "med_48",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_49",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_50",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_51",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_52",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_53",
+    "domain": "SequentialLogicControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_54",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_55",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "med_56",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_57",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_58",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_59",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_60",
+    "domain": "SequentialLogicControl",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_61",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_62",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_63",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_64",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_65",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_66",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_67",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_68",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_69",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_70",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_71",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_72",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_73",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_74",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_75",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_76",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_77",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_78",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_79",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_80",
+    "domain": "SequentialLogicControl",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_81",
+    "domain": "SequentialLogicControl",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_82",
+    "domain": "SequentialLogicControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_83",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "med_84",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_85",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "med_86",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_87",
+    "domain": "ProcessControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_88",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 9,
+    "identity": "STCodeGenerator",
+    "depth": 1,
+    "roles": [
+      "STCodeGenerator"
+    ]
+  },
+  {
+    "task_id": "med_89",
+    "domain": "ProcessControl",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "med_90",
+    "domain": "MotionAndSortingControl",
+    "action_index": 3,
+    "identity": "PathAndDecisionPlanner",
+    "depth": 1,
+    "roles": [
+      "PathAndDecisionPlanner"
+    ]
+  },
+  {
+    "task_id": "med_91",
+    "domain": "DataHandlingAndCommunication",
+    "action_index": 0,
+    "identity": "RequirementsAnalyzer",
+    "depth": 1,
+    "roles": [
+      "RequirementsAnalyzer"
+    ]
+  },
+  {
+    "task_id": "hard_92",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "hard_93",
+    "domain": "SafetyAndMonitoring",
+    "action_index": 12,
+    "identity": "SafetyLogicDesigner",
+    "depth": 1,
+    "roles": [
+      "SafetyLogicDesigner"
+    ]
+  },
+  {
+    "task_id": "hard_94",
+    "domain": "SequentialLogicControl",
+    "action_index": 1,
+    "identity": "RequirementsAnalyzer",
+    "depth": 2,
+    "roles": [
+      "RequirementsAnalyzer",
+      "STCodeGenerator"
+    ]
+  }
+]

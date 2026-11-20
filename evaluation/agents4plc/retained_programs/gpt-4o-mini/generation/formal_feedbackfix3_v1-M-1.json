@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-1",
+  "selected_source": "PROGRAM MAIN\nVAR\n    pressure_sensor : UINT := 10;  // Input from pressure sensor\n    temp_sensor : INT := 2;         // Input from temperature sensor\n    relay : BOOL := TRUE;           // Relay status\n    counter : UINT := 0;            // Counter for operations\n    error_code : INT := 0;          // Error code for tracking errors\n    error : BOOL := FALSE;          // Error flag\n    GT1_OUT : BOOL;                 // Output condition for relay control\n    operation_complete : BOOL := FALSE; // Operation completion flag\nEND_VAR\n\n// Function to scale pressure sensor value\nFUNCTION ScalePressure : REAL\nVAR_INPUT\n    raw_pressure : UINT;\nEND_VAR_INPUT\nVAR\n    scaled_pressure : REAL;\nEND_VAR\n    // Example scaling logic (adjust as needed)\n    scaled_pressure := REAL(raw_pressure) * 0.1; // Scale to a range\n    RETURN scaled_pressure;\nEND_FUNCTION\n\n// Function to scale temperature sensor value\nFUNCTION ScaleTemperature : REAL\nVAR_INPUT\n    raw_temperature : INT;\nEND_VAR_INPUT\nVAR\n    scaled_temperature : REAL;\nEND_VAR\n    // Example scaling logic (adjust as needed)\n    scaled_temperature := REAL(raw_temperature) * 1.5; // Scale to a range\n    RETURN scaled_temperature;\nEND_FUNCTION\n\n// Main control loop\nWHILE TRUE DO\n    // Scale the pressure sensor\n    VAR scaled_pressure : REAL := ScalePressure(pressure_sensor);\n    \n    // Check for pressure sensor overflow\n    IF scaled_pressure > 100.0 THEN\n        error := TRUE;\n        error_code := 1; // Overflow error\n    ELSE\n        error := FALSE;\n        error_code := 0; // No error\n    END_IF\n\n    // Adjust temperature based on pressure\n    IF scaled_pressure > 50.0 THEN\n        temp_sensor := temp_sensor + 1; // Increase temperature\n    ELSIF scaled_pressure < 30.0 THEN\n        temp_sensor := temp_sensor - 1; // Decrease temperature\n    END_IF\n\n    // Scale the temperature sensor\n    VAR scaled_temperature : REAL := ScaleTemperature(temp_sensor);\n    \n    // Update relay status based on GT1_OUT condition\n    IF GT1_OUT THEN\n        relay := TRUE; // Activate relay\n    ELSE\n        relay := FALSE; // Deactivate relay\n    END_IF\n\n    // Increment counter and check for overflow\n    IF counter < UINT_MAX THEN\n        counter := counter + 1;\n    ELSE\n        error := TRUE;\n        error_code := 2; // Counter overflow error\n    END_IF\n\n    // Set operation complete flag\n    operation_complete := TRUE;\n\n    // Exit loop if needed (for simulation purposes)\n    // This can be replaced with a proper condition to exit the loop\n    IF operation_complete THEN\n        EXIT; // Exit the loop\n    END_IF\nEND_WHILE\n\nEND_PROGRAM",
+  "known_tokens": 8835,
+  "calls": [
+    {
+      "seconds": 9.541567221283913,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 8.725256119854748,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 8.414143953472376,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 9.496884660795331,
+      "finish_reason": "stop"
+    }
+  ]
+}

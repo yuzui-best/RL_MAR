@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-7",
+  "selected_source": "FUNCTION_BLOCK constantprogram\nVAR_INPUT\n    i : INT;\nEND_VAR\nVAR_OUTPUT\n    o : INT;\n    c : INT;\nEND_VAR\n\nVAR\n    constantValue : INT := 43;\nEND_VAR\n\nBEGIN\n    // Set the first output 'o' to the input value 'i'\n    o := i;\n    \n    // Set the second output 'c' to the constant value 43\n    c := constantValue;\nEND_FUNCTION_BLOCK",
+  "known_tokens": 2960,
+  "calls": [
+    {
+      "seconds": 1.890914173796773,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 1.7873240122571588,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 1.8950158534571528,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.418750202283263,
+      "finish_reason": "stop"
+    }
+  ]
+}

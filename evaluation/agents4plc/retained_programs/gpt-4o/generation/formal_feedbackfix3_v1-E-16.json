@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-16",
+  "selected_source": "FUNCTION_BLOCK AND_GATE\nVAR_INPUT\n    Input1 : BOOL;\n    Input2 : BOOL;\nEND_VAR\nVAR_OUTPUT\n    AndResult : BOOL;\nEND_VAR\n\n// Implementing the AND gate logic\nAndResult := Input1 AND Input2;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 309,
+  "calls": [
+    {
+      "seconds": 1.4251680690795183,
+      "finish_reason": "stop"
+    }
+  ]
+}

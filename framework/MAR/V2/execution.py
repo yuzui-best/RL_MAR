@@ -1,4 +1,4 @@
-"""Execute a frozen RL-MAR route with bounded verifier-guided correction."""
+"""Frozen RouteAction executor used only by the Functional94 evaluation runner."""
 from __future__ import annotations
 
 import asyncio

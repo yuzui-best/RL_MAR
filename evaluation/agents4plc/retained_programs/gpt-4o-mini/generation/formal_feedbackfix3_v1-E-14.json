@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-14",
+  "selected_source": "FUNCTION_BLOCK AND_GATE\n  VAR_INPUT\n    Input1 : BOOL;\n    Input2 : BOOL;\n  END_VAR\n  VAR_OUTPUT\n    AndResult : BOOL;\n  END_VAR\n\n  AndResult := Input1 AND Input2;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 314,
+  "calls": [
+    {
+      "seconds": 2.2035712748765945,
+      "finish_reason": "stop"
+    }
+  ]
+}

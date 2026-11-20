@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-3",
+  "selected_source": "FUNCTION_BLOCK FB_NestedLoopControl\nVAR\n    i : INT;\n    j : INT;\n    flag : BOOL;\n    count : INT := 0;\n    some_var : INT;\nEND_VAR\n\nVAR CONSTANT\n    MAX_OUTER_ITERATIONS : INT := 10;\n    MAX_INNER_ITERATIONS : INT := 46; // (100 - 10) / 2 = 45, plus 1 for inclusive range\nEND_VAR\n\nVAR\n    inner_iterations : INT;\nEND_VAR\n\nBEGIN\n    // Initialize the count to zero at the start of the function block execution\n    count := 0;\n\n    // Outer loop iterating from 0 to 10\n    FOR i := 0 TO MAX_OUTER_ITERATIONS DO\n        // Reset inner loop iteration counter\n        inner_iterations := 0;\n\n        // Inner loop iterating from 10 to 100 with a step size of 2\n        FOR j := 10 TO 100 BY 2 DO\n            // Check if the flag is TRUE\n            IF flag THEN\n                // Exit the inner loop if the flag is TRUE\n                EXIT;\n            END_IF;\n\n            // Increment the inner loop iteration counter\n            inner_iterations := inner_iterations + 1;\n        END_FOR\n\n        // Update the count with the number of times the inner loop executed\n        count := count + inner_iterations;\n\n        // Ensure the count does not exceed the expected maximum of iterations\n        IF count > MAX_OUTER_ITERATIONS * MAX_INNER_ITERATIONS THEN\n            count := MAX_OUTER_ITERATIONS * MAX_INNER_ITERATIONS;\n        END_IF;\n    END_FOR\nEND_FUNCTION_BLOCK",
+  "known_tokens": 4833,
+  "calls": [
+    {
+      "seconds": 3.0112996511161327,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6771259140223265,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.4829576080664992,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.490408889017999,
+      "finish_reason": "stop"
+    }
+  ]
+}

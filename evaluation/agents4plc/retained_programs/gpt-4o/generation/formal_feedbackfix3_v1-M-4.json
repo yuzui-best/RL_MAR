@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-4",
+  "selected_source": "FUNCTION_BLOCK FB_Fibonacci_Calculator\nVAR_INPUT\n    N : DINT := 5; // Input value for the Fibonacci sequence term\nEND_VAR\nVAR_OUTPUT\n    O : DINT := 1; // Output value for the N-th Fibonacci number\nEND_VAR\nVAR\n    F1 : DINT := 1; // First Fibonacci number\n    F2 : DINT := 1; // Second Fibonacci number\n    CNT : DINT := 2; // Counter for the loop\n    MAX_INT : DINT := 32767; // Maximum value for INT\nEND_VAR\n\n// Calculate the Fibonacci number\nIF N <= 2 THEN\n    O := 1; // Return 1 for N <= 2\nELSE\n    WHILE CNT < N DO\n        O := F1 + F2; // Calculate next Fibonacci number\n        IF O > MAX_INT THEN\n            O := MAX_INT; // Saturation arithmetic: limit to MAX_INT\n            EXIT; // Exit the loop if the maximum value is reached\n        END_IF\n        F1 := F2; // Update F1 to the previous F2\n        F2 := O; // Update F2 to the current Fibonacci number\n        CNT := CNT + 1; // Increment the counter\n    END_WHILE\nEND_IF\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 7900,
+  "calls": [
+    {
+      "seconds": 3.0367481522262096,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6009244546294212,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.879903786815703,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.0440001282840967,
+      "finish_reason": "stop"
+    }
+  ]
+}

@@ -64,3 +64,11 @@ def test_public_validation_redacts_hidden_function_details():
         "checks_passed": 1,
         "diagnostic": "Compiled candidate failed hidden functional checks.",
     }
+
+
+def load_tests(loader, tests, pattern):
+    """Run the same contract functions under stdlib unittest and pytest."""
+    import unittest
+    return unittest.TestSuite(unittest.FunctionTestCase(value)
+        for name, value in globals().items()
+        if name.startswith("test_") and callable(value))

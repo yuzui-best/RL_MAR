@@ -1,93 +1,32 @@
-#!/usr/bin/env python3
-"""Evaluation-only, resumable Functional94 runner.  Never train or mutate policy."""
+"""Frozen seed1818 identity/depth routing and Functional94 execution.
+
+Public-only routing is decoded before verification. Each run writes its own
+routes and candidates; recorded paper results are never overwritten.
+"""
 from __future__ import annotations
 import argparse, asyncio, hashlib, json, os, re, subprocess, sys, tempfile, time
 from pathlib import Path
-import torch
-from openai import AsyncOpenAI
-
-try:
-    import resource
-except ImportError:  # Windows does not provide the Unix resource module.
-    resource = None
-
 ROOT = Path(__file__).resolve().parents[3]
-sys.path[:0] = [str(ROOT), str(ROOT / "framework"), str(ROOT / "experiments" / "runners")]
-from MAR.V2.execution import Execution, TOPOLOGIES
-from MAR.V2.policy import ContextualRoutePolicy
-
-IDS = {"gpt-4o": 0, "gpt-4o-mini": 1, "deepseek-v3.2": 2, "qwen3.5-9b": 3, "deepseek-v4-flash": 4, "gpt-5.5": 0}
-PFX = {"gpt-4o":"GPT4O", "gpt-4o-mini":"GPT4O_MINI", "deepseek-v3.2":"DEEPSEEK_V32", "qwen3.5-9b":"QWEN35", "deepseek-v4-flash":"DEEPSEEK_V4_FLASH", "gpt-5.5":"GPT55"}
-ROUTE_INDEX_SOURCE = {"gpt-5.5": "gpt-4o"}
-CK = "e4006a0245bd5947d8a45fc7404db41969cfd368bd57ca8bf208b88323cb546d"
-HIDDEN = ("cases", "oracles", "stimulus", "oracle", "expected_output", "input_trace", "expected_internal")
+sys.path.insert(0, str(ROOT / "framework"))
+from MAR.V2.execution import Execution
+from MAR.V2.budget import BudgetExceeded
+from MAR.V2.request_budget import active_request_budget
 PUBLIC_PROMPT_FIELDS = ("instruction", "instruction_sha256", "entry_point", "pou_interface")
-DOMAINS = ("SequentialLogicControl", "ProcessControl", "MotionAndSortingControl", "DataHandlingAndCommunication", "SafetyAndMonitoring")
-GENERATOR_ROLE = {"SequentialLogicControl":3, "ProcessControl":5, "MotionAndSortingControl":5, "DataHandlingAndCommunication":5, "SafetyAndMonitoring":3}
-BALANCED_GENERATOR_DOMAINS = {"SequentialLogicControl", "ProcessControl", "DataHandlingAndCommunication"}
-DOMAIN_TERMS = {
-    "SafetyAndMonitoring": ("emergency", "fault", "guard", "hazard", "interlock", "safe", "safety", "trip", "watchdog"),
-    "MotionAndSortingControl": ("axis", "conveyor", "drive", "encoder", "jam", "motion", "position", "robot", "sort", "speed", "stepper", "target"),
-    "DataHandlingAndCommunication": ("array", "buffer", "communication", "count", "crc", "data", "decode", "encode", "fifo", "message", "modbus", "protocol", "sample"),
-    "ProcessControl": ("analog", "flow", "hysteresis", "level", "pid", "pressure", "pump", "tank", "temperature", "valve"),
-    "SequentialLogicControl": ("latch", "permit", "sequence", "start", "state machine", "step", "stop"),
-}
+PFX = {"gpt-4o":"GPT4O", "gpt-4o-mini":"GPT4O_MINI", "gpt-5.5":"GPT55", "deepseek-v3.2":"DEEPSEEK_V32", "deepseek-v4-flash":"DEEPSEEK_V4_FLASH", "qwen3.5-9b":"QWEN35"}
 
-def peak_rss_bytes():
-    return None if resource is None else resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
-
-def sha(path):
-    h = hashlib.sha256()
-    with Path(path).open("rb") as f:
-        for block in iter(lambda: f.read(1 << 20), b""): h.update(block)
-    return h.hexdigest()
-
-def stable_test_hash(task):
-    payload = {"task_id":task["task_id"], "cases":task["cases"], "oracles":task["oracles"], "stimulus":task["stimulus"]}
-    return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 def put(path, value):
-    path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"); tmp.replace(path)
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+
 
 def load_env(path):
-    lines = Path(path).read_text(encoding="utf-8").splitlines()
-    for line in lines:
+    for line in path.read_text().splitlines():
         if "=" in line and not line.lstrip().startswith("#"):
-            key, value = line.split("=", 1); os.environ[key.strip()] = value.strip()
-    if not os.getenv("GPT55_MODEL"):
-        blocks, block = [], {}
-        for line in lines + [""]:
-            if not line.strip():
-                if block: blocks.append(block); block = {}
-            elif not line.lstrip().startswith("#") and "=" in line:
-                key, value = line.split("=", 1); block[key.strip()] = value.strip()
-        match = next((item for item in blocks if item.get("MODEL") == "gpt-5.5"), None)
-        if match:
-            os.environ.update(GPT55_URL=match["URL"], GPT55_KEY=match["KEY"], GPT55_MODEL=match["MODEL"], GPT55_PROVIDER="openai-compatible")
+            key, value = line.split("=", 1)
+            os.environ[key.strip()] = value.strip().strip('"').strip("'")
 
-def provider_bindings(models, env_file):
-    bindings = {"env_file_sha256": sha(env_file), "models": {}}
-    for model in models:
-        prefix = PFX[model]
-        values = {name: os.getenv(f"{prefix}_{name}", "") for name in ("URL", "KEY", "MODEL", "PROVIDER")}
-        if not all(values.values()):
-            raise ValueError(f"incomplete provider binding for {prefix}")
-        bindings["models"][model] = {
-            "provider_prefix": prefix,
-            "provider": values["PROVIDER"],
-            "base_url": values["URL"],
-            "model_id": values["MODEL"],
-            "key_configured": bool(values["KEY"]),
-            "route_index": IDS[model],
-            "route_index_source": ROUTE_INDEX_SOURCE.get(model, model),
-            "metadata_sha256": {
-                name.lower(): hashlib.sha256(value.encode()).hexdigest()
-                for name, value in values.items() if name != "KEY"
-            },
-        }
-    return bindings
 
 def public_prompt(task):
     """Only released name/category/interface are model-visible; verifier fields remain private."""
@@ -133,51 +72,6 @@ def assert_prompt_isolated(task, prompt):
     if prompt != public_prompt(public_task):
         raise AssertionError("prompt depends on fields outside the public allowlist")
 
-class Backend:
-    def __init__(self, model): self.model = model; self.usage = []
-    async def agen(self, messages, max_tokens=None, **_):
-        prefix = PFX[self.model]; cfg = {k: os.getenv(f"{prefix}_{k}", "") for k in ("URL", "KEY", "MODEL")}
-        if not all(cfg.values()): raise RuntimeError("ENVIRONMENT_ERROR: incomplete provider")
-        kwargs = {"model":cfg["MODEL"],"messages":messages,"temperature":0,"max_tokens":max_tokens or 2048}
-        if self.model in {"deepseek-v4-flash", "gpt-5.5"}: kwargs["extra_body"] = {"thinking":{"type":"disabled"}}
-        try:
-            async with AsyncOpenAI(base_url=cfg["URL"], api_key=cfg["KEY"], timeout=float(os.getenv("RL_MAR_API_TIMEOUT", "180"))) as client:
-                response = await client.chat.completions.create(**kwargs)
-            usage = response.usage
-            prompt_tokens = int(getattr(usage, "prompt_tokens", 0) or 0)
-            completion_tokens = int(getattr(usage, "completion_tokens", 0) or 0)
-            self.usage.append({"prompt_tokens":prompt_tokens, "completion_tokens":completion_tokens, "cost":None, "pricing_status":"unavailable", "response_model":str(response.model), "reasoning_present":bool(getattr(response.choices[0].message, "reasoning_content", None))})
-            return str(response.choices[0].message.content)
-        except Exception as exc:
-            raise RuntimeError("API_ERROR:" + type(exc).__name__) from exc
-    def pop_usage(self): return self.usage.pop(0) if self.usage else {"prompt_tokens":0,"completion_tokens":0,"cost":None,"pricing_status":"unavailable"}
-
-def infer_domain(task):
-    text = " ".join(str(task.get(field, "")) for field in ("category", "title", "instruction")).lower()
-    scores = {domain: sum(text.count(term) for term in terms) for domain, terms in DOMAIN_TERMS.items()}
-    best = max(scores, key=scores.get)
-    return best if scores[best] else "SequentialLogicControl"
-
-def load_role_catalog(domain):
-    directory = ROOT / "framework" / "MAR" / "Roles" / domain
-    roles = tuple(json.loads(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.json")))
-    names = tuple(role["Name"] for role in roles)
-    instructions = tuple(role["Description"] for role in roles)
-    if len(names) != 6:
-        raise ValueError(f"invalid role catalog for {domain}")
-    return names, instructions
-
-def route(policy, encoder, task, model, device, override, candidate_profile):
-    text = public_prompt(task); inferred_domain = infer_domain(task)
-    domain = torch.zeros(1, len(DOMAINS), device=device); domain[0, DOMAINS.index(inferred_domain)] = 1
-    with torch.no_grad(): action = policy.sample(encoder([text]).to(device), domain, torch.tensor([IDS[model]], device=device), deterministic=True)[0].action.to_dict()
-    if override == "random": action["topology_index"] = int(hashlib.sha256(task["task_id"].encode()).hexdigest(), 16) % len(TOPOLOGIES)
-    elif override and override != "policy": action["topology_index"] = TOPOLOGIES.index(override)
-    if candidate_profile == "balanced_domain" and inferred_domain in BALANCED_GENERATOR_DOMAINS:
-        action["agent_count"] = 1
-        action["role_indices"] = [GENERATOR_ROLE[inferred_domain]]
-    return action, inferred_domain
-
 def public_validation(result):
     status = result.get("status", "ENVIRONMENT_ERROR")
     checks = result.get("checks") or []
@@ -190,76 +84,173 @@ def public_validation(result):
     else: public["diagnostic"] = "Compiled candidate failed hidden functional checks." if status != "PASS" else "PASS"
     return public
 
-def verify(root, run_id, model, task, source):
-    source = extract_candidate(source)
-    verifier_root = Path(os.environ["PLC_FUNCTIONAL_ROOT"])
-    private_task = dict(task)  # verifier alone receives hidden cases/oracles/stimulus.
-    with tempfile.TemporaryDirectory(prefix="rlmar-v2-verifier-") as directory:
-        req = Path(directory) / "request.json"; response = Path(directory) / "response.json"
-        put(req, {"root":str(verifier_root),"run_id":"rlmar_v2_"+run_id,"method":"RL-MAR-v2","method_slug":model,"task":private_task,"source":source,"test_vector_sha256":stable_test_hash(task),"compile_timeout":int(os.getenv("PLC_FUNCTIONAL_COMPILE_TIMEOUT", "120"))})
+
+class Backend:
+    """OpenAI-compatible transport; provider usage is the accounting source.
+
+    GPT-5.5 may use a user-managed Responses-to-Chat loopback. The endpoint and
+    model are always taken from the user's environment, with SDK retries off.
+    """
+    def __init__(self, model):
+        self.model, self.usage, self.calls, self.spent = model, [], [], 0
+
+    def prompt_tokens(self, messages):
+        prefix = PFX[self.model]
+        tokenizer_file = os.getenv(prefix + '_TOKENIZER')
+        if tokenizer_file:
+            from tokenizers import Tokenizer
+            tokenizer = Tokenizer.from_file(tokenizer_file)
+            count = lambda s: len(tokenizer.encode(s, add_special_tokens=False).ids)
+        elif self.model.startswith('gpt-'):
+            import tiktoken
+            encoding = tiktoken.get_encoding('o200k_base')
+            count = lambda s: len(encoding.encode(s, disallowed_special=()))
+        else:
+            raise ValueError(prefix + '_TOKENIZER must point to the model tokenizer.json')
+        content_tokens = sum(count(m['content']) for m in messages)
+        if self.model == 'deepseek-v4-flash':
+            return content_tokens + 128
+        extra = int(os.getenv('GPT55_PROMPT_EXTRA_RESERVE', '512')) if self.model == 'gpt-5.5' else 0
+        return content_tokens + 16 + 128 * len(messages) + extra
+
+    async def agen(self, messages, max_tokens=2048, **_):
+        from openai import AsyncOpenAI
+        prefix = PFX[self.model]
+        cfg = {name: os.environ[prefix + '_' + name] for name in ('URL', 'KEY', 'MODEL')}
+        budget = active_request_budget()
+        prompt = self.prompt_tokens(messages)
+        # RequestBudget reserves completion first; the provider ledger must also
+        # account for prompt tokens, as in the frozen experimental client.
+        remaining = budget.max_tokens - self.spent if budget else 16384 - self.spent
+        limit = min(max_tokens, remaining - prompt)
+        if limit < 1:
+            if budget:
+                budget.stop_reason = 'prompt_budget_exhausted'
+            raise BudgetExceeded('prompt_budget_exhausted')
+        options = dict(model=cfg['MODEL'], messages=messages, temperature=0, max_tokens=limit)
+        if self.model == 'qwen3.5-9b':
+            options['extra_body'] = {'enable_thinking': False}
+        elif self.model == 'deepseek-v4-flash':
+            options['extra_body'] = {'thinking': {'type': 'disabled'}}
+        started = time.monotonic()
+        record = dict(status='RUNNING', requested_max_tokens=limit)
+        self.calls.append(record)
         try:
-            process = subprocess.run([sys.executable, str(verifier_root / "scripts/run_functional94.py"), "--worker", str(req), "--response", str(response)], text=True, capture_output=True, timeout=float(os.getenv("RL_MAR_VERIFIER_TIMEOUT", "180")))
-        except (OSError, subprocess.TimeoutExpired) as exc:
-            return public_validation({"status":"ENVIRONMENT_ERROR", "diagnostic":type(exc).__name__})
-        if response.is_file(): return public_validation(json.loads(response.read_text()))
-        diagnostic = (process.stderr or process.stdout or f"worker exited without response ({process.returncode})")[-2000:]
-        return public_validation({"status":"ENVIRONMENT_ERROR", "diagnostic":diagnostic})
+            async with AsyncOpenAI(base_url=cfg['URL'], api_key=cfg['KEY'], max_retries=0,
+                                   timeout=float(os.getenv('RL_MAR_API_TIMEOUT', '180'))) as client:
+                response = await client.chat.completions.create(**options)
+            if response.usage is None:
+                record.update(status='UNKNOWN_USAGE', unknown_upper=prompt + limit)
+                raise RuntimeError('provider did not return token usage')
+            usage = dict(prompt_tokens=response.usage.prompt_tokens,
+                         completion_tokens=response.usage.completion_tokens, cost=None)
+            self.spent += usage['prompt_tokens'] + usage['completion_tokens']
+            self.usage.append(usage)
+            record.update(status='COMPLETE', **usage, response_model=response.model,
+                          finish_reason=response.choices[0].finish_reason)
+            if usage['prompt_tokens'] > prompt:
+                record['prompt_under_reserved'] = True
+                raise BudgetExceeded('measured_prompt_reservation_exceeded')
+            if usage['completion_tokens'] > limit:
+                record['over_call_budget'] = True
+                raise BudgetExceeded('measured_completion_cap_exceeded')
+            if usage['prompt_tokens'] + usage['completion_tokens'] > remaining:
+                # Total measured usage remains in the ledger on a provider overrun.
+                record['over_budget'] = True
+                raise BudgetExceeded('measured_total_budget_exhausted')
+            return response.choices[0].message.content or ''
+        except Exception as exc:
+            if record['status'] == 'RUNNING':
+                record.update(status='FAILED', error_type=type(exc).__name__, unknown_upper=prompt + limit)
+            raise
+        finally:
+            record['seconds'] = time.monotonic() - started
+
+    def pop_usage(self):
+        return self.usage.pop(0)
+
+
+def verify(output, run_id, model, task, source, index):
+    root = Path(os.environ.get('PLC_FUNCTIONAL_ROOT') or ROOT / 'evaluation/functional94')
+    work = output / run_id / 'verification' / model / task['task_id'] / str(index)
+    work.mkdir(parents=True, exist_ok=False)
+    request, response = work / 'request.json', work / 'response.json'
+    put(request, dict(root=str(work.resolve()), run_id='evaluation', method='RL-MAR',
+        method_slug=model, task=task, source=extract_candidate(source),
+        test_vector_sha256='released-exact-trace', compile_timeout=60))
+    try:
+        process = subprocess.run([sys.executable, str(root / 'scripts/portable_worker.py'),
+            '--worker', str(request), '--response', str(response)], capture_output=True,
+            text=True, timeout=float(os.getenv('RL_MAR_VERIFIER_TIMEOUT', '120')))
+    except subprocess.TimeoutExpired:
+        return {'status': 'TIMEOUT', 'checks': [], 'diagnostic': 'verifier outer timeout'}
+    if response.is_file():
+        return json.loads(response.read_text())
+    return {'status': 'ENVIRONMENT_ERROR', 'checks': [],
+            'diagnostic': (process.stderr or process.stdout)[-2000:]}
+
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--dataset", type=Path, required=True); ap.add_argument("--policy", type=Path, required=True); ap.add_argument("--env-file", type=Path, required=True)
-    ap.add_argument("--output", type=Path, required=True); ap.add_argument("--run-id", required=True); ap.add_argument("--model", action="append", choices=IDS)
-    ap.add_argument("--preflight", action="store_true"); ap.add_argument("--limit", type=int); ap.add_argument("--task-id", action="append"); ap.add_argument("--disable-quality-controller", action="store_true")
-    ap.add_argument("--route", choices=("policy", "random") + TOPOLOGIES, default="policy"); ap.add_argument("--disable-hard-budget", action="store_true")
-    ap.add_argument("--candidate-profile", choices=("quality", "balanced_domain"), required=True)
-    ap.add_argument("--evolution-archive", type=Path, help="read-only archive materialized in preflight metadata only")
-    args = ap.parse_args(); load_env(args.env_file)
-    settings_path = Path(os.environ["RL_MAR_FIVE_MODEL_SETTINGS"])
-    settings = json.loads(settings_path.read_text(encoding="utf-8"))
-    from MAR.LLM.llm_embedding import SentenceEncoder
-    if sha(args.policy) != CK: raise ValueError("checkpoint hash mismatch")
-    verifier_root = Path(os.environ["PLC_FUNCTIONAL_ROOT"])
-    official_dir = verifier_root / "vendor" / "Agents4PLC_release" / "benchmark_v2"
-    validation_command = [sys.executable, str(verifier_root / "scripts/validate_manifest.py"), str(args.dataset)]
-    if official_dir.is_dir():
-        validation_command += ["--official-dir", str(official_dir)]
-    check = subprocess.run(validation_command, capture_output=True)
-    tasks = [json.loads(line) for line in args.dataset.read_text().splitlines() if line.strip()]
-    if check.returncode or len(tasks) != 94 or len({t["task_id"] for t in tasks}) != 94 or any(t.get("schema_version") != "1.3" for t in tasks): raise ValueError("Functional94 v1.3 freeze validation failed")
+    from MAR.Routing.policy import FrozenRouter
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--dataset', type=Path, required=True)
+    parser.add_argument('--policy', type=Path, default=Path(__file__).with_name('route_policy.pt'))
+    parser.add_argument('--env-file', type=Path)
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--run-id', required=True)
+    parser.add_argument('--model', choices=PFX, action='append')
+    parser.add_argument('--budget', type=int, choices=(4096, 8192, 16384), default=16384)
+    parser.add_argument('--task-id', action='append')
+    parser.add_argument('--routes-only', action='store_true')
+    args = parser.parse_args()
+    if args.env_file:
+        load_env(args.env_file)
+    value = args.dataset.read_text()
+    tasks = json.loads(value) if value.lstrip().startswith('[') else [json.loads(s) for s in value.splitlines() if s.strip()]
     tasks = select_tasks(tasks, args.task_id)
-    if args.limit: tasks = tasks[:args.limit]
-    models = args.model or list(IDS); device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    policy = ContextualRoutePolicy().to(device); policy.load_state_dict(torch.load(args.policy, map_location=device, weights_only=True).get("state_dict", torch.load(args.policy, map_location=device, weights_only=True))); policy.eval()
-    init_wall = time.monotonic(); print("stage=encoder_load status=start", flush=True)
-    encoder = SentenceEncoder(device=device); before = sha(args.policy)
-    print(f"stage=encoder_load status=done wall_seconds={time.monotonic()-init_wall:.3f}", flush=True)
-    routes = {m: route(policy, encoder, tasks[0], m, device, args.route, args.candidate_profile)[0] for m in models}
-    proof = {"status":"PASS","dataset_sha256":sha(args.dataset),"checkpoint_sha256":before,"candidate_profile":args.candidate_profile,"provider_bindings":provider_bindings(models, args.env_file),"routes":routes,"overrides":{"quality":args.disable_quality_controller,"hard_budget":args.disable_hard_budget,"route":args.route},"evolution_archive":sha(args.evolution_archive) if args.evolution_archive else None}
-    if args.preflight:
-        # Explicit smoke only; ordinary/resume runs never issue a non-task API request.
-        asyncio.run(Backend(models[0]).agen([{"role":"user","content":"Reply exactly OK"}], max_tokens=8)); print(json.dumps(proof, sort_keys=True)); return
-    root = args.output / args.run_id
-    contract_path = root / "preflight.json"
-    if contract_path.is_file():
-        prior = json.loads(contract_path.read_text())
-        if prior != proof: raise ValueError("resume contract mismatch")
-    else: put(contract_path, proof)
+    models = args.model or list(PFX)
+    router = FrozenRouter(args.policy)
+    routes = {model: [router.predict(task, model, args.budget) for task in tasks] for model in models}
+    # The entire route plan is fixed before any model call or hidden verification.
+    run = args.output.resolve() / args.run_id
+    run.mkdir(parents=True, exist_ok=False)
     for model in models:
-        for task in tasks:
-            out = root / "results" / model / f"{task['task_id']}.json"
-            if out.is_file(): continue
-            prompt = public_prompt(task); assert_prompt_isolated(task, prompt); wall, cpu = time.monotonic(), time.process_time()
-            print(f"stage=task status=start model={model} task_id={task['task_id']}", flush=True)
-            action, inferred_domain = route(policy, encoder, task, model, device, args.route, args.candidate_profile); execution_action = budgeted_action(action, settings); record = {"run_id":args.run_id,"task_id":task["task_id"],"model":model,"candidate_profile":args.candidate_profile,"inferred_domain":inferred_domain,"route_action":action,"execution_action":execution_action,"public_prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()}
+        put(run / f'routes_{model}.json', routes[model])
+    put(run / 'settings.json', dict(seed=1818, round=1, budget=args.budget,
+        max_call_tokens=2048, corrections=1, temperature=0, models=models,
+        task_ids=[t['task_id'] for t in tasks]))
+    if args.routes_only:
+        print(f'Frozen {len(tasks) * len(models)} routes; no model calls')
+        return
+    if not os.getenv('RUSTY_BIN'):
+        raise ValueError('Set RUSTY_BIN to your RuSTy compiler binary before generation')
+    for model in models:
+        for task, route in zip(tasks, routes[model]):
+            prompt = public_prompt(task)
+            assert_prompt_isolated(task, prompt)
+            backend = Backend(model)
+            checks = []
+            def verifier(source):
+                result = verify(args.output.resolve(), args.run_id, model, task, source, len(checks))
+                checks.append(dict(source=extract_candidate(source), result=result))
+                return public_validation(result)
+            record = dict(task_id=task['task_id'], model=model, route=route)
+            started = time.monotonic()
             try:
-                role_names, role_instructions = load_role_catalog(inferred_domain)
-                run = asyncio.run(Execution(execution_action, Backend(model), lambda code: verify(root,args.run_id,model,task,code), hard_budget=not args.disable_hard_budget, quality=not args.disable_quality_controller, max_call_tokens=int(settings["max_call_tokens"]), role_names=role_names, role_instructions=role_instructions).run({"query":prompt}))
-                record.update({"execution":run,"generated_code":run.get("candidate", ""),"validation":run["validation"],"raw_reward":run.get("raw_reward")})
-            except Exception as exc: record.update({"validation":{"status":"API_ERROR" if "API_ERROR" in str(exc) else "ENVIRONMENT_ERROR","diagnostic":str(exc)[:300]},"raw_reward":None})
-            record["resources"] = {"wall_seconds":time.monotonic()-wall,"cpu_seconds":time.process_time()-cpu,"peak_rss_bytes":peak_rss_bytes()}
-            put(out, record)
-            print(f"stage=task status=done model={model} task_id={task['task_id']} validation={record['validation']['status']} wall_seconds={record['resources']['wall_seconds']:.3f}", flush=True)
-    after = sha(args.policy)
-    if after != before: raise RuntimeError("checkpoint changed during evaluation")
-    put(root / "status.json", {"run_id":args.run_id,"completed":len(list((root/"results").glob("*/*.json"))),"expected":len(tasks)*len(models),"checkpoint_before":before,"checkpoint_after":after})
-if __name__ == "__main__": main()
+                execution = asyncio.run(Execution(route['execution_action'], backend, verifier,
+                    max_call_tokens=2048, role_names=tuple(route['roles']),
+                    role_instructions=tuple(route['role_instructions'])).run({'query': prompt}))
+                record.update(execution=execution, selected_source=extract_candidate(execution['candidate']))
+                matching = [v['result'] for v in checks if v['source'] == record['selected_source']]
+                record['terminal'] = matching[-1] if matching else {'status': 'MISSING_CANDIDATE'}
+            except Exception as exc:
+                record.update(error_type=type(exc).__name__, status='FAILED')
+            record.update(calls=backend.calls, verification=checks, known_tokens=backend.spent,
+                seconds=time.monotonic() - started,
+                functional_pass=record.get('terminal', {}).get('status') == 'PASS')
+            put(run / 'results' / model / (task['task_id'] + '.json'), record)
+    print(f'Completed {len(tasks) * len(models)} workflows in {run}')
+
+
+if __name__ == '__main__':
+    main()

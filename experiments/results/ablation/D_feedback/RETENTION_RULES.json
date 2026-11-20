@@ -1,0 +1,15 @@
+{
+  "status": "FROZEN_BEFORE_NEW_CANDIDATE_GENERATION",
+  "initial_candidate_retention": "Retain the first complete candidate presented to validation; never substitute selected final candidate when initial is absent.",
+  "compile_only_retention": "Retain initial if compiled; otherwise replace only with the corrected compiled candidate. This selector accepts compilation booleans only.",
+  "original_functional_retention": "Use the actual frozen controller selected_source; source must match a recorded candidate or be separately terminal-evaluated.",
+  "same_feedback_conditioned_candidate_pool": true,
+  "not_independent_no_correction_generation": true,
+  "charge_all_physical_calls": true,
+  "subtract_unused_corrected_candidate_costs": false,
+  "missing_candidate_handling": "Report missing candidate with explicit source absence and terminal outcome; never fill from another task/budget/controller.",
+  "unexpected_infrastructure_error": "Incomplete, do not code as functional failure",
+  "retain_trigger": "A replacement in selection relative to first candidate; correction invocation reported separately.",
+  "uncertainty": "task-cluster bootstrap10000 seed1818; pairs within budget; exact McNemar descriptive",
+  "budget_cross_reuse": false
+}

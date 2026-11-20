@@ -1,0 +1,19 @@
+{
+  "task_id": "v1-E-11",
+  "selected_source": "FUNCTION_BLOCK TOGGLE_OUTPUT\nVAR_INPUT\n    Button : BOOL;\nEND_VAR\n\nVAR_OUTPUT\n    ToggledOutput : BOOL := FALSE;\nEND_VAR\n\nVAR\n    PrevButtonState : BOOL := FALSE;\nEND_VAR\n\n// Main logic for toggling the output based on button press\nIF (Button AND NOT PrevButtonState) THEN\n    ToggledOutput := NOT ToggledOutput; // Toggle the output\nEND_IF;\n\n// Update the previous button state for the next cycle\nPrevButtonState := Button;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 2770,
+  "calls": [
+    {
+      "seconds": 3.4258084893226624,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.7548082722350955,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.7878909558057785,
+      "finish_reason": "stop"
+    }
+  ]
+}

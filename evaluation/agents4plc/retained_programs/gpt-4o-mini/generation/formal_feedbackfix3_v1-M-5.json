@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-5",
+  "selected_source": "FUNCTION_BLOCK FB_MonitorStartStop\nVAR_INPUT\n    Start_Stop : BOOL;  // Input signal for start/stop\nEND_VAR_INPUT\n\nVAR_OUTPUT\n    ONS_Trig    : BOOL;  // One-shot trigger output\n    ON_OFF      : BOOL;   // Output state that toggles\n    Rising_ONS  : BOOL;   // Previous state of Start_Stop\nEND_VAR_OUTPUT\n\nVAR\n    Previous_Start_Stop : BOOL; // Variable to hold the previous state of Start_Stop\nEND_VAR\n\n// Initialization\nIF NOT Rising_ONS THEN\n    Rising_ONS := Start_Stop; // Initialize Rising_ONS with the current state\nEND_IF\n\n// Detect rising edge\nONS_Trig := (Start_Stop AND NOT Rising_ONS); // Set ONS_Trig on rising edge\n\n// Update ON_OFF state based on ONS_Trig\nON_OFF := ONS_Trig XOR ON_OFF; // Toggle ON_OFF based on ONS_Trig\n\n// Store the current state for the next cycle\nPrevious_Start_Stop := Start_Stop; // Update previous state for next cycle\nRising_ONS := Start_Stop; // Update Rising_ONS with the current state\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5329,
+  "calls": [
+    {
+      "seconds": 4.774592286907136,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.405390256084502,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.203635422512889,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 4.352360264398158,
+      "finish_reason": "stop"
+    }
+  ]
+}

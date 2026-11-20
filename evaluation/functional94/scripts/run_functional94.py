@@ -469,7 +469,7 @@ def worker(request: dict[str, Any]) -> dict[str, Any]:
     result = {
         "method": request["method"],
         "task_id": task["task_id"],
-        "suite_version": task.get("suite_version", "plc94.functional.v1.3"),
+        "suite_version": task.get("suite_version", "plc94.functional.v1.1"),
         "preprocessing_version": PREPROCESSING_VERSION,
         "original_code_sha256": sha256_text(original_source),
         "normalized_code_sha256": sha256_text(normalized_source),
@@ -530,7 +530,7 @@ def result_provenance(task: dict[str, Any], method: str, source: str | None) -> 
     return {
         "method": method,
         "task_id": task["task_id"],
-        "suite_version": task.get("suite_version", "plc94.functional.v1.3"),
+        "suite_version": task.get("suite_version", "plc94.functional.v1.1"),
         "preprocessing_version": PREPROCESSING_VERSION,
         "original_code_sha256": sha256_text(source) if source is not None else None,
         "normalized_code_sha256": sha256_text(normalized) if normalized is not None else None,
@@ -659,8 +659,8 @@ def main() -> None:
         return
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", required=True)
-    parser.add_argument("--manifest", default="data/plc94.functional.v1.3.jsonl")
-    parser.add_argument("--input-index", required=True, help="JSON index describing generated ST packages")
+    parser.add_argument("--manifest", default="data/plc94.functional.v1.2.jsonl")
+    parser.add_argument("--input-index", default="data/deepseek_input_index.json")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--compile-timeout", type=int, default=120)
     parser.add_argument("--task-timeout", type=int, default=180)

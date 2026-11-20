@@ -2,26 +2,22 @@
   "method": "RL-MAR",
   "benchmark": "Functional94 v1.3",
   "models": [
+    "deepseek-v4-flash",
+    "deepseek-v3.2",
     "gpt-4o",
     "gpt-4o-mini",
-    "gpt-5.5",
-    "deepseek-v3.2",
-    "deepseek-v4-flash",
-    "qwen3.5-9b"
+    "qwen3.5-9b",
+    "gpt-5.5"
   ],
-  "profile": "balanced_domain_chain",
   "checkpoint": "route_policy.pt",
-  "checkpoint_sha256": "e4006a0245bd5947d8a45fc7404db41969cfd368bd57ca8bf208b88323cb546d",
-  "primary_seed": 1234,
-  "seed": 1234,
-  "deterministic_revalidation": true,
-  "evaluation_only": true,
-  "disable_thinking": {
-    "deepseek-v4-flash": true
-  },
+  "seed": 1818,
+  "round": 1,
+  "architecture": "20-64-14 tanh MLP; masked categorical identity/depth",
+  "training": "REINFORCE on measured development reward table",
   "max_call_tokens": 2048,
-  "max_model_calls": 8,
-  "max_route_seconds": 180,
-  "confirmation_reuses_primary_routes": true,
-  "correction_budget": 1
+  "token_budget": 16384,
+  "correction_budget": 1,
+  "temperature": 0,
+  "topology": "Chain",
+  "rounds": 1
 }

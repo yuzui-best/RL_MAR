@@ -1,0 +1,19 @@
+{
+  "task_id": "v1-E-8",
+  "selected_source": "FUNCTION_BLOCK dw\nVAR_INPUT\n    i: INT;\nEND_VAR\nVAR_OUTPUT\n    o: INT;\nEND_VAR\nVAR\n    ss: INT := 0; // Internal state variable initialized to 0\nEND_VAR\n\n// Function block execution logic\nss := ss + 1; // Increment internal state variable every cycle\n\nIF i = 1 THEN\n    o := 1; // Set output to 1 if input is 1\nELSE\n    o := ss; // Set output to the current value of ss\nEND_IF;\n\nEND_FUNCTION_BLOCK\n\nPROGRAM MAIN\nVAR\n    fb_dw: dw; // Instance of the function block\n    input_value: INT := 3; // Input value for the function block\n    output_value: INT; // Variable to store the output\nEND_VAR\n\n// Call the function block with the input value\nfb_dw(i := input_value);\n\n// Retrieve the output from the function block\noutput_value := fb_dw.o;\n\nEND_PROGRAM",
+  "known_tokens": 5610,
+  "calls": [
+    {
+      "seconds": 3.0858930805698037,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.654329496435821,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.827921354211867,
+      "finish_reason": "stop"
+    }
+  ]
+}

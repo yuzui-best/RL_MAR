@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Public deterministic IEC ST dialect normalization for Functional94 v1.3."""
+"""Public deterministic IEC ST dialect normalization for Functional94 v1.2."""
 
 from __future__ import annotations
 

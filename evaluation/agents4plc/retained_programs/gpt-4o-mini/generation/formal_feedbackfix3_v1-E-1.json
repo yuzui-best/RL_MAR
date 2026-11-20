@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-1",
+  "selected_source": "FUNCTION_BLOCK FB_MotorControl\nVAR_INPUT\n    Pressure_LOW : REAL;\nEND_VAR\n\nVAR_OUTPUT\n    Motor_Critical : BOOL;\nEND_VAR\n\nVAR\n    Threshold : REAL := 36464.0; // Define the threshold for low pressure\nEND_VAR\n\n// Main execution logic\nMotor_Critical := (Pressure_LOW < Threshold); // Set Motor_Critical based on pressure comparison\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 7246,
+  "calls": [
+    {
+      "seconds": 2.2565549183636904,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.945785720832646,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.683694218285382,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.273083028383553,
+      "finish_reason": "stop"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "v1-M-3",
+  "selected_source": "FUNCTION_BLOCK FB_ValueComparison\nVAR_INPUT\n    input1 : DINT := 0;\n    input2 : DINT := 0;\n    input3 : DINT := 0;\n    input4 : DINT := 0;\n    input5 : DINT := 0;\n    CYCLE  : DINT := 0;\nEND_VAR\nVAR_OUTPUT\n    M : DINT;\n    N : DINT;\n    UPDATED_CYCLE : DINT;\nEND_VAR\nVAR\n    TEMP_MAX_OUT   : DINT;\n    TEMP_MIN_2_OUT : DINT;\n    TEMP_MIN_3_OUT : DINT;\n    INSTANCE_MAX   : USER_MAX;\n    INSTANCE_MIN   : USER_MIN;\n    tempCalc       : DINT;\nEND_VAR\nBEGIN\n    // Step 1: Calculate the intermediate maximum value (TEMP_MAX_OUT)\n    INSTANCE_MAX(in1 := input2, in2 := input3);\n    TEMP_MAX_OUT := INSTANCE_MAX.OUT;\n\n    // Step 2: Calculate M as the maximum value between input1 and TEMP_MAX_OUT\n    INSTANCE_MAX(in1 := input1, in2 := TEMP_MAX_OUT);\n    M := INSTANCE_MAX.OUT;\n\n    // Step 3: Calculate the intermediate minimum value (TEMP_MIN_2_OUT)\n    INSTANCE_MIN(in1 := input4, in2 := input5);\n    TEMP_MIN_2_OUT := INSTANCE_MIN.OUT;\n\n    // Step 4: Calculate another intermediate value (TEMP_MIN_3_OUT)\n    tempCalc := input3 * TEMP_MIN_2_OUT + input2;\n    INSTANCE_MIN(in1 := input2, in2 := tempCalc);\n    TEMP_MIN_3_OUT := INSTANCE_MIN.OUT;\n\n    // Step 5: Calculate N as the minimum value between input1 and the sum of TEMP_MIN_3_OUT + input3\n    tempCalc := TEMP_MIN_3_OUT + input3;\n    INSTANCE_MIN(in1 := input1, in2 := tempCalc);\n    N := INSTANCE_MIN.OUT;\n\n    // Update the cycle counter\n    UPDATED_CYCLE := CYCLE + 1;\nEND_FUNCTION_BLOCK",
+  "known_tokens": 10294,
+  "calls": [
+    {
+      "seconds": 3.3270577723160386,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.7136164773255587,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.741423588246107,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.766114923171699,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.53489041980356,
+      "finish_reason": "stop"
+    }
+  ]
+}

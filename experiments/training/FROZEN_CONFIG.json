@@ -1,0 +1,226 @@
+{
+  "schema": "identity-depth-native-safety-v3",
+  "status": "FROZEN_BEFORE_THIS_VERSION_INFERENCE",
+  "version": "run_v3",
+  "previous_run": "run_v2: same clarified public contracts, native safety designer excluded; original frozen configuration retained",
+  "actions": [
+    {
+      "identity": "RequirementsAnalyzer",
+      "depth": 1
+    },
+    {
+      "identity": "RequirementsAnalyzer",
+      "depth": 2
+    },
+    {
+      "identity": "RequirementsAnalyzer",
+      "depth": 3
+    },
+    {
+      "identity": "PathAndDecisionPlanner",
+      "depth": 1
+    },
+    {
+      "identity": "PathAndDecisionPlanner",
+      "depth": 2
+    },
+    {
+      "identity": "PathAndDecisionPlanner",
+      "depth": 3
+    },
+    {
+      "identity": "STSafetyCodeImplementer",
+      "depth": 1
+    },
+    {
+      "identity": "STSafetyCodeImplementer",
+      "depth": 2
+    },
+    {
+      "identity": "STSafetyCodeImplementer",
+      "depth": 3
+    },
+    {
+      "identity": "STCodeGenerator",
+      "depth": 1
+    },
+    {
+      "identity": "STCodeGenerator",
+      "depth": 2
+    },
+    {
+      "identity": "STCodeGenerator",
+      "depth": 3
+    },
+    {
+      "identity": "SafetyLogicDesigner",
+      "depth": 1
+    },
+    {
+      "identity": "SafetyLogicDesigner",
+      "depth": 2
+    }
+  ],
+  "reward": {
+    "cost_lambda": 1.0,
+    "call_mu": 0.02,
+    "denominator": 16384
+  },
+  "tuning_rounds": [
+    {
+      "round": 1,
+      "cost_lambda": 1.0
+    },
+    {
+      "round": 2,
+      "cost_lambda": 0.5
+    }
+  ],
+  "algorithm": {
+    "name": "REINFORCE",
+    "learning_rate": 0.01,
+    "epochs": 400,
+    "initialization_epochs": 20,
+    "baseline_window": 32,
+    "entropy_weight": 0.02,
+    "hidden_dim": 64,
+    "seeds": [
+      1818,
+      2411,
+      3203
+    ],
+    "evaluation_interval": 10,
+    "early_stopping_patience": 80,
+    "environment": "Fresh per-action development executions; empirical reward table; policy-sampled gradients, no authored target routes"
+  },
+  "gates": {
+    "a_gain_pp": 5,
+    "a_cluster_ci_lower_gt": 0,
+    "a_require_positive_ci": false,
+    "a_strict_ci_also_report": true,
+    "a_positive_family_fraction": 0.6666666666666666,
+    "b_passes": 92,
+    "b_denominator": 282,
+    "b_mean_tokens": 3000,
+    "b_gain_vs_rule_pp": 5,
+    "b_cluster_ci_lower_gt": 0,
+    "c_gain_pp": 3
+  },
+  "generation": {
+    "temperature": 0,
+    "single_call_cap": 2048,
+    "corrections": 1,
+    "rounds": 1,
+    "terminal_evaluator": "evidence://routing_factor_ablation_20261109/interleaved_v4_3rep_16384/source_snapshot/evaluator"
+  },
+  "safety": "Native SafetyLogicDesigner alone, SafetyLogicDesigner→STSafetyCodeImplementer, or STSafetyCodeImplementer alone. No STCodeGenerator exists in this domain.",
+  "safety_justification": "Offline generation uses the domain's native engineering roles under identical bounded verification. Original blanket single-role exclusion lacked an implementation or evaluation basis; native safety design is restored without changing prompts or claiming certification.",
+  "external_budget": "Budget is an external experimental condition, not a learned action; training16384; later4096/8192/16384 reuse the same frozen identity-depth policy",
+  "action_constraints": "Each role must already exist in that domain's frozen catalog; duplicate identities in a chain are excluded before inference; no synthetic role prompts",
+  "collapse_check": "Report per-domain identity/depth counts and entropy. >90% one identity is a concentrated or constant policy, not proof of conditional routing.",
+  "statistical_claims": "CI spanning zero is inconclusive, not equivalence. Constant routes reported as constants.",
+  "development_split": {
+    "train_task_ids": [
+      "rp-01-25-v1",
+      "rp-01-25-v2",
+      "rp-01-25-v3",
+      "rp-01-25-v4",
+      "rp-01-25-v5",
+      "rp-01-26-v1",
+      "rp-01-26-v2",
+      "rp-01-26-v3",
+      "rp-01-26-v4",
+      "rp-01-26-v5",
+      "rp-02-25-v1",
+      "rp-02-25-v2",
+      "rp-02-25-v3",
+      "rp-02-25-v4",
+      "rp-02-25-v5",
+      "rp-02-26-v1",
+      "rp-02-26-v2",
+      "rp-02-26-v3",
+      "rp-02-26-v4",
+      "rp-02-26-v5",
+      "rp-03-25-v1",
+      "rp-03-25-v2",
+      "rp-03-25-v3",
+      "rp-03-25-v4",
+      "rp-03-25-v5",
+      "rp-03-26-v1",
+      "rp-03-26-v2",
+      "rp-03-26-v3",
+      "rp-03-26-v4",
+      "rp-03-26-v5",
+      "rp-04-25-v1",
+      "rp-04-25-v2",
+      "rp-04-25-v3",
+      "rp-04-25-v4",
+      "rp-04-25-v5",
+      "rp-04-26-v1",
+      "rp-04-26-v2",
+      "rp-04-26-v3",
+      "rp-04-26-v4",
+      "rp-04-26-v5",
+      "rp-05-25-v1",
+      "rp-05-25-v2",
+      "rp-05-25-v3",
+      "rp-05-25-v4",
+      "rp-05-25-v5",
+      "rp-05-26-v1",
+      "rp-05-26-v2",
+      "rp-05-26-v3",
+      "rp-05-26-v4",
+      "rp-05-26-v5"
+    ],
+    "validation_task_ids": [
+      "rp-01-27-v1",
+      "rp-01-27-v2",
+      "rp-01-27-v3",
+      "rp-01-27-v4",
+      "rp-01-27-v5",
+      "rp-02-27-v1",
+      "rp-02-27-v2",
+      "rp-02-27-v3",
+      "rp-02-27-v4",
+      "rp-02-27-v5",
+      "rp-03-27-v1",
+      "rp-03-27-v2",
+      "rp-03-27-v3",
+      "rp-03-27-v4",
+      "rp-03-27-v5",
+      "rp-04-27-v1",
+      "rp-04-27-v2",
+      "rp-04-27-v3",
+      "rp-04-27-v4",
+      "rp-04-27-v5",
+      "rp-05-27-v1",
+      "rp-05-27-v2",
+      "rp-05-27-v3",
+      "rp-05-27-v4",
+      "rp-05-27-v5"
+    ],
+    "train_families": [
+      "01-25",
+      "01-26",
+      "02-25",
+      "02-26",
+      "03-25",
+      "03-26",
+      "04-25",
+      "04-26",
+      "05-25",
+      "05-26"
+    ],
+    "validation_families": [
+      "01-27",
+      "02-27",
+      "03-27",
+      "04-27",
+      "05-27"
+    ],
+    "validation_composition": "five domain families, five parameter variants per family; not template-independent"
+  },
+  "classification": "Historical released category+title+instruction classifier preserved; new instruction-only classifier would reassign13/94 benchmark tasks and confound identity effects",
+  "data_correction": "Clarify all five authored RewardPLC public execution contracts uniformly; reference code, output traces, cases unchanged; Functional94 unchanged",
+  "initialization": "Repeat reward-based 1-task/4-action/20-update stage for new action head; observed successes reported without filtering. Legacy reward initialization retained as provenance, not claimed as inherited new head."
+}

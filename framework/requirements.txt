@@ -1,6 +1,8 @@
 # RL-MAR public framework
 torch>=2.0.0
-sentence-transformers>=3.0.0
+
+# Optional only for legacy MAR/LLM embedding interfaces:
+# sentence-transformers>=3.0.0
 
 # OpenAI-compatible experiment backends
 openai>=1.0.0
@@ -9,3 +11,12 @@ openai>=1.0.0
 antlr4-python3-runtime==4.13.1
 requests>=2.31.0
 loguru>=0.7.0
+
+# Frozen public-feature router and measured-reward replay
+numpy>=1.24
+tiktoken>=0.7
+tokenizers>=0.20
+
+# Published Agents4PLC report parsing (NuSMV / CBMC fallback)
+beautifulsoup4>=4.12
+lxml>=6.1.3

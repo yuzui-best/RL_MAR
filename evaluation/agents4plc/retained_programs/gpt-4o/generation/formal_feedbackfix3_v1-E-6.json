@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-6",
+  "selected_source": "FUNCTION_BLOCK FB_ValueTracker\n    VAR_INPUT\n        aaa : DINT := 1;\n        bbb : DINT := 0;\n    END_VAR\n    VAR_OUTPUT\n        OUT : DINT;\n        UPDATED_CYCLE : DINT;\n    END_VAR\n    VAR\n        CYCLE : DINT := 0;\n    END_VAR\n\n    // Increment cycle counter\n    CYCLE := CYCLE + 1;\n\n    // Compare aaa and bbb and increment accordingly\n    IF aaa = bbb THEN\n        aaa := aaa + 1;\n    ELSIF aaa > bbb THEN\n        bbb := bbb + 1;\n    ELSE\n        aaa := aaa + 1;\n    END_IF\n\n    // Calculate the output difference\n    OUT := aaa - bbb;\n\n    // Update the cycle output\n    UPDATED_CYCLE := CYCLE;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 7260,
+  "calls": [
+    {
+      "seconds": 2.4662984805181623,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.9202784756198525,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6937334006652236,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6153705613687634,
+      "finish_reason": "stop"
+    }
+  ]
+}

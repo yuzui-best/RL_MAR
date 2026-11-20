@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-2",
+  "selected_source": "FUNCTION_BLOCK FB_CalculateOutput\nVAR_INPUT\n    i: INT; // Input integer\nEND_VAR\nVAR_OUTPUT\n    o: INT; // Output integer\nEND_VAR\nVAR\n    tempOutput: INT; // Temporary variable for output calculation\nEND_VAR\n\n// Main logic\nIF i = 0 THEN\n    tempOutput := 0; // Case 1: i = 0, output is 0\nELSIF (i >= 1) AND (i <= 5) THEN\n    tempOutput := i * i; // Case 2: i between 1 and 5, output is square of i\nELSIF (i >= 6) AND (i <= 10) THEN\n    tempOutput := i + (2 * i); // Case 3: i between 6 and 10, output is i + 2*i\nELSE\n    tempOutput := -1; // Case 4: i outside defined ranges, output is -1\nEND_IF;\n\n// Assign the calculated value to the output\no := tempOutput;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 5890,
+  "calls": [
+    {
+      "seconds": 3.8756076684221625,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 5.232287457212806,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.0925024040043354,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6831475337967277,
+      "finish_reason": "stop"
+    }
+  ]
+}

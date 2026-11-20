@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-M-5",
+  "selected_source": "FUNCTION_BLOCK FB_MonitorStartStop\nVAR_INPUT\n    Start_Stop  : BOOL;\nEND_VAR\nVAR_OUTPUT\n    ONS_Trig    : BOOL;\n    Rising_ONS  : BOOL;\nEND_VAR\nVAR\n    Prev_Start_Stop : BOOL := FALSE;  // Variable to store the previous state of Start_Stop\n    ON_OFF          : BOOL := FALSE;  // Internal variable to manage ON/OFF state\nEND_VAR\n\n(* Detect rising edge: ONS_Trig is TRUE only when Start_Stop changes from FALSE to TRUE *)\nONS_Trig := (NOT Prev_Start_Stop) AND Start_Stop;\n\n(* Update ON_OFF based on XOR operation between ONS_Trig and ON_OFF *)\nON_OFF := ONS_Trig XOR ON_OFF;\n\n(* Store the current state of Start_Stop for the next cycle *)\nPrev_Start_Stop := Start_Stop;\n\n(* Update Rising_ONS to reflect the current state of Start_Stop *)\nRising_ONS := Start_Stop;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 6561,
+  "calls": [
+    {
+      "seconds": 2.9641415355727077,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 3.9584819404408336,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.892532884143293,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.634539294987917,
+      "finish_reason": "stop"
+    }
+  ]
+}

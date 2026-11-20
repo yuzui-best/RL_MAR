@@ -1,0 +1,23 @@
+{
+  "task_id": "v1-E-12",
+  "selected_source": "FUNCTION_BLOCK FIND_MAX_VALUE\nVAR_INPUT\n    Value1 : INT;\n    Value2 : INT;\nEND_VAR\nVAR_OUTPUT\n    MaxValue : INT;\nEND_VAR\n\nBEGIN\n    IF Value1 > Value2 THEN\n        MaxValue := Value1;\n    ELSE\n        MaxValue := Value2;\n    END_IF;\nEND_FUNCTION_BLOCK",
+  "known_tokens": 3275,
+  "calls": [
+    {
+      "seconds": 2.3361586751416326,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.4354121843352914,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6424532923847437,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.481305998750031,
+      "finish_reason": "stop"
+    }
+  ]
+}

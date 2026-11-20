@@ -1,0 +1,11 @@
+{
+  "task_id": "v1-E-10",
+  "selected_source": "FUNCTION_BLOCK FB_SequentialAssignment\nVAR_INPUT\n    i : INT;              // Input value\nEND_VAR\n\nVAR\n    a, b, c, d0 : INT;    // Intermediate variables\nEND_VAR\n\nVAR_OUTPUT\n    o : INT;              // Output value\nEND_VAR\n\n// Main program logic\na := i;        // Assign input value to a\nb := a;       // Assign value of a to b\nc := b;       // Assign value of b to c\nd0 := c;      // Assign value of c to d0\no := d0;      // Assign value of d0 to output variable o\n\nEND_FUNCTION_BLOCK\n\nPROGRAM MAIN\nVAR\n    fbAssignment : FB_SequentialAssignment; // Instance of the function block\n    inputValue : INT := 3;                  // Input value to be passed\nEND_VAR\n\n// Call the function block with the input value\nfbAssignment(i := inputValue);\n\n// The output can be accessed via fbAssignment.o\nEND_PROGRAM",
+  "known_tokens": 490,
+  "calls": [
+    {
+      "seconds": 2.9563605561852455,
+      "finish_reason": "stop"
+    }
+  ]
+}

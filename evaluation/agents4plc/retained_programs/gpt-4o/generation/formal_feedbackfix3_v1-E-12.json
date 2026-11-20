@@ -1,0 +1,15 @@
+{
+  "task_id": "v1-E-12",
+  "selected_source": "FUNCTION_BLOCK FIND_MAX_VALUE\nVAR_INPUT\n    Value1 : INT;\n    Value2 : INT;\nEND_VAR\nVAR_OUTPUT\n    MaxValue : INT;\nEND_VAR\n\n// Compare the two input values and assign the larger one to MaxValue\nIF Value1 >= Value2 THEN\n    MaxValue := Value1;\nELSE\n    MaxValue := Value2;\nEND_IF;\n\nEND_FUNCTION_BLOCK",
+  "known_tokens": 2772,
+  "calls": [
+    {
+      "seconds": 2.7216130550950766,
+      "finish_reason": "stop"
+    },
+    {
+      "seconds": 2.6282923500984907,
+      "finish_reason": "stop"
+    }
+  ]
+}

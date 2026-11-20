@@ -1,0 +1,79 @@
+{
+  "family": "six backbone comparisons of RL-MAR versus AutoPLC",
+  "method": "two-sided exact McNemar, Holm step-down",
+  "source": "resubmission2/evidence/routing_upgrade_20261111/six_backbone_main_20261112/DESCRIPTIVE_PAIRED_TESTS.csv",
+  "comparisons": [
+    {
+      "model": "gpt-5.5",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "13",
+      "losses": "0",
+      "ties": "81",
+      "exact_mcnemar_two_sided_descriptive": "0.000244140625",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 0.00146484375
+    },
+    {
+      "model": "deepseek-v3.2",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "6",
+      "losses": "0",
+      "ties": "88",
+      "exact_mcnemar_two_sided_descriptive": "0.03125",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 0.15625
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "5",
+      "losses": "2",
+      "ties": "87",
+      "exact_mcnemar_two_sided_descriptive": "0.453125",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 1
+    },
+    {
+      "model": "gpt-4o",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "6",
+      "losses": "4",
+      "ties": "84",
+      "exact_mcnemar_two_sided_descriptive": "0.75390625",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 1
+    },
+    {
+      "model": "gpt-4o-mini",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "4",
+      "losses": "5",
+      "ties": "85",
+      "exact_mcnemar_two_sided_descriptive": "1.0",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 1
+    },
+    {
+      "model": "qwen3.5-9b",
+      "baseline": "autoplc",
+      "n": "94",
+      "wins": "6",
+      "losses": "7",
+      "ties": "81",
+      "exact_mcnemar_two_sided_descriptive": "1.0",
+      "main_source": "run_01/MAIN_SOURCE_DATA.csv",
+      "baseline_source": "preparation/baseline_service_recovery_20261112/RECOVERED_BASELINE_SOURCE_ROWS.json",
+      "holm_adjusted_p": 1
+    }
+  ]
+}
