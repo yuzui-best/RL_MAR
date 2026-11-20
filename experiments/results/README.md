@@ -1,11 +1,11 @@
 # Published experiment results
 
-| Experiment | Published material | Coverage |
+| Experiment | Per-task records | Coverage |
 |---|---|---|
 | Main comparison | [Source data](main_comparison/source_data.csv) | 2,256 runs across six models and four methods |
 | Matched budgets | [Source data](matched_budget/source_data.csv) | 6,768 runs across three budgets, including the main comparison at 16,384 tokens |
 | Routing and identity | [Source data](ablation/six_arm/source_data.csv) | Six arms, each with 94 tasks and three repetitions |
-| Verifier feedback | [Retention rules](ablation/D_feedback/RETENTION_RULES.json) | Candidate selection rules for comparisons within each budget |
+| Verifier feedback | [Source data](ablation/D_feedback/source_data.csv) | 564 observations with shared candidates within each budget. See the [retention rules](ablation/D_feedback/RETENTION_RULES.json). |
 | Formal verification | [Source data](formal_alignment/source_data.csv) | 92 checks covering 23 tasks, two models and two source conditions |
 
 The main comparison CSV replaces the former experiments/comparison/task_results.csv. Call time sums model API durations and includes recorded service time for cached calls. Compilation and terminal evaluation are timed separately.
