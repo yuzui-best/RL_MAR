@@ -71,9 +71,9 @@ Inspect an RL-MAR comparison command before execution:
 python experiments/comparison/run_comparison.py \
   --method rlmar \
   --model gpt-4o \
-  --dataset evaluation/functional94/data/plc94.functional.v1.3.jsonl \
-  --output-root runs \
-  --env-file framework/.env \
+  --dataset "$PWD/evaluation/functional94/data/plc94.functional.v1.3.jsonl" \
+  --output-root "$PWD/runs" \
+  --env-file "$PWD/framework/.env" \
   --dry-run
 ```
 
